@@ -15,7 +15,7 @@ class LHP2Item(Item):
 class LHP2ItemData(NamedTuple):
     code: Optional[int] = None
     classification: ItemClassification = ItemClassification.filler
-    # qty: int = 1
+    qty: int = 1
 
 
 base_item_id = 400000
@@ -645,6 +645,10 @@ true_wizard_item_table: Dict[str, LHP2ItemData] = {
     ItemName.tfitp_tw: LHP2ItemData(base_item_id + 698),
 }
 
+gold_brick_item_table: Dict[str, LHP2ItemData] = {
+    ItemName.gb: LHP2ItemData(base_item_id + 700, qty=16),
+}
+
 item_data_table = {
     **character_item_table,
     **character_token_item_table,
@@ -652,6 +656,7 @@ item_data_table = {
     **sip_item_table,
     **house_crest_item_table,
     **true_wizard_item_table,
+    **gold_brick_item_table,
 }
 
 
@@ -663,4 +668,5 @@ def setup_items(options: LHP2Options):
     temp_item_table.update(sip_item_table)
     temp_item_table.update(house_crest_item_table)
     temp_item_table.update(true_wizard_item_table)
+    temp_item_table.update(gold_brick_item_table)
     return temp_item_table

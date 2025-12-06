@@ -54,8 +54,10 @@ class LHP2World(World):
         return item
 
     def create_items(self):
-        self.seed_item_table = setup_items(self.options)
-        self.multiworld.itempool += [self.create_item(item_name) for item_name in self.seed_item_table]
+        itempool = []
+        for name, data in item_data_table.items():
+             itempool += [self.create_item(name) for _ in range(data.qty)]
+        self.multiworld.itempool.extend(itempool)
 
     def set_rules(self):
         set_rules(self.multiworld, self.options, self.player)

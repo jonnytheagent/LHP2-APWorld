@@ -642,6 +642,26 @@ true_wizard_loc_table: Dict[str, LocationData] = {
     LocationName.tfitp_tw: LocationData(base_location_id + 698, RegionName.tfitp),
 }
 
+# 700 - 715
+bb_gb_loc_table: Dict[str, LocationData] = {
+    LocationName.bb_gb1: LocationData(base_location_id + 700, RegionName.bb),
+    LocationName.bb_gb2: LocationData(base_location_id + 701, RegionName.bb),
+    LocationName.bb_gb3: LocationData(base_location_id + 702, RegionName.bb),
+    LocationName.bb_gb4: LocationData(base_location_id + 703, RegionName.bb),
+    LocationName.bb_gb5: LocationData(base_location_id + 704, RegionName.bb),
+    LocationName.bb_gb6: LocationData(base_location_id + 705, RegionName.bb),
+    LocationName.bb_gb7: LocationData(base_location_id + 706, RegionName.bb),
+    LocationName.bb_gb8: LocationData(base_location_id + 707, RegionName.bb),
+    LocationName.bb_gb9: LocationData(base_location_id + 708, RegionName.bb),
+    LocationName.bb_gb10: LocationData(base_location_id + 709, RegionName.bb),
+    LocationName.bb_gb11: LocationData(base_location_id + 710, RegionName.bb),
+    LocationName.bb_gb12: LocationData(base_location_id + 711, RegionName.bb),
+    LocationName.bb_gb13: LocationData(base_location_id + 712, RegionName.bb),
+    LocationName.bb_gb14: LocationData(base_location_id + 713, RegionName.bb),
+    LocationName.bb_gb15: LocationData(base_location_id + 714, RegionName.bb),
+    LocationName.bb_gb16: LocationData(base_location_id + 715, RegionName.bb),
+}
+
 all_location_table = {
     **character_location_table,
     **character_token_location_table,
@@ -649,6 +669,7 @@ all_location_table = {
     **sip_loc_table,
     **house_crest_loc_table,
     **true_wizard_loc_table,
+    **bb_gb_loc_table,
 }
 
 
@@ -660,4 +681,5 @@ def setup_locations(options: LHP2Options):
     temp_location_table.update(sip_loc_table)
     temp_location_table.update(house_crest_loc_table)
     temp_location_table.update(true_wizard_loc_table)
+    temp_location_table.update(bb_gb_loc_table)
     return temp_location_table

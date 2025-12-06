@@ -637,6 +637,22 @@ tfitp_tw = "The Flaw in the Plan: True Wizard"
 # Gold Brick Definitions
 
 # Gold Brick Purchase Definitions
+bb_gb1 = "Gold Brick Purchase # 1"
+bb_gb2 = "Gold Brick Purchase # 2"
+bb_gb3 = "Gold Brick Purchase # 3"
+bb_gb4 = "Gold Brick Purchase # 4"
+bb_gb5 = "Gold Brick Purchase # 5"
+bb_gb6 = "Gold Brick Purchase # 6"
+bb_gb7 = "Gold Brick Purchase # 7"
+bb_gb8 = "Gold Brick Purchase # 8"
+bb_gb9 = "Gold Brick Purchase # 9"
+bb_gb10 = "Gold Brick Purchase # 10"
+bb_gb11 = "Gold Brick Purchase # 11"
+bb_gb12 = "Gold Brick Purchase # 12"
+bb_gb13 = "Gold Brick Purchase # 13"
+bb_gb14 = "Gold Brick Purchase # 14"
+bb_gb15 = "Gold Brick Purchase # 15"
+bb_gb16 = "Gold Brick Purchase # 16"
 
 # Red Brick Definitions
 
