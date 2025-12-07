@@ -649,6 +649,34 @@ gold_brick_item_table: Dict[str, LHP2ItemData] = {
     ItemName.gb: LHP2ItemData(base_item_id + 700, qty=16),
 }
 
+# Red Brick Unlocks 725 - 749
+red_brick_unlock_table: Dict[str, LHP2ItemData] = {
+    ItemName.com_spec_unlock: LHP2ItemData(base_item_id + 725),
+    ItemName.adv_guide_unlock: LHP2ItemData(base_item_id + 726),
+    ItemName.disguise_unlock: LHP2ItemData(base_item_id + 727),
+    ItemName.carrot_wand_unlock: LHP2ItemData(base_item_id + 728),
+    ItemName.super_strength_unlock: LHP2ItemData(base_item_id + 729),
+    ItemName.char_token_detect_unlock: LHP2ItemData(base_item_id + 730),
+    ItemName.fall_rescue_unlock: LHP2ItemData(base_item_id + 731),
+    ItemName.char_studs_unlock: LHP2ItemData(base_item_id + 732),
+    ItemName.score_x2_unlock: LHP2ItemData(base_item_id + 733),
+    ItemName.score_x4_unlock: LHP2ItemData(base_item_id + 734),
+    ItemName.score_x6_unlock: LHP2ItemData(base_item_id + 735),
+    ItemName.score_x8_unlock: LHP2ItemData(base_item_id + 736),
+    ItemName.score_x10_unlock: LHP2ItemData(base_item_id + 737),
+    ItemName.stud_mag_unlock: LHP2ItemData(base_item_id + 738),
+    ItemName.regen_hearts_unlock: LHP2ItemData(base_item_id + 739),
+    ItemName.extra_hears_unlock: LHP2ItemData(base_item_id + 740),
+    ItemName.invincibility_unlock: LHP2ItemData(base_item_id + 741),
+    ItemName.red_brick_detect_unlock: LHP2ItemData(base_item_id + 742),
+    ItemName.crest_detect_unlock: LHP2ItemData(base_item_id + 743),
+    ItemName.gb_detect_unlock: LHP2ItemData(base_item_id + 744),
+    ItemName.christmas_unlock: LHP2ItemData(base_item_id + 745),
+    ItemName.ghost_studs_unlock: LHP2ItemData(base_item_id + 746),
+    ItemName.fast_magic_unlock: LHP2ItemData(base_item_id + 747),
+    ItemName.fast_dig_unlock: LHP2ItemData(base_item_id + 748),
+}
+
 item_data_table = {
     **character_item_table,
     **character_token_item_table,
@@ -657,6 +685,7 @@ item_data_table = {
     **house_crest_item_table,
     **true_wizard_item_table,
     **gold_brick_item_table,
+    **red_brick_unlock_table
 }
 
 
@@ -669,4 +698,5 @@ def setup_items(options: LHP2Options):
     temp_item_table.update(house_crest_item_table)
     temp_item_table.update(true_wizard_item_table)
     temp_item_table.update(gold_brick_item_table)
+    temp_item_table.update(red_brick_unlock_table)
     return temp_item_table
