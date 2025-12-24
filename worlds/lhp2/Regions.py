@@ -1,6 +1,5 @@
-from BaseClasses import MultiWorld, Region, Entrance, Location, ItemClassification
+from BaseClasses import MultiWorld, Region, Entrance
 from .Locations import LHP2Location
-from .Items import LHP2Item
 from .Names import RegionName
 
 
@@ -34,7 +33,6 @@ level_regions = [
 hub_regions = [
     RegionName.diag,
     RegionName.knock,
-    RegionName.bnb,
     RegionName.www,
     RegionName.mm,
     RegionName.cust,
@@ -48,28 +46,27 @@ hub_regions = [
     RegionName.hogspath,
     RegionName.hogs,
     RegionName.hogwpath,
-    RegionName.quad,
-    RegionName.herbcourt,
-    RegionName.green,
+    RegionName.court,
+    RegionName.tg,
+    RegionName.herb,
     RegionName.ground,
     RegionName.qp,
     RegionName.thest,
     RegionName.lake,
-    RegionName.enthall,
+    RegionName.foyer,
     RegionName.stair,
     RegionName.house,
     RegionName.slyth,
     RegionName.huff,
     RegionName.gryf,
-    RegionName.dorm,
     RegionName.raven,
     RegionName.lib,
-    RegionName.ghe,
+    RegionName.ghl,
     RegionName.wc,
-    RegionName.ws,
+    RegionName.wcs,
     RegionName.gh,
     RegionName.ror,
-    RegionName.clc,
+    RegionName.cl,
     RegionName.y5c,
     RegionName.y6c,
     RegionName.dada,
@@ -95,16 +92,49 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
 
     connect_regions(world, player, "Menu", RegionName.diag)
     connect_regions(world, player, RegionName.diag, RegionName.knock)
-    connect_regions(world, player, RegionName.knock, RegionName.bnb)
+    connect_regions(world, player, RegionName.knock, RegionName.ror)
     connect_regions(world, player, RegionName.diag, RegionName.www)
     connect_regions(world, player, RegionName.diag, RegionName.mm)
     connect_regions(world, player, RegionName.mm, RegionName.cust)
     connect_regions(world, player, RegionName.diag, RegionName.leak)
     connect_regions(world, player, RegionName.leak, RegionName.lond)
+    connect_regions(world, player, RegionName.lond, RegionName.cafe)
     connect_regions(world, player, RegionName.lond, RegionName.tent)
     connect_regions(world, player, RegionName.tent, RegionName.wild)
     connect_regions(world, player, RegionName.lond, RegionName.kcs)
     connect_regions(world, player, RegionName.kcs, RegionName.hogstat)
+    connect_regions(world, player, RegionName.hogstat, RegionName.hogwpath)
+    connect_regions(world, player, RegionName.hogwpath, RegionName.hogspath)
+    connect_regions(world, player, RegionName.hogspath, RegionName.hogs)
+    connect_regions(world, player, RegionName.hogwpath, RegionName.court)
+    connect_regions(world, player, RegionName.court, RegionName.tg)
+    connect_regions(world, player, RegionName.tg, RegionName.herb)
+    connect_regions(world, player, RegionName.court, RegionName.foyer)
+    connect_regions(world, player, RegionName.foyer, RegionName.ground)
+    connect_regions(world, player, RegionName.ground, RegionName.thest)
+    connect_regions(world, player, RegionName.ground, RegionName.qp)
+    connect_regions(world, player, RegionName.ground, RegionName.lake)
+    connect_regions(world, player, RegionName.foyer, RegionName.lib)
+    connect_regions(world, player, RegionName.foyer, RegionName.ghl)
+    connect_regions(world, player, RegionName.ghl, RegionName.gh)
+    connect_regions(world, player, RegionName.ghl, RegionName.wc)
+    connect_regions(world, player, RegionName.wc, RegionName.wcs)
+    connect_regions(world, player, RegionName.ghl, RegionName.ror)
+    connect_regions(world, player, RegionName.ror, RegionName.stair)
+    connect_regions(world, player, RegionName.foyer, RegionName.stair)
+    connect_regions(world, player, RegionName.stair, RegionName.house)
+    connect_regions(world, player, RegionName.house, RegionName.slyth)
+    connect_regions(world, player, RegionName.house, RegionName.huff)
+    connect_regions(world, player, RegionName.house, RegionName.gryf)
+    connect_regions(world, player, RegionName.house, RegionName.raven)
+    connect_regions(world, player, RegionName.foyer, RegionName.cl)
+    connect_regions(world, player, RegionName.cl, RegionName.dada)
+    connect_regions(world, player, RegionName.cl, RegionName.y5c)
+    connect_regions(world, player, RegionName.cl, RegionName.y6c)
+    connect_regions(world, player, RegionName.cl, RegionName.pot)
+    connect_regions(world, player, RegionName.cl, RegionName.divc)
+    connect_regions(world, player, RegionName.divc, RegionName.ast)
+    connect_regions(world, player, RegionName.divc, RegionName.div)
 
     for region in level_regions:
         connect_regions(world, player, RegionName.leak, region)

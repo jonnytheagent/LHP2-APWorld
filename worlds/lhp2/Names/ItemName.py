@@ -642,9 +642,31 @@ tfitp_tw = "The Flaw in the Plan: True Wizard"
 # Gold Brick Definitions
 gb = "Gold Brick"
 
-# Gold Brick Purchase Definitions
-
 # Red Brick Definitions
+com_spec_purchasable = "Comedy Specs Purchasable"
+adv_guide_purchasable = "Advanced Guide Purchasable"
+disguise_purchasable = "Disguise Purchasable"
+carrot_wand_purchasable = "Carrot Wands Purchasable"
+super_strength_purchasable = "Super Strength Purchasable"
+char_token_detect_purchasable = "Character Token Detector Purchasable"
+fall_rescue_purchasable = "Fall Rescue Purchasable"
+char_studs_purchasable = "Character Studs Purchasable"
+score_x2_purchasable = "Score X2 Purchasable"
+score_x4_purchasable = "Score X4 Purchasable"
+score_x6_purchasable = "Score X6 Purchasable"
+score_x8_purchasable = "Score X8 Purchasable"
+score_x10_purchasable = "Score X10 Purchasable"
+stud_mag_purchasable = "Stud Magnet Purchasable"
+regen_hearts_purchasable = "Regenerate Hearts Purchasable"
+extra_hears_purchasable = "Extra Hearts Purchasable"
+invincibility_purchasable = "Invincibility Purchasable"
+red_brick_detect_purchasable = "Red Brick Detector Purchasable"
+crest_detect_purchasable = "Hogwarts Crest Detector Purchasable"
+gb_detect_purchasable = "Gold Brick Detector Purchasable"
+christmas_purchasable = "Christmas Purchasable"
+ghost_studs_purchasable = "Collect Ghost Studs Purchasable"
+fast_magic_purchasable = "Fast Magic Purchasable"
+fast_dig_purchasable = "Fast Dig Purchasable"
 
 # Red Brick Purchase Definitions
 com_spec_unlock = "Comedy Specs Unlocked"

@@ -2,7 +2,7 @@ from typing import Dict
 
 from BaseClasses import Item, Tutorial
 from Options import OptionError
-from .Items import LHP2Item, item_data_table, setup_items
+from .Items import LHP2Item, item_data_table
 from .Locations import all_location_table, LocationData, setup_locations
 from .Names import ItemName, RegionName
 from .Options import LHP2Options
@@ -56,7 +56,7 @@ class LHP2World(World):
     def create_items(self):
         itempool = []
         for name, data in item_data_table.items():
-             itempool += [self.create_item(name) for _ in range(data.qty)]
+            itempool += [self.create_item(name) for _ in range(data.qty)]
         self.multiworld.itempool.extend(itempool)
 
     def set_rules(self):

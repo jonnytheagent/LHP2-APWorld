@@ -662,32 +662,56 @@ bb_gb_loc_table: Dict[str, LocationData] = {
     LocationName.bb_gb16: LocationData(base_location_id + 715, RegionName.bb),
 }
 
-# Red Brick Purchases 725 - 749
+# Red Brick Locations 900 - 919
+red_brick_loc_table: Dict[str, LocationData] = {
+    LocationName.wc_rb: LocationData(base_location_id + 900, RegionName.wc),
+    LocationName.div_rb: LocationData(base_location_id + 901, RegionName.div),
+    LocationName.lib_rb: LocationData(base_location_id + 902, RegionName.lib),
+    LocationName.gh_rb: LocationData(base_location_id + 903, RegionName.gh),
+    LocationName.hogs_rb: LocationData(base_location_id + 904, RegionName.hogs),
+    LocationName.kcs_rb: LocationData(base_location_id + 905, RegionName.kcs),
+    LocationName.hogspath_rb: LocationData(base_location_id + 906, RegionName.hogspath),
+    LocationName.hogwpath_rb: LocationData(base_location_id + 907, RegionName.hogwpath),
+    LocationName.lake_rb: LocationData(base_location_id + 908, RegionName.lake),
+    LocationName.ror_rb: LocationData(base_location_id + 909, RegionName.ror),
+    LocationName.thest_rb: LocationData(base_location_id + 910, RegionName.thest),
+    LocationName.dada_rb: LocationData(base_location_id + 911, RegionName.dada),
+    LocationName.divc_rb: LocationData(base_location_id + 912, RegionName.divc),
+    LocationName.hogstat_rb: LocationData(base_location_id + 913, RegionName.hogstat),
+    LocationName.ghl_rb: LocationData(base_location_id + 914, RegionName.ghl),
+    LocationName.lond_rb: LocationData(base_location_id + 915, RegionName.lond),
+    LocationName.wild_rb: LocationData(base_location_id + 916, RegionName.wild),
+    LocationName.court_rb: LocationData(base_location_id + 917, RegionName.court),
+    LocationName.ast_rb: LocationData(base_location_id + 918, RegionName.ast),
+    LocationName.ground_rb: LocationData(base_location_id + 919, RegionName.ground),
+}
+
+# Red Brick Purchases 925 - 948
 red_brick_purch_table: Dict[str, LocationData] = {
-    LocationName.com_spec_purch: LocationData(base_location_id + 725, RegionName.leak),
-    LocationName.adv_guide_purch: LocationData(base_location_id + 726, RegionName.leak),
-    LocationName.disguise_purch: LocationData(base_location_id + 727, RegionName.leak),
-    LocationName.carrot_wand_purch: LocationData(base_location_id + 728, RegionName.leak),
-    LocationName.super_strength_purch: LocationData(base_location_id + 729, RegionName.leak),
-    LocationName.char_token_detect_purch: LocationData(base_location_id + 730, RegionName.leak),
-    LocationName.fall_rescue_purch: LocationData(base_location_id + 731, RegionName.leak),
-    LocationName.char_studs_purch: LocationData(base_location_id + 732, RegionName.leak),
-    LocationName.score_x2_purch: LocationData(base_location_id + 733, RegionName.leak),
-    LocationName.score_x4_purch: LocationData(base_location_id + 734, RegionName.leak),
-    LocationName.score_x6_purch: LocationData(base_location_id + 735, RegionName.leak),
-    LocationName.score_x8_purch: LocationData(base_location_id + 736, RegionName.leak),
-    LocationName.score_x10_purch: LocationData(base_location_id + 737, RegionName.leak),
-    LocationName.stud_mag_purch: LocationData(base_location_id + 738, RegionName.leak),
-    LocationName.regen_hearts_purch: LocationData(base_location_id + 739, RegionName.leak),
-    LocationName.extra_hears_purch: LocationData(base_location_id + 740, RegionName.leak),
-    LocationName.invincibility_purch: LocationData(base_location_id + 741, RegionName.leak),
-    LocationName.red_brick_detect_purch: LocationData(base_location_id + 742, RegionName.leak),
-    LocationName.crest_detect_purch: LocationData(base_location_id + 743, RegionName.leak),
-    LocationName.gb_detect_purch: LocationData(base_location_id + 744, RegionName.leak),
-    LocationName.christmas_purch: LocationData(base_location_id + 745, RegionName.leak),
-    LocationName.ghost_studs_purch: LocationData(base_location_id + 746, RegionName.leak),
-    LocationName.fast_magic_purch: LocationData(base_location_id + 747, RegionName.leak),
-    LocationName.fast_dig_purch: LocationData(base_location_id + 748, RegionName.leak),
+    LocationName.com_spec_purch: LocationData(base_location_id + 925, RegionName.leak),
+    LocationName.adv_guide_purch: LocationData(base_location_id + 926, RegionName.leak),
+    LocationName.disguise_purch: LocationData(base_location_id + 927, RegionName.leak),
+    LocationName.carrot_wand_purch: LocationData(base_location_id + 928, RegionName.leak),
+    LocationName.super_strength_purch: LocationData(base_location_id + 929, RegionName.leak),
+    LocationName.char_token_detect_purch: LocationData(base_location_id + 930, RegionName.leak),
+    LocationName.fall_rescue_purch: LocationData(base_location_id + 931, RegionName.leak),
+    LocationName.char_studs_purch: LocationData(base_location_id + 932, RegionName.leak),
+    LocationName.score_x2_purch: LocationData(base_location_id + 933, RegionName.leak),
+    LocationName.score_x4_purch: LocationData(base_location_id + 934, RegionName.leak),
+    LocationName.score_x6_purch: LocationData(base_location_id + 935, RegionName.leak),
+    LocationName.score_x8_purch: LocationData(base_location_id + 936, RegionName.leak),
+    LocationName.score_x10_purch: LocationData(base_location_id + 937, RegionName.leak),
+    LocationName.stud_mag_purch: LocationData(base_location_id + 938, RegionName.leak),
+    LocationName.regen_hearts_purch: LocationData(base_location_id + 939, RegionName.leak),
+    LocationName.extra_hears_purch: LocationData(base_location_id + 940, RegionName.leak),
+    LocationName.invincibility_purch: LocationData(base_location_id + 941, RegionName.leak),
+    LocationName.red_brick_detect_purch: LocationData(base_location_id + 942, RegionName.leak),
+    LocationName.crest_detect_purch: LocationData(base_location_id + 943, RegionName.leak),
+    LocationName.gb_detect_purch: LocationData(base_location_id + 944, RegionName.leak),
+    LocationName.christmas_purch: LocationData(base_location_id + 945, RegionName.leak),
+    LocationName.ghost_studs_purch: LocationData(base_location_id + 946, RegionName.leak),
+    LocationName.fast_magic_purch: LocationData(base_location_id + 947, RegionName.leak),
+    LocationName.fast_dig_purch: LocationData(base_location_id + 948, RegionName.leak),
 }
 
 all_location_table = {
@@ -698,6 +722,7 @@ all_location_table = {
     **house_crest_loc_table,
     **true_wizard_loc_table,
     **bb_gb_loc_table,
+    **red_brick_loc_table,
     **red_brick_purch_table,
 }
 
@@ -711,5 +736,6 @@ def setup_locations(options: LHP2Options):
     temp_location_table.update(house_crest_loc_table)
     temp_location_table.update(true_wizard_loc_table)
     temp_location_table.update(bb_gb_loc_table)
+    temp_location_table.update(red_brick_loc_table)
     temp_location_table.update(red_brick_purch_table)
     return temp_location_table
