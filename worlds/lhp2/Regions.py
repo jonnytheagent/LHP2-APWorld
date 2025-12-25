@@ -36,7 +36,7 @@ hub_regions = [
     RegionName.www,
     RegionName.mm,
     RegionName.cust,
-    RegionName.leak,
+    RegionName.leaky,
     RegionName.lond,
     RegionName.cafe,
     RegionName.kcs,
@@ -96,8 +96,8 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.diag, RegionName.www)
     connect_regions(world, player, RegionName.diag, RegionName.mm)
     connect_regions(world, player, RegionName.mm, RegionName.cust)
-    connect_regions(world, player, RegionName.diag, RegionName.leak)
-    connect_regions(world, player, RegionName.leak, RegionName.lond)
+    connect_regions(world, player, RegionName.diag, RegionName.leaky)
+    connect_regions(world, player, RegionName.leaky, RegionName.lond)
     connect_regions(world, player, RegionName.lond, RegionName.cafe)
     connect_regions(world, player, RegionName.lond, RegionName.tent)
     connect_regions(world, player, RegionName.tent, RegionName.wild)
@@ -137,7 +137,7 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.divc, RegionName.div)
 
     for region in level_regions:
-        connect_regions(world, player, RegionName.leak, region)
+        connect_regions(world, player, RegionName.leaky, region)
 
 
 def connect_regions(world: MultiWorld, player: int, source: str, target: str) -> Entrance:

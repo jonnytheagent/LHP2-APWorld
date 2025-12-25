@@ -482,8 +482,8 @@ level_unlock_item_table: Dict[str, LHP2ItemData] = {
     ItemName.tfitp_unlock: LHP2ItemData(base_item_id + 473, ItemClassification.progression),
 }
 
-# 475 - 535 (to verify totals since there are extras)
-sip_item_table: Dict[str, LHP2ItemData] = {
+# 475 - 498
+level_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.dt_sip: LHP2ItemData(base_item_id + 475),
     ItemName.da_sip: LHP2ItemData(base_item_id + 476),
     ItemName.foc_sip: LHP2ItemData(base_item_id + 477),
@@ -508,6 +508,49 @@ sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.fiend_sip: LHP2ItemData(base_item_id + 496),
     ItemName.st_sip: LHP2ItemData(base_item_id + 497),
     ItemName.tfitp_sip: LHP2ItemData(base_item_id + 498),
+}
+
+# 499 - 537
+hub_sip_item_table: Dict[str, LHP2ItemData] = {
+    ItemName.tent_sip: LHP2ItemData(base_item_id + 499),
+    ItemName.wild_sip: LHP2ItemData(base_item_id + 500),
+    ItemName.cafe_sip: LHP2ItemData(base_item_id + 501),
+    ItemName.lond_sip: LHP2ItemData(base_item_id + 502),
+    ItemName.kcs_sip: LHP2ItemData(base_item_id + 503),
+    ItemName.hogspath_sip: LHP2ItemData(base_item_id + 504),
+    ItemName.hogs_sip: LHP2ItemData(base_item_id + 505),
+    ItemName.hogstat_sip: LHP2ItemData(base_item_id + 506),
+    ItemName.hogwpath_sip: LHP2ItemData(base_item_id + 507),
+    ItemName.herb_sip: LHP2ItemData(base_item_id + 508),
+    ItemName.tg_sip: LHP2ItemData(base_item_id + 509),
+    ItemName.court_sip: LHP2ItemData(base_item_id + 510),
+    ItemName.ror_sip: LHP2ItemData(base_item_id + 511),
+    ItemName.wcs_sip: LHP2ItemData(base_item_id + 512),
+    ItemName.wc_sip: LHP2ItemData(base_item_id + 513),
+    ItemName.gh_sip: LHP2ItemData(base_item_id + 514),
+    ItemName.ghl_sip: LHP2ItemData(base_item_id + 515),
+    ItemName.lake_sip: LHP2ItemData(base_item_id + 516),
+    ItemName.thest_sip: LHP2ItemData(base_item_id + 517),
+    ItemName.ground_sip: LHP2ItemData(base_item_id + 518),
+    ItemName.raven_sip: LHP2ItemData(base_item_id + 519),
+    ItemName.gryf_sip: LHP2ItemData(base_item_id + 520),
+    ItemName.house_sip: LHP2ItemData(base_item_id + 521),
+    ItemName.ast_sip: LHP2ItemData(base_item_id + 522),
+    ItemName.y6c_sip: LHP2ItemData(base_item_id + 523),
+    ItemName.y5c_sip: LHP2ItemData(base_item_id + 524),
+    ItemName.pot_sip: LHP2ItemData(base_item_id + 525),
+    ItemName.div_sip: LHP2ItemData(base_item_id + 526),
+    ItemName.dada_sip: LHP2ItemData(base_item_id + 527),
+    ItemName.divc_sip: LHP2ItemData(base_item_id + 528),
+    ItemName.cl_sip: LHP2ItemData(base_item_id + 529),
+    ItemName.stair_sip: LHP2ItemData(base_item_id + 530),
+    ItemName.lib_sip: LHP2ItemData(base_item_id + 531),
+    ItemName.foyer_sip: LHP2ItemData(base_item_id + 532),
+    ItemName.mm_sip: LHP2ItemData(base_item_id + 533),
+    ItemName.knock_sip: LHP2ItemData(base_item_id + 534),
+    ItemName.leaky_sip: LHP2ItemData(base_item_id + 535),
+    ItemName.www_sip: LHP2ItemData(base_item_id + 536),
+    ItemName.diag_sip: LHP2ItemData(base_item_id + 537),
 }
 
 # 550 - 525
@@ -706,7 +749,8 @@ item_data_table = {
     **character_item_table,
     **character_token_item_table,
     **level_unlock_item_table,
-    **sip_item_table,
+    **level_sip_item_table,
+    **hub_sip_item_table,
     **house_crest_item_table,
     **true_wizard_item_table,
     **gold_brick_item_table,

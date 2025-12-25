@@ -321,7 +321,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.grindel_young_token: LocationData(base_location_id + 296, RegionName.ast),
     LocationName.grindel_old_token: LocationData(base_location_id + 297, RegionName.ast),
     LocationName.gregorovitch_token: LocationData(base_location_id + 298, RegionName.diag),
-    LocationName.hestia_token: LocationData(base_location_id + 299, RegionName.leak),
+    LocationName.hestia_token: LocationData(base_location_id + 299, RegionName.leaky),
     LocationName.prof_slughorn_token: LocationData(base_location_id + 300, RegionName.lh),
     LocationName.james_young_token: LocationData(base_location_id + 301, RegionName.hogwpath),
     LocationName.lavender_token: LocationData(base_location_id + 302, RegionName.y6c),
@@ -385,7 +385,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.bill_wedding_token: LocationData(base_location_id + 360, RegionName.ansmc),
     LocationName.fleur_token: LocationData(base_location_id + 361, RegionName.wild),
     LocationName.herm_red_dress_token: LocationData(base_location_id + 362, RegionName.tsh),
-    LocationName.figg_token: LocationData(base_location_id + 363, RegionName.leak),
+    LocationName.figg_token: LocationData(base_location_id + 363, RegionName.leaky),
     LocationName.harry_locket_token: LocationData(base_location_id + 364, RegionName.sal),
     LocationName.twin_1_token: LocationData(base_location_id + 365, RegionName.knock),
     LocationName.cole_token: LocationData(base_location_id + 366, RegionName.cafe),
@@ -478,8 +478,8 @@ level_beaten_loc_table: Dict[str, LocationData] = {
     LocationName.tfitp_beat: LocationData(base_location_id + 473, RegionName.tfitp),
 }
 
-# 475 - 535 (to verify totals, I think there are actually 61)
-sip_loc_table: Dict[str, LocationData] = {
+# 475 - 498
+leve_sip_loc_table: Dict[str, LocationData] = {
     LocationName.dt_sip: LocationData(base_location_id + 475, RegionName.dt),
     LocationName.da_sip: LocationData(base_location_id + 476, RegionName.da),
     LocationName.foc_sip: LocationData(base_location_id + 477, RegionName.foc),
@@ -504,6 +504,49 @@ sip_loc_table: Dict[str, LocationData] = {
     LocationName.fiend_sip: LocationData(base_location_id + 496, RegionName.fiend),
     LocationName.st_sip: LocationData(base_location_id + 497, RegionName.st),
     LocationName.tfitp_sip: LocationData(base_location_id + 498, RegionName.tfitp),
+}
+
+# 499 - 537
+hub_sip_loc_table: Dict[str, LocationData] = {
+    LocationName.tent_sip: LocationData(base_location_id + 499, RegionName.tent),
+    LocationName.wild_sip: LocationData(base_location_id + 500, RegionName.wild),
+    LocationName.cafe_sip: LocationData(base_location_id + 501, RegionName.cafe),
+    LocationName.lond_sip: LocationData(base_location_id + 502, RegionName.lond),
+    LocationName.kcs_sip: LocationData(base_location_id + 503, RegionName.kcs),
+    LocationName.hogspath_sip: LocationData(base_location_id + 504, RegionName.hogspath),
+    LocationName.hogs_sip: LocationData(base_location_id + 505, RegionName.hogs),
+    LocationName.hogstat_sip: LocationData(base_location_id + 506, RegionName.hogstat),
+    LocationName.hogwpath_sip: LocationData(base_location_id + 507, RegionName.hogwpath),
+    LocationName.herb_sip: LocationData(base_location_id + 508, RegionName.herb),
+    LocationName.tg_sip: LocationData(base_location_id + 509, RegionName.tg),
+    LocationName.court_sip: LocationData(base_location_id + 510, RegionName.court),
+    LocationName.ror_sip: LocationData(base_location_id + 511, RegionName.ror),
+    LocationName.wcs_sip: LocationData(base_location_id + 512, RegionName.wcs),
+    LocationName.wc_sip: LocationData(base_location_id + 513, RegionName.wc),
+    LocationName.gh_sip: LocationData(base_location_id + 514, RegionName.gh),
+    LocationName.ghl_sip: LocationData(base_location_id + 515, RegionName.ghl),
+    LocationName.lake_sip: LocationData(base_location_id + 516, RegionName.lake),
+    LocationName.thest_sip: LocationData(base_location_id + 517, RegionName.thest),
+    LocationName.ground_sip: LocationData(base_location_id + 518, RegionName.ground),
+    LocationName.raven_sip: LocationData(base_location_id + 519, RegionName.raven),
+    LocationName.gryf_sip: LocationData(base_location_id + 520, RegionName.gryf),
+    LocationName.house_sip: LocationData(base_location_id + 521, RegionName.house),
+    LocationName.ast_sip: LocationData(base_location_id + 522, RegionName.ast),
+    LocationName.y6c_sip: LocationData(base_location_id + 523, RegionName.y6c),
+    LocationName.y5c_sip: LocationData(base_location_id + 524, RegionName.y5c),
+    LocationName.pot_sip: LocationData(base_location_id + 525, RegionName.pot),
+    LocationName.div_sip: LocationData(base_location_id + 526, RegionName.div),
+    LocationName.dada_sip: LocationData(base_location_id + 527, RegionName.dada),
+    LocationName.divc_sip: LocationData(base_location_id + 528, RegionName.divc),
+    LocationName.cl_sip: LocationData(base_location_id + 529, RegionName.cl),
+    LocationName.stair_sip: LocationData(base_location_id + 530, RegionName.stair),
+    LocationName.lib_sip: LocationData(base_location_id + 531, RegionName.lib),
+    LocationName.foyer_sip: LocationData(base_location_id + 532, RegionName.foyer),
+    LocationName.mm_sip: LocationData(base_location_id + 533, RegionName.mm),
+    LocationName.knock_sip: LocationData(base_location_id + 534, RegionName.knock),
+    LocationName.leaky_sip: LocationData(base_location_id + 535, RegionName.leaky),
+    LocationName.www_sip: LocationData(base_location_id + 536, RegionName.www),
+    LocationName.diag_sip: LocationData(base_location_id + 537, RegionName.diag),
 }
 
 # 550 - 525
@@ -687,37 +730,38 @@ red_brick_loc_table: Dict[str, LocationData] = {
 
 # Red Brick Purchases 925 - 948
 red_brick_purch_table: Dict[str, LocationData] = {
-    LocationName.com_spec_purch: LocationData(base_location_id + 925, RegionName.leak, 1250),
-    LocationName.adv_guide_purch: LocationData(base_location_id + 926, RegionName.leak, 2500),
-    LocationName.disguise_purch: LocationData(base_location_id + 927, RegionName.leak, 5000),
-    LocationName.carrot_wand_purch: LocationData(base_location_id + 928, RegionName.leak, 10000),
-    LocationName.super_strength_purch: LocationData(base_location_id + 929, RegionName.leak, 75000),
-    LocationName.char_token_detect_purch: LocationData(base_location_id + 930, RegionName.leak, 250000),
-    LocationName.fall_rescue_purch: LocationData(base_location_id + 931, RegionName.leak, 125000),
-    LocationName.char_studs_purch: LocationData(base_location_id + 932, RegionName.leak, 75000),
-    LocationName.score_x2_purch: LocationData(base_location_id + 933, RegionName.leak, 200000),
-    LocationName.score_x4_purch: LocationData(base_location_id + 934, RegionName.leak, 400000),
-    LocationName.score_x6_purch: LocationData(base_location_id + 935, RegionName.leak, 600000),
-    LocationName.score_x8_purch: LocationData(base_location_id + 936, RegionName.leak, 800000),
-    LocationName.score_x10_purch: LocationData(base_location_id + 937, RegionName.leak, 1000000),
-    LocationName.stud_mag_purch: LocationData(base_location_id + 938, RegionName.leak, 250000),
-    LocationName.regen_hearts_purch: LocationData(base_location_id + 939, RegionName.leak, 50000),
-    LocationName.extra_hears_purch: LocationData(base_location_id + 940, RegionName.leak, 75000),
-    LocationName.invincibility_purch: LocationData(base_location_id + 941, RegionName.leak, 500000),
-    LocationName.red_brick_detect_purch: LocationData(base_location_id + 942, RegionName.leak, 250000),
-    LocationName.crest_detect_purch: LocationData(base_location_id + 943, RegionName.leak, 250000),
-    LocationName.gb_detect_purch: LocationData(base_location_id + 944, RegionName.leak, 250000),
-    LocationName.christmas_purch: LocationData(base_location_id + 945, RegionName.leak, 80000),
-    LocationName.ghost_studs_purch: LocationData(base_location_id + 946, RegionName.leak, 99000),
-    LocationName.fast_magic_purch: LocationData(base_location_id + 947, RegionName.leak, 75000),
-    LocationName.fast_dig_purch: LocationData(base_location_id + 948, RegionName.leak, 60000),
+    LocationName.com_spec_purch: LocationData(base_location_id + 925, RegionName.leaky, 1250),
+    LocationName.adv_guide_purch: LocationData(base_location_id + 926, RegionName.leaky, 2500),
+    LocationName.disguise_purch: LocationData(base_location_id + 927, RegionName.leaky, 5000),
+    LocationName.carrot_wand_purch: LocationData(base_location_id + 928, RegionName.leaky, 10000),
+    LocationName.super_strength_purch: LocationData(base_location_id + 929, RegionName.leaky, 75000),
+    LocationName.char_token_detect_purch: LocationData(base_location_id + 930, RegionName.leaky, 250000),
+    LocationName.fall_rescue_purch: LocationData(base_location_id + 931, RegionName.leaky, 125000),
+    LocationName.char_studs_purch: LocationData(base_location_id + 932, RegionName.leaky, 75000),
+    LocationName.score_x2_purch: LocationData(base_location_id + 933, RegionName.leaky, 200000),
+    LocationName.score_x4_purch: LocationData(base_location_id + 934, RegionName.leaky, 400000),
+    LocationName.score_x6_purch: LocationData(base_location_id + 935, RegionName.leaky, 600000),
+    LocationName.score_x8_purch: LocationData(base_location_id + 936, RegionName.leaky, 800000),
+    LocationName.score_x10_purch: LocationData(base_location_id + 937, RegionName.leaky, 1000000),
+    LocationName.stud_mag_purch: LocationData(base_location_id + 938, RegionName.leaky, 250000),
+    LocationName.regen_hearts_purch: LocationData(base_location_id + 939, RegionName.leaky, 50000),
+    LocationName.extra_hears_purch: LocationData(base_location_id + 940, RegionName.leaky, 75000),
+    LocationName.invincibility_purch: LocationData(base_location_id + 941, RegionName.leaky, 500000),
+    LocationName.red_brick_detect_purch: LocationData(base_location_id + 942, RegionName.leaky, 250000),
+    LocationName.crest_detect_purch: LocationData(base_location_id + 943, RegionName.leaky, 250000),
+    LocationName.gb_detect_purch: LocationData(base_location_id + 944, RegionName.leaky, 250000),
+    LocationName.christmas_purch: LocationData(base_location_id + 945, RegionName.leaky, 80000),
+    LocationName.ghost_studs_purch: LocationData(base_location_id + 946, RegionName.leaky, 99000),
+    LocationName.fast_magic_purch: LocationData(base_location_id + 947, RegionName.leaky, 75000),
+    LocationName.fast_dig_purch: LocationData(base_location_id + 948, RegionName.leaky, 60000),
 }
 
 all_location_table = {
     **character_location_table,
     **character_token_location_table,
     **level_beaten_loc_table,
-    **sip_loc_table,
+    **leve_sip_loc_table,
+    **hub_sip_loc_table,
     **house_crest_loc_table,
     **true_wizard_loc_table,
     **bb_gb_loc_table,
@@ -731,7 +775,8 @@ def setup_locations(options: LHP2Options):
     temp_location_table.update(character_location_table)
     temp_location_table.update(character_token_location_table)
     temp_location_table.update(level_beaten_loc_table)
-    temp_location_table.update(sip_loc_table)
+    temp_location_table.update(leve_sip_loc_table)
+    temp_location_table.update(hub_sip_loc_table)
     temp_location_table.update(house_crest_loc_table)
     temp_location_table.update(true_wizard_loc_table)
     temp_location_table.update(bb_gb_loc_table)
