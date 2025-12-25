@@ -506,7 +506,7 @@ wc_sip = "Weasley Courtyard: Student in Peril"
 gh_sip = "Great Hall: Student in Peril"
 ghl_sip = "Great Hall Lobby: Student in Peril"
 lake_sip = "Black Lake: Student in Peril"
-# qp doesn't have SIP
+qp_sip = "Quidditch Pitch: Student in Peril"  # Doesn't Exist
 thest_sip = "Thestral Forest: Student in Peril"
 ground_sip = "Hogwarts Grounds: Student in Peril"
 raven_sip = "Ravenclaw Tower: Student in Peril"
@@ -527,7 +527,7 @@ mm_sip = "Madam Malkin's: Student in Peril"
 knock_sip = "Knockturn Alley: Student in Peril"
 leaky_sip = "Leaky Cauldron: Student in Peril"
 www_sip = "Weasley's Wizard Wheezes: Student in Peril"
-diag_sip = "Diagon Alley: Student in Peril"
+diag_sip = "Diagon Alley: Student in Peril"  # Doesn't Exist
 
 # House Crest Definitions
 dt_gc = "Dark Times: Gryffindor Crest"
@@ -735,5 +735,3 @@ christmas_unlock = "Christmas Unlocked"
 ghost_studs_unlock = "Collect Ghost Studs Unlocked"
 fast_magic_unlock = "Fast Magic Unlocked"
 fast_dig_unlock = "Fast Dig Unlocked"
-
-

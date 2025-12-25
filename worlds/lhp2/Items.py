@@ -510,7 +510,7 @@ level_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.tfitp_sip: LHP2ItemData(base_item_id + 498),
 }
 
-# 499 - 536
+# 499 - 538
 hub_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.tent_sip: LHP2ItemData(base_item_id + 499),
     ItemName.wild_sip: LHP2ItemData(base_item_id + 500),
@@ -530,26 +530,28 @@ hub_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.gh_sip: LHP2ItemData(base_item_id + 514),
     ItemName.ghl_sip: LHP2ItemData(base_item_id + 515),
     ItemName.lake_sip: LHP2ItemData(base_item_id + 516),
-    ItemName.thest_sip: LHP2ItemData(base_item_id + 517),
-    ItemName.ground_sip: LHP2ItemData(base_item_id + 518),
-    ItemName.raven_sip: LHP2ItemData(base_item_id + 519),
-    ItemName.gryf_sip: LHP2ItemData(base_item_id + 520),
-    ItemName.house_sip: LHP2ItemData(base_item_id + 521),
-    ItemName.ast_sip: LHP2ItemData(base_item_id + 522),
-    ItemName.y6c_sip: LHP2ItemData(base_item_id + 523),
-    ItemName.y5c_sip: LHP2ItemData(base_item_id + 524),
-    ItemName.pot_sip: LHP2ItemData(base_item_id + 525),
-    ItemName.div_sip: LHP2ItemData(base_item_id + 526),
-    ItemName.dada_sip: LHP2ItemData(base_item_id + 527),
-    ItemName.divc_sip: LHP2ItemData(base_item_id + 528),
-    ItemName.cl_sip: LHP2ItemData(base_item_id + 529),
-    ItemName.stair_sip: LHP2ItemData(base_item_id + 530),
-    ItemName.lib_sip: LHP2ItemData(base_item_id + 531),
-    ItemName.foyer_sip: LHP2ItemData(base_item_id + 532),
-    ItemName.mm_sip: LHP2ItemData(base_item_id + 533),
-    ItemName.knock_sip: LHP2ItemData(base_item_id + 534),
-    ItemName.leaky_sip: LHP2ItemData(base_item_id + 535),
-    ItemName.www_sip: LHP2ItemData(base_item_id + 536),
+    # ItemName.qp_sip: LHP2ItemData(base_item_id + 517),
+    ItemName.thest_sip: LHP2ItemData(base_item_id + 518),
+    ItemName.ground_sip: LHP2ItemData(base_item_id + 519),
+    ItemName.raven_sip: LHP2ItemData(base_item_id + 520),
+    ItemName.gryf_sip: LHP2ItemData(base_item_id + 521),
+    ItemName.house_sip: LHP2ItemData(base_item_id + 522),
+    ItemName.ast_sip: LHP2ItemData(base_item_id + 523),
+    ItemName.y6c_sip: LHP2ItemData(base_item_id + 524),
+    ItemName.y5c_sip: LHP2ItemData(base_item_id + 525),
+    ItemName.pot_sip: LHP2ItemData(base_item_id + 526),
+    ItemName.div_sip: LHP2ItemData(base_item_id + 527),
+    ItemName.dada_sip: LHP2ItemData(base_item_id + 528),
+    ItemName.divc_sip: LHP2ItemData(base_item_id + 529),
+    ItemName.cl_sip: LHP2ItemData(base_item_id + 530),
+    ItemName.stair_sip: LHP2ItemData(base_item_id + 531),
+    ItemName.lib_sip: LHP2ItemData(base_item_id + 532),
+    ItemName.foyer_sip: LHP2ItemData(base_item_id + 533),
+    ItemName.mm_sip: LHP2ItemData(base_item_id + 534),
+    ItemName.knock_sip: LHP2ItemData(base_item_id + 535),
+    ItemName.leaky_sip: LHP2ItemData(base_item_id + 536),
+    ItemName.www_sip: LHP2ItemData(base_item_id + 537),
+    # ItemName.diag_sip: LHP2ItemData(base_item_id + 538),
 }
 
 # 550 - 525
@@ -689,7 +691,7 @@ true_wizard_item_table: Dict[str, LHP2ItemData] = {
 
 # Gold Bricks 700 - 899
 gold_brick_item_table: Dict[str, LHP2ItemData] = {
-    ItemName.gb: LHP2ItemData(base_item_id + 700, qty=16),
+    ItemName.gb: LHP2ItemData(base_item_id + 700, qty=53),
 }
 
 # Red Brick Purchasable 900 - 919
@@ -716,32 +718,32 @@ red_brick_purchasable_table: Dict[str, LHP2ItemData] = {
     ItemName.fast_dig_purchasable: LHP2ItemData(base_item_id + 919, ItemClassification.progression),
 }
 
-# Red Brick Unlocks 925 - 948
+# Red Brick Unlocks 950 - 973
 red_brick_unlock_table: Dict[str, LHP2ItemData] = {
-    ItemName.com_spec_unlock: LHP2ItemData(base_item_id + 925),
-    ItemName.adv_guide_unlock: LHP2ItemData(base_item_id + 926),
-    ItemName.disguise_unlock: LHP2ItemData(base_item_id + 927),
-    ItemName.carrot_wand_unlock: LHP2ItemData(base_item_id + 928),
-    ItemName.super_strength_unlock: LHP2ItemData(base_item_id + 929),
-    ItemName.char_token_detect_unlock: LHP2ItemData(base_item_id + 930),
-    ItemName.fall_rescue_unlock: LHP2ItemData(base_item_id + 931),
-    ItemName.char_studs_unlock: LHP2ItemData(base_item_id + 932),
-    ItemName.score_x2_unlock: LHP2ItemData(base_item_id + 933),
-    ItemName.score_x4_unlock: LHP2ItemData(base_item_id + 934),
-    ItemName.score_x6_unlock: LHP2ItemData(base_item_id + 935),
-    ItemName.score_x8_unlock: LHP2ItemData(base_item_id + 936),
-    ItemName.score_x10_unlock: LHP2ItemData(base_item_id + 937),
-    ItemName.stud_mag_unlock: LHP2ItemData(base_item_id + 938),
-    ItemName.regen_hearts_unlock: LHP2ItemData(base_item_id + 939),
-    ItemName.extra_hears_unlock: LHP2ItemData(base_item_id + 940),
-    ItemName.invincibility_unlock: LHP2ItemData(base_item_id + 941),
-    ItemName.red_brick_detect_unlock: LHP2ItemData(base_item_id + 942),
-    ItemName.crest_detect_unlock: LHP2ItemData(base_item_id + 943),
-    ItemName.gb_detect_unlock: LHP2ItemData(base_item_id + 944),
-    ItemName.christmas_unlock: LHP2ItemData(base_item_id + 945),
-    ItemName.ghost_studs_unlock: LHP2ItemData(base_item_id + 946),
-    ItemName.fast_magic_unlock: LHP2ItemData(base_item_id + 947),
-    ItemName.fast_dig_unlock: LHP2ItemData(base_item_id + 948),
+    ItemName.com_spec_unlock: LHP2ItemData(base_item_id + 950),
+    ItemName.adv_guide_unlock: LHP2ItemData(base_item_id + 951),
+    ItemName.disguise_unlock: LHP2ItemData(base_item_id + 952),
+    ItemName.carrot_wand_unlock: LHP2ItemData(base_item_id + 953),
+    ItemName.super_strength_unlock: LHP2ItemData(base_item_id + 954),
+    ItemName.char_token_detect_unlock: LHP2ItemData(base_item_id + 955),
+    ItemName.fall_rescue_unlock: LHP2ItemData(base_item_id + 956),
+    ItemName.char_studs_unlock: LHP2ItemData(base_item_id + 957),
+    ItemName.score_x2_unlock: LHP2ItemData(base_item_id + 958),
+    ItemName.score_x4_unlock: LHP2ItemData(base_item_id + 959),
+    ItemName.score_x6_unlock: LHP2ItemData(base_item_id + 960),
+    ItemName.score_x8_unlock: LHP2ItemData(base_item_id + 961),
+    ItemName.score_x10_unlock: LHP2ItemData(base_item_id + 962),
+    ItemName.stud_mag_unlock: LHP2ItemData(base_item_id + 963),
+    ItemName.regen_hearts_unlock: LHP2ItemData(base_item_id + 964),
+    ItemName.extra_hears_unlock: LHP2ItemData(base_item_id + 965),
+    ItemName.invincibility_unlock: LHP2ItemData(base_item_id + 966),
+    ItemName.red_brick_detect_unlock: LHP2ItemData(base_item_id + 967),
+    ItemName.crest_detect_unlock: LHP2ItemData(base_item_id + 968),
+    ItemName.gb_detect_unlock: LHP2ItemData(base_item_id + 969),
+    ItemName.christmas_unlock: LHP2ItemData(base_item_id + 970),
+    ItemName.ghost_studs_unlock: LHP2ItemData(base_item_id + 971),
+    ItemName.fast_magic_unlock: LHP2ItemData(base_item_id + 972),
+    ItemName.fast_dig_unlock: LHP2ItemData(base_item_id + 973),
 }
 
 item_data_table = {
