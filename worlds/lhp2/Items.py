@@ -510,7 +510,7 @@ level_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.tfitp_sip: LHP2ItemData(base_item_id + 498),
 }
 
-# 499 - 537
+# 499 - 536
 hub_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.tent_sip: LHP2ItemData(base_item_id + 499),
     ItemName.wild_sip: LHP2ItemData(base_item_id + 500),
@@ -550,7 +550,6 @@ hub_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.knock_sip: LHP2ItemData(base_item_id + 534),
     ItemName.leaky_sip: LHP2ItemData(base_item_id + 535),
     ItemName.www_sip: LHP2ItemData(base_item_id + 536),
-    ItemName.diag_sip: LHP2ItemData(base_item_id + 537),
 }
 
 # 550 - 525

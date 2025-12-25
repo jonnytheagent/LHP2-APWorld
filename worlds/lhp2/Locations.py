@@ -506,7 +506,7 @@ leve_sip_loc_table: Dict[str, LocationData] = {
     LocationName.tfitp_sip: LocationData(base_location_id + 498, RegionName.tfitp),
 }
 
-# 499 - 537
+# 499 - 536
 hub_sip_loc_table: Dict[str, LocationData] = {
     LocationName.tent_sip: LocationData(base_location_id + 499, RegionName.tent),
     LocationName.wild_sip: LocationData(base_location_id + 500, RegionName.wild),
@@ -546,7 +546,6 @@ hub_sip_loc_table: Dict[str, LocationData] = {
     LocationName.knock_sip: LocationData(base_location_id + 534, RegionName.knock),
     LocationName.leaky_sip: LocationData(base_location_id + 535, RegionName.leaky),
     LocationName.www_sip: LocationData(base_location_id + 536, RegionName.www),
-    LocationName.diag_sip: LocationData(base_location_id + 537, RegionName.diag),
 }
 
 # 550 - 525
