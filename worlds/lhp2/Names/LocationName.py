@@ -1,5 +1,4 @@
 # Character Definitions
-from worlds.lhp2.Names.RegionName import hogwpath
 
 hagrid_purch = "Hagrid Purchased"
 fang_purch = "Fang Purchased"
@@ -433,6 +432,25 @@ skeleton_token = "Skeleton Token Collected"
 # Spell & Ability Definitions
 
 # Joke Spell Definitions
+slug_purch = "Slugulus Eructo Purchased"
+rictu_purch = "Rictusempra Purchased"
+entomo_purch = "Entomorphis Purchased"
+taranta_purch = "Tarantallegra Purchased"
+loco_purch = "Locomotor Mortis Purchased"
+redact_purch = "Redactum Skullus Purchased"
+colo_purch = "Colovaria Purchased"
+calvo_purch = "Calvorio Purchased"
+anteo_purch = "Anteoculatia Purchased"
+herbi_purch = "Herbifors Purchased"
+glaci_purch = "Glacius Purchased"
+incarc_purch = "Incarcerous Purchased"
+expel_purch = "Expelliarmus Purchased"
+flip_purch = "Flipendo Purchased"
+trip_purch = "Trip Jinx Purchased"
+stup_purch = "Stupefy Purchased"
+transfig_purch = "Transfiguration Purchased"
+engorg_purch = "Engorgio Skullus Purchased"
+immob_purch = "Immobulus Purchased"
 
 # Level Unlock Definitions
 dt_beat = "Dark Times: Level Beaten"

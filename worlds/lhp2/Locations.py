@@ -450,6 +450,29 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.skeleton_token: LocationData(base_location_id + 425, RegionName.ll),
 }
 
+# 426 - 444
+joke_spell_loc_table: Dict[str, LocationData] = {
+    LocationName.slug_purch: LocationData(base_location_id + 426, RegionName.www, 500000),
+    LocationName.rictu_purch: LocationData(base_location_id + 427, RegionName.www, 65000),
+    LocationName.entomo_purch: LocationData(base_location_id + 428, RegionName.www, 80000),
+    LocationName.taranta_purch: LocationData(base_location_id + 429, RegionName.www, 75000),
+    LocationName.loco_purch: LocationData(base_location_id + 430, RegionName.www, 30000),
+    LocationName.redact_purch: LocationData(base_location_id + 431, RegionName.www, 10000),
+    LocationName.colo_purch: LocationData(base_location_id + 432, RegionName.www, 75000),
+    LocationName.calvo_purch: LocationData(base_location_id + 433, RegionName.www, 20000),
+    LocationName.anteo_purch: LocationData(base_location_id + 434, RegionName.www, 95000),
+    LocationName.herbi_purch: LocationData(base_location_id + 435, RegionName.www, 15000),
+    LocationName.glaci_purch: LocationData(base_location_id + 436, RegionName.www, 110000),
+    LocationName.incarc_purch: LocationData(base_location_id + 437, RegionName.www, 100000),
+    LocationName.expel_purch: LocationData(base_location_id + 438, RegionName.www, 10000),
+    LocationName.flip_purch: LocationData(base_location_id + 439, RegionName.www, 125000),
+    LocationName.trip_purch: LocationData(base_location_id + 440, RegionName.www, 40000),
+    LocationName.stup_purch: LocationData(base_location_id + 441, RegionName.www, 150000),
+    LocationName.transfig_purch: LocationData(base_location_id + 442, RegionName.www, 200000),
+    LocationName.engorg_purch: LocationData(base_location_id + 443, RegionName.www, 10000),
+    LocationName.immob_purch: LocationData(base_location_id + 444, RegionName.www, 400000),
+}
+
 # 450 - 473
 level_beaten_loc_table: Dict[str, LocationData] = {
     LocationName.dt_beat: LocationData(base_location_id + 450, RegionName.dt),
@@ -824,6 +847,7 @@ red_brick_purch_table: Dict[str, LocationData] = {
 all_location_table = {
     **character_location_table,
     **character_token_location_table,
+    **joke_spell_loc_table,
     **level_beaten_loc_table,
     **leve_sip_loc_table,
     **hub_sip_loc_table,
@@ -840,6 +864,7 @@ def setup_locations(options: LHP2Options):
     temp_location_table = {}
     temp_location_table.update(character_location_table)
     temp_location_table.update(character_token_location_table)
+    temp_location_table.update(joke_spell_loc_table)
     temp_location_table.update(level_beaten_loc_table)
     temp_location_table.update(leve_sip_loc_table)
     temp_location_table.update(hub_sip_loc_table)

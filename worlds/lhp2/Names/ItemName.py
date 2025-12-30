@@ -433,6 +433,25 @@ skeleton_token = "Skeleton Token"
 # Spell & Ability Definitions
 
 # Joke Spell Definitions
+slug_unlock = "Slugulus Eructo Unlocked"
+rictu_unlock = "Rictusempra Unlocked"
+entomo_unlock = "Entomorphis Unlocked"
+taranta_unlock = "Tarantallegra Unlocked"
+loco_unlock = "Locomotor Mortis Unlocked"
+redact_unlock = "Redactum Skullus Unlocked"
+colo_unlock = "Colovaria Unlocked"
+calvo_unlock = "Calvorio Unlocked"
+anteo_unlock = "Anteoculatia Unlocked"
+herbi_unlock = "Herbifors Unlocked"
+glaci_unlock = "Glacius Unlocked"
+incarc_unlock = "Incarcerous Unlocked"
+expel_unlock = "Expelliarmus Unlocked"
+flip_unlock = "Flipendo Unlocked"
+trip_unlock = "Trip Jinx Unlocked"
+stup_unlock = "Stupefy Unlocked"
+transfig_unlock = "Transfiguration Unlocked"
+engorg_unlock = "Engorgio Skullus Unlocked"
+immob_unlock = "Immobulus Unlocked"
 
 # Level Unlock Definitions
 dt_unlock = "Dark Times: Level Unlocked"
