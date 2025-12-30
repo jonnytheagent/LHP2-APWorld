@@ -454,29 +454,6 @@ character_token_item_table: Dict[str, LHP2ItemData] = {
     ItemName.skeleton_token: LHP2ItemData(base_item_id + 425, ItemClassification.progression),
 }
 
-# 426 - 444
-joke_spell_item_table: Dict[str, LHP2ItemData] = {
-    ItemName.slug_unlock: LHP2ItemData(base_item_id + 426),
-    ItemName.rictu_unlock: LHP2ItemData(base_item_id + 427),
-    ItemName.entomo_unlock: LHP2ItemData(base_item_id + 428),
-    ItemName.taranta_unlock: LHP2ItemData(base_item_id + 429),
-    ItemName.loco_unlock: LHP2ItemData(base_item_id + 430),
-    ItemName.redact_unlock: LHP2ItemData(base_item_id + 431),
-    ItemName.colo_unlock: LHP2ItemData(base_item_id + 432),
-    ItemName.calvo_unlock: LHP2ItemData(base_item_id + 433),
-    ItemName.anteo_unlock: LHP2ItemData(base_item_id + 434),
-    ItemName.herbi_unlock: LHP2ItemData(base_item_id + 435),
-    ItemName.glaci_unlock: LHP2ItemData(base_item_id + 436),
-    ItemName.incarc_unlock: LHP2ItemData(base_item_id + 437),
-    ItemName.expel_unlock: LHP2ItemData(base_item_id + 438),
-    ItemName.flip_unlock: LHP2ItemData(base_item_id + 439),
-    ItemName.trip_unlock: LHP2ItemData(base_item_id + 440),
-    ItemName.stup_unlock: LHP2ItemData(base_item_id + 441),
-    ItemName.transfig_unlock: LHP2ItemData(base_item_id + 442),
-    ItemName.engorg_unlock: LHP2ItemData(base_item_id + 443),
-    ItemName.immob_unlock: LHP2ItemData(base_item_id + 444),
-}
-
 # 450 - 473
 level_unlock_item_table: Dict[str, LHP2ItemData] = {
     ItemName.dt_unlock: LHP2ItemData(base_item_id + 450, ItemClassification.progression),
@@ -769,10 +746,45 @@ red_brick_unlock_table: Dict[str, LHP2ItemData] = {
     ItemName.fast_dig_unlock: LHP2ItemData(base_item_id + 973),
 }
 
+# 975 - 1005
+spell_item_table: Dict[str, LHP2ItemData] = {
+    # ItemName.wingarad_unlock: LHP2ItemData(base_item_id + 975),
+    ItemName.slug_unlock: LHP2ItemData(base_item_id + 976),
+    ItemName.rictu_unlock: LHP2ItemData(base_item_id + 977),
+    ItemName.entomo_unlock: LHP2ItemData(base_item_id + 978),
+    ItemName.taranta_unlock: LHP2ItemData(base_item_id + 979),
+    ItemName.loco_unlock: LHP2ItemData(base_item_id + 980),
+    ItemName.redact_unlock: LHP2ItemData(base_item_id + 981),
+    ItemName.colo_unlock: LHP2ItemData(base_item_id + 982),
+    ItemName.calvo_unlock: LHP2ItemData(base_item_id + 983),
+    ItemName.anteo_unlock: LHP2ItemData(base_item_id + 984),
+    ItemName.herbi_unlock: LHP2ItemData(base_item_id + 985),
+    ItemName.glaci_unlock: LHP2ItemData(base_item_id + 986),
+    ItemName.incarc_unlock: LHP2ItemData(base_item_id + 987),
+    ItemName.expel_unlock: LHP2ItemData(base_item_id + 988),
+    ItemName.flip_unlock: LHP2ItemData(base_item_id + 989),
+    ItemName.trip_unlock: LHP2ItemData(base_item_id + 990),
+    ItemName.stup_unlock: LHP2ItemData(base_item_id + 991),
+    ItemName.transfig_unlock: LHP2ItemData(base_item_id + 992),
+    ItemName.engorg_unlock: LHP2ItemData(base_item_id + 993),
+    ItemName.immob_unlock: LHP2ItemData(base_item_id + 994),
+    # ItemName.pets_unlock: LHP2ItemData(base_item_id + 995),
+    # ItemName.invis_unlock: LHP2ItemData(base_item_id + 996),
+    # ItemName.avada_unlock: LHP2ItemData(base_item_id + 997),
+    ItemName.diffindo_unlock: LHP2ItemData(base_item_id + 998),
+    # ItemName.lumos_unlock: LHP2ItemData(base_item_id + 999),
+    # lumos has 2 bits
+    ItemName.delum_unlock: LHP2ItemData(base_item_id + 1001),
+    ItemName.agua_unlock: LHP2ItemData(base_item_id + 1002),
+    ItemName.focus_unlock: LHP2ItemData(base_item_id + 1003),
+    ItemName.expecto_unlock: LHP2ItemData(base_item_id + 1004),
+    ItemName.reducto_unlock: LHP2ItemData(base_item_id + 1005),
+}
+
 item_data_table = {
     **character_item_table,
     **character_token_item_table,
-    **joke_spell_item_table,
+    **spell_item_table,
     **level_unlock_item_table,
     **level_sip_item_table,
     **hub_sip_item_table,

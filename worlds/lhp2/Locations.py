@@ -450,29 +450,6 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.skeleton_token: LocationData(base_location_id + 425, RegionName.ll),
 }
 
-# 426 - 444
-joke_spell_loc_table: Dict[str, LocationData] = {
-    LocationName.slug_purch: LocationData(base_location_id + 426, RegionName.www, 500000),
-    LocationName.rictu_purch: LocationData(base_location_id + 427, RegionName.www, 65000),
-    LocationName.entomo_purch: LocationData(base_location_id + 428, RegionName.www, 80000),
-    LocationName.taranta_purch: LocationData(base_location_id + 429, RegionName.www, 75000),
-    LocationName.loco_purch: LocationData(base_location_id + 430, RegionName.www, 30000),
-    LocationName.redact_purch: LocationData(base_location_id + 431, RegionName.www, 10000),
-    LocationName.colo_purch: LocationData(base_location_id + 432, RegionName.www, 75000),
-    LocationName.calvo_purch: LocationData(base_location_id + 433, RegionName.www, 20000),
-    LocationName.anteo_purch: LocationData(base_location_id + 434, RegionName.www, 95000),
-    LocationName.herbi_purch: LocationData(base_location_id + 435, RegionName.www, 15000),
-    LocationName.glaci_purch: LocationData(base_location_id + 436, RegionName.www, 110000),
-    LocationName.incarc_purch: LocationData(base_location_id + 437, RegionName.www, 100000),
-    LocationName.expel_purch: LocationData(base_location_id + 438, RegionName.www, 10000),
-    LocationName.flip_purch: LocationData(base_location_id + 439, RegionName.www, 125000),
-    LocationName.trip_purch: LocationData(base_location_id + 440, RegionName.www, 40000),
-    LocationName.stup_purch: LocationData(base_location_id + 441, RegionName.www, 150000),
-    LocationName.transfig_purch: LocationData(base_location_id + 442, RegionName.www, 200000),
-    LocationName.engorg_purch: LocationData(base_location_id + 443, RegionName.www, 10000),
-    LocationName.immob_purch: LocationData(base_location_id + 444, RegionName.www, 400000),
-}
-
 # 450 - 473
 level_beaten_loc_table: Dict[str, LocationData] = {
     LocationName.dt_beat: LocationData(base_location_id + 450, RegionName.dt),
@@ -844,10 +821,45 @@ red_brick_purch_table: Dict[str, LocationData] = {
     LocationName.fast_dig_purch: LocationData(base_location_id + 973, RegionName.leaky, 60000),
 }
 
+# 975 - 1005
+spell_loc_table: Dict[str, LocationData] = {
+    # LocationName.wingard_purch: LocationData(base_location_id + 975, RegionName.www, 0),
+    LocationName.slug_purch: LocationData(base_location_id + 976, RegionName.www, 500000),
+    LocationName.rictu_purch: LocationData(base_location_id + 977, RegionName.www, 65000),
+    LocationName.entomo_purch: LocationData(base_location_id + 978, RegionName.www, 80000),
+    LocationName.taranta_purch: LocationData(base_location_id + 979, RegionName.www, 75000),
+    LocationName.loco_purch: LocationData(base_location_id + 980, RegionName.www, 30000),
+    LocationName.redact_purch: LocationData(base_location_id + 981, RegionName.www, 10000),
+    LocationName.colo_purch: LocationData(base_location_id + 982, RegionName.www, 75000),
+    LocationName.calvo_purch: LocationData(base_location_id + 983, RegionName.www, 20000),
+    LocationName.anteo_purch: LocationData(base_location_id + 984, RegionName.www, 95000),
+    LocationName.herbi_purch: LocationData(base_location_id + 985, RegionName.www, 15000),
+    LocationName.glaci_purch: LocationData(base_location_id + 986, RegionName.www, 110000),
+    LocationName.incarc_purch: LocationData(base_location_id + 987, RegionName.www, 100000),
+    LocationName.expel_purch: LocationData(base_location_id + 988, RegionName.www, 10000),
+    LocationName.flip_purch: LocationData(base_location_id + 989, RegionName.www, 125000),
+    LocationName.trip_purch: LocationData(base_location_id + 990, RegionName.www, 40000),
+    LocationName.stup_purch: LocationData(base_location_id + 991, RegionName.www, 150000),
+    LocationName.transfig_purch: LocationData(base_location_id + 992, RegionName.www, 200000),
+    LocationName.engorg_purch: LocationData(base_location_id + 993, RegionName.www, 10000),
+    LocationName.immob_purch: LocationData(base_location_id + 994, RegionName.www, 400000),
+    # LocationName.pets_purch: LocationData(base_location_id + 995, RegionName.www),
+    # LocationName.invis_purch: LocationData(base_location_id + 996, RegionName.www),
+    # LocationName.avada_purch: LocationData(base_location_id + 997, RegionName.www),
+    LocationName.diffindo_purch: LocationData(base_location_id + 998, RegionName.y5c),
+    # LocationName.lumos_purch: LocationData(base_location_id + 999, RegionName.www),
+    # lumos has 2 bits
+    LocationName.delum_purch: LocationData(base_location_id + 1001, RegionName.www),
+    LocationName.agua_purch: LocationData(base_location_id + 1002, RegionName.y6c),
+    LocationName.focus_purch: LocationData(base_location_id + 1003, RegionName.cl),
+    LocationName.expecto_purch: LocationData(base_location_id + 1004, RegionName.ror),
+    LocationName.reducto_purch: LocationData(base_location_id + 1005, RegionName.y6c),
+}
+
 all_location_table = {
     **character_location_table,
     **character_token_location_table,
-    **joke_spell_loc_table,
+    **spell_loc_table,
     **level_beaten_loc_table,
     **leve_sip_loc_table,
     **hub_sip_loc_table,
@@ -864,7 +876,7 @@ def setup_locations(options: LHP2Options):
     temp_location_table = {}
     temp_location_table.update(character_location_table)
     temp_location_table.update(character_token_location_table)
-    temp_location_table.update(joke_spell_loc_table)
+    temp_location_table.update(spell_loc_table)
     temp_location_table.update(level_beaten_loc_table)
     temp_location_table.update(leve_sip_loc_table)
     temp_location_table.update(hub_sip_loc_table)

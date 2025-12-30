@@ -432,7 +432,8 @@ skeleton_token = "Skeleton Token"
 
 # Spell & Ability Definitions
 
-# Joke Spell Definitions
+# Spell Definitions
+wingarad_unlock = "Wingardium Leviosa Unlocked"
 slug_unlock = "Slugulus Eructo Unlocked"
 rictu_unlock = "Rictusempra Unlocked"
 entomo_unlock = "Entomorphis Unlocked"
@@ -452,6 +453,16 @@ stup_unlock = "Stupefy Unlocked"
 transfig_unlock = "Transfiguration Unlocked"
 engorg_unlock = "Engorgio Skullus Unlocked"
 immob_unlock = "Immobulus Unlocked"
+pets_unlock = "Pets & Animagus Unlocked"
+invis_unlock = "Invisibility Cloak Unlocked"
+avada_unlock = "Avada Kadavra Unlocked"
+diffindo_unlock = "Diffindo Unlocked"
+lumos_unlock = "Lumos Unlocked"
+delum_unlock = "Deluminator and Polyjuice Potion Unlocked"
+agua_unlock = "Aguamenti Unlocked"
+focus_unlock = "Focus Unlocked"
+expecto_unlock = "Expecto Patronum Unlocked"
+reducto_unlock = "Reducto Unlocked"
 
 # Level Unlock Definitions
 dt_unlock = "Dark Times: Level Unlocked"

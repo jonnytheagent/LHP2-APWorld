@@ -429,9 +429,8 @@ neville_waiter_token = "Neville (Waiter) Token Collected"
 xeno_wedding_token = "Xenophilius (Wedding) Token Collected"
 skeleton_token = "Skeleton Token Collected"
 
-# Spell & Ability Definitions
-
-# Joke Spell Definitions
+# Spell Definitions
+wingard_purch = "Wingardium Leviosa Purchased"
 slug_purch = "Slugulus Eructo Purchased"
 rictu_purch = "Rictusempra Purchased"
 entomo_purch = "Entomorphis Purchased"
@@ -451,6 +450,16 @@ stup_purch = "Stupefy Purchased"
 transfig_purch = "Transfiguration Purchased"
 engorg_purch = "Engorgio Skullus Purchased"
 immob_purch = "Immobulus Purchased"
+pets_purch = "Pets & Animagus Purchased"
+invis_purch = "Invisibility Cloak Purchased"
+avada_purch = "Avada Kadavra Purchased"
+diffindo_purch = "Diffindo Purchased"
+lumos_purch = "Lumos Purchased"
+delum_purch = "Deluminator and Polyjuice Potion Purchased"
+agua_purch = "Aguamenti Purchased"
+focus_purch = "Focus Purchased"
+expecto_purch = "Expecto Patronum Purchased"
+reducto_purch = "Reducto Purchased"
 
 # Level Unlock Definitions
 dt_beat = "Dark Times: Level Beaten"
