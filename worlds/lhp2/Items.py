@@ -771,14 +771,14 @@ spell_item_table: Dict[str, LHP2ItemData] = {
     # ItemName.pets_unlock: LHP2ItemData(base_item_id + 995),
     # ItemName.invis_unlock: LHP2ItemData(base_item_id + 996),
     # ItemName.avada_unlock: LHP2ItemData(base_item_id + 997),
-    ItemName.diffindo_unlock: LHP2ItemData(base_item_id + 998),
+    ItemName.diffindo_unlock: LHP2ItemData(base_item_id + 998, ItemClassification.progression),
     # ItemName.lumos_unlock: LHP2ItemData(base_item_id + 999),
     # lumos has 2 bits
-    ItemName.delum_unlock: LHP2ItemData(base_item_id + 1001),
-    ItemName.agua_unlock: LHP2ItemData(base_item_id + 1002),
-    ItemName.focus_unlock: LHP2ItemData(base_item_id + 1003),
-    ItemName.expecto_unlock: LHP2ItemData(base_item_id + 1004),
-    ItemName.reducto_unlock: LHP2ItemData(base_item_id + 1005),
+    ItemName.delum_unlock: LHP2ItemData(base_item_id + 1001, ItemClassification.progression),
+    ItemName.agua_unlock: LHP2ItemData(base_item_id + 1002, ItemClassification.progression),
+    ItemName.focus_unlock: LHP2ItemData(base_item_id + 1003, ItemClassification.progression),
+    ItemName.expecto_unlock: LHP2ItemData(base_item_id + 1004, ItemClassification.progression),
+    ItemName.reducto_unlock: LHP2ItemData(base_item_id + 1005, ItemClassification.progression),
 }
 
 item_data_table = {
