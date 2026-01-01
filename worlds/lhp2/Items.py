@@ -694,7 +694,7 @@ gold_brick_item_table: Dict[str, LHP2ItemData] = {
     ItemName.gb: LHP2ItemData(base_item_id + 700, qty=53),
 }
 
-# Red Brick Purchasable 900 - 919
+# Red Brick Purchasable 900 - 935
 red_brick_purchasable_table: Dict[str, LHP2ItemData] = {
     ItemName.christmas_purchasable: LHP2ItemData(base_item_id + 901, ItemClassification.progression),
     ItemName.gb_detect_purchasable: LHP2ItemData(base_item_id + 903, ItemClassification.progression),
