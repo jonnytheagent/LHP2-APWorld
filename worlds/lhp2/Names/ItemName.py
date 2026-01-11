@@ -464,6 +464,18 @@ focus_unlock = "Focus Unlocked"
 expecto_unlock = "Expecto Patronum Unlocked"
 reducto_unlock = "Reducto Unlocked"
 
+# Ability Table
+draught_unlock = "Draught of Living Death Unlocked"
+thest_unlock = "Thestral Riding Unlocked"
+dueling_unlock = "Dueling Unlocked"
+apparition_unlock = "Apparition Unlocked"
+dada_unlock = "DADA Unlocked"
+grawp_unlock = "Grawp Befriended"
+slug_vial_unlock = "Slughorn Vial Received"
+www_box_unlock = "Weasley Wizard Wheezes Boxes Unlocked"
+specs_unlock = "Spectrespecs Unlocked"
+herm_bag_unlock = "Hermione's Bag Unlocked"
+
 # Level Unlock Definitions
 dt_unlock = "Dark Times: Level Unlocked"
 da_unlock = "Dumbledore's Army: Level Unlocked"
@@ -765,3 +777,5 @@ christmas_unlock = "Christmas Unlocked"
 ghost_studs_unlock = "Collect Ghost Studs Unlocked"
 fast_magic_unlock = "Fast Magic Unlocked"
 fast_dig_unlock = "Fast Dig Unlocked"
+
+purp_stud = "Purple Stud"

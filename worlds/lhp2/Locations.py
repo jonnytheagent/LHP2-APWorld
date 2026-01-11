@@ -856,6 +856,19 @@ spell_loc_table: Dict[str, LocationData] = {
     LocationName.reducto_purch: LocationData(base_location_id + 1005, RegionName.y6c),
 }
 
+ability_loc_table: Dict[str, LocationData] = {
+    LocationName.draught_purch: LocationData(base_location_id + 1006, RegionName.pot),
+    LocationName.thest_purch: LocationData(base_location_id + 1007, RegionName.thest),
+    LocationName.dueling_purch: LocationData(base_location_id + 1008, RegionName.ror),
+    LocationName.apparition_purch: LocationData(base_location_id + 1009, RegionName.tsh),
+    LocationName.dada_purch: LocationData(base_location_id + 1010, RegionName.dada),
+    LocationName.grawp_purch: LocationData(base_location_id + 1011, RegionName.ground),
+    LocationName.slug_vial_purch: LocationData(base_location_id + 1012, RegionName.stair),
+    LocationName.www_box_purch: LocationData(base_location_id + 1013, RegionName.wc),
+    LocationName.specs_purch: LocationData(base_location_id + 1014, RegionName.hogstat),
+    LocationName.herm_bag_purch: LocationData(base_location_id + 1015, RegionName.tsh),
+}
+
 all_location_table = {
     **character_location_table,
     **character_token_location_table,
@@ -869,6 +882,7 @@ all_location_table = {
     **hub_gb_loc_table,
     **red_brick_loc_table,
     **red_brick_purch_table,
+    **ability_loc_table,
 }
 
 
@@ -886,4 +900,5 @@ def setup_locations(options: LHP2Options):
     temp_location_table.update(hub_gb_loc_table)
     temp_location_table.update(red_brick_loc_table)
     temp_location_table.update(red_brick_purch_table)
+    temp_location_table.update(ability_loc_table)
     return temp_location_table

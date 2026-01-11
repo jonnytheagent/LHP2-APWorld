@@ -781,6 +781,23 @@ spell_item_table: Dict[str, LHP2ItemData] = {
     ItemName.reducto_unlock: LHP2ItemData(base_item_id + 1005, ItemClassification.progression),
 }
 
+ability_item_table: Dict[str, LHP2ItemData] = {
+    # ItemName.draught_unlock: LHP2ItemData(base_item_id + 1006),
+    ItemName.thest_unlock: LHP2ItemData(base_item_id + 1007, ItemClassification.progression_deprioritized_skip_balancing),
+    # ItemName.dueling_unlock: LHP2ItemData(base_item_id + 1008),
+    ItemName.apparition_unlock: LHP2ItemData(base_item_id + 1009, ItemClassification.progression),
+    # ItemName.dada_unlock: LHP2ItemData(base_item_id + 1010),
+    # ItemName.grawp_unlock: LHP2ItemData(base_item_id + 1011),
+    # ItemName.slug_vial_unlock: LHP2ItemData(base_item_id + 1012),
+    ItemName.www_box_unlock: LHP2ItemData(base_item_id + 1013, ItemClassification.progression),
+    ItemName.specs_unlock: LHP2ItemData(base_item_id + 1014, ItemClassification.progression),
+    ItemName.herm_bag_unlock: LHP2ItemData(base_item_id + 1015, ItemClassification.progression),
+}
+
+purp_stud_item_table: Dict[str, LHP2ItemData] = {
+    ItemName.purp_stud: LHP2ItemData(base_item_id + 1016, qty=5),
+}
+
 item_data_table = {
     **character_item_table,
     **character_token_item_table,
@@ -793,4 +810,6 @@ item_data_table = {
     **gold_brick_item_table,
     **red_brick_purchasable_table,
     **red_brick_unlock_table,
+    **ability_item_table,
+    **purp_stud_item_table,
 }
