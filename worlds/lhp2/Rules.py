@@ -1,9 +1,70 @@
+from typing import List, Callable
+
 from BaseClasses import MultiWorld, Location
 from worlds.generic.Rules import set_rule
 from worlds.AutoWorld import CollectionState
 
 from .Names import LocationName, ItemName, RegionName
 from .Options import LHP2Options, EndGoal
+
+
+# Helper Functions
+def can_use_dark_magic(state: CollectionState, player: int) -> bool:
+    return (
+            state.has(ItemName.alecto_play, player)
+            or state.has(ItemName.amycus_play, player)
+            or state.has(ItemName.dolohov_play, player)
+            or state.has(ItemName.dolohov_play, player)
+            or state.has(ItemName.bellatrix_azka_play, player)
+            or state.has(ItemName.bellatrix_play, player)
+            or state.has(ItemName.death_eater_play, player)
+            or state.has(ItemName.fenrir_play, player)
+            or state.has(ItemName.grindel_old_play, player)
+            or state.has(ItemName.grindel_young_play, player)
+            or state.has(ItemName.lord_voldemort_play, player)
+            or state.has(ItemName.lucius_play, player)
+            or state.has(ItemName.lucius_death_eater_play, player)
+            or state.has(ItemName.black_play, player)
+            or state.has(ItemName.pius_play, player)
+            or state.has(ItemName.scabior_play, player)
+            or state.has(ItemName.snatcher_play, player)
+            or state.has(ItemName.rowle_play, player)
+            or state.has(ItemName.tom_riddle_play, player)
+            or state.has(ItemName.tr_orphanage_play, player) # TODO: to check
+    )
+
+
+def can_use_spanner(state: CollectionState, player: int) -> bool:
+    return(
+            state.has(ItemName.arthur_play, player)
+            or state.has(ItemName.arthur_suit_play, player)
+            or state.has(ItemName.arthur_play, player)
+            or state.has(ItemName.arthur_torn_suit_play, player)
+    )
+
+
+def can_use_key(state: CollectionState, player: int) -> bool:
+    return(
+            state.has(ItemName.bogrod_play, player)
+            or state.has(ItemName.cole_play, player)
+            or state.has(ItemName.griphook_play, player)
+    )
+
+
+def char_is_strong(state: CollectionState, player: int) -> bool:
+    return(
+            state.has(ItemName.dudley_play, player)
+            or state.has(ItemName.dudley_shirt_play, player)
+            or state.has(ItemName.dudley_grey_play, player)
+            or state.has(ItemName.fenrir_play, player)
+            or state.has(ItemName.fang_play, player)
+            or state.has(ItemName.hagrid_play, player)
+            or state.has(ItemName.hagrid_wed_play, player)
+            or state.has(ItemName.remus_lupin_play, player)
+            or state.has(ItemName.sirius_black_play, player)
+            or state.has(ItemName.sirius_azkaban_play, player) # TODO: to verify
+            or state.has(ItemName.super_strength_unlock, player)
+    )
 
 
 def set_rules(world: MultiWorld, options: LHP2Options, player: int):
