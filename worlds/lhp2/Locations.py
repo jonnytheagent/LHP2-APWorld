@@ -454,7 +454,7 @@ character_token_location_table: Dict[str, LocationData] = {
 level_beaten_loc_table: Dict[str, LocationData] = {
     LocationName.dt_beat: LocationData(base_location_id + 450, RegionName.dt),
     LocationName.da_beat: LocationData(base_location_id + 451, RegionName.da),
-    LocationName.foc_beat: LocationData(base_location_id + 452, RegionName.foc),
+    LocationName.foc_beat: LocationData(base_location_id + 452, RegionName.focf),
     LocationName.kd_beat: LocationData(base_location_id + 453, RegionName.kd),
     LocationName.agv_beat: LocationData(base_location_id + 454, RegionName.agv),
     LocationName.avt_beat: LocationData(base_location_id + 455, RegionName.avt),
@@ -482,7 +482,7 @@ level_beaten_loc_table: Dict[str, LocationData] = {
 leve_sip_loc_table: Dict[str, LocationData] = {
     LocationName.dt_sip: LocationData(base_location_id + 475, RegionName.dt),
     LocationName.da_sip: LocationData(base_location_id + 476, RegionName.da),
-    LocationName.foc_sip: LocationData(base_location_id + 477, RegionName.foc),
+    LocationName.foc_sip: LocationData(base_location_id + 477, RegionName.focf),
     LocationName.kd_sip: LocationData(base_location_id + 478, RegionName.kd),
     LocationName.agv_sip: LocationData(base_location_id + 479, RegionName.agv),
     LocationName.avt_sip: LocationData(base_location_id + 480, RegionName.avt),
@@ -555,7 +555,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     # Gryff Crests
     LocationName.dt_gc: LocationData(base_location_id + 550, RegionName.dt),
     LocationName.da_gc: LocationData(base_location_id + 551, RegionName.da),
-    LocationName.foc_gc: LocationData(base_location_id + 552, RegionName.foc),
+    LocationName.foc_gc: LocationData(base_location_id + 552, RegionName.focf),
     LocationName.kd_gc: LocationData(base_location_id + 553, RegionName.kd),
     LocationName.agv_gc: LocationData(base_location_id + 554, RegionName.agv),
     LocationName.avt_gc: LocationData(base_location_id + 555, RegionName.avt),
@@ -605,7 +605,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     # Raven Crests
     LocationName.dt_rc: LocationData(base_location_id + 598, RegionName.dt),
     LocationName.da_rc: LocationData(base_location_id + 599, RegionName.da),
-    LocationName.foc_rc: LocationData(base_location_id + 600, RegionName.foc),
+    LocationName.foc_rc: LocationData(base_location_id + 600, RegionName.focf),
     LocationName.kd_rc: LocationData(base_location_id + 601, RegionName.kd),
     LocationName.agv_rc: LocationData(base_location_id + 602, RegionName.agv),
     LocationName.avt_rc: LocationData(base_location_id + 603, RegionName.avt),
@@ -630,7 +630,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     # Huffle Crests
     LocationName.dt_hc: LocationData(base_location_id + 622, RegionName.dt),
     LocationName.da_hc: LocationData(base_location_id + 623, RegionName.da),
-    LocationName.foc_hc: LocationData(base_location_id + 624, RegionName.foc),
+    LocationName.foc_hc: LocationData(base_location_id + 624, RegionName.focf),
     LocationName.kd_hc: LocationData(base_location_id + 625, RegionName.kd),
     LocationName.agv_hc: LocationData(base_location_id + 626, RegionName.agv),
     LocationName.avt_hc: LocationData(base_location_id + 627, RegionName.avt),
@@ -661,7 +661,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
 true_wizard_loc_table: Dict[str, LocationData] = {
     LocationName.dt_tw: LocationData(base_location_id + 675, RegionName.dt),
     LocationName.da_tw: LocationData(base_location_id + 676, RegionName.da),
-    LocationName.foc_tw: LocationData(base_location_id + 677, RegionName.foc),
+    LocationName.foc_tw: LocationData(base_location_id + 677, RegionName.focf),
     LocationName.kd_tw: LocationData(base_location_id + 678, RegionName.kd),
     LocationName.agv_tw: LocationData(base_location_id + 679, RegionName.agv),
     LocationName.avt_tw: LocationData(base_location_id + 680, RegionName.avt),

@@ -24,6 +24,9 @@ fiend = "Fiendfyre Frenzy"
 st = "Snape's Tears"
 tfitp = "The Flaw in the Plan"
 
+# Freeplay Regions
+focf = "Focus!: Freeplay"
+
 # Hub Regions
 diag = "Diagon Alley"
 knock = "Knockturn Alley"

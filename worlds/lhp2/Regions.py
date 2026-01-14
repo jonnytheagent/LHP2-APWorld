@@ -77,9 +77,15 @@ hub_regions = [
 ]
 
 
+freeplay_regions = [
+    RegionName.focf,
+]
+
+
 lhp2_all_regions = [
     *level_regions,
     *hub_regions,
+    *freeplay_regions,
 ]
 
 
@@ -139,6 +145,7 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     for region in level_regions:
         connect_regions(world, player, RegionName.leaky, region)
 
+    connect_regions(world, player, RegionName.foc, RegionName.focf)
 
 def connect_regions(world: MultiWorld, player: int, source: str, target: str) -> Entrance:
     source_region = world.get_region(source, player)

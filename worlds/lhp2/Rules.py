@@ -67,12 +67,155 @@ def char_is_strong(state: CollectionState, player: int) -> bool:
     )
 
 
+# Dark Times Logic
+def can_get_dt_sc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.diffindo_unlock, player)
+
+
+def can_get_dt_hc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.www_box_unlock, player)
+
+
+def can_get_dt_sip(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_collect_arthur_suit_tok(state: CollectionState, player: int) -> bool:
+    return can_use_spanner(state, player)
+
+
+def can_collect_doge_token(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.agua_unlock, player)
+
+
+# Dumbledore's Army Logic
+def can_beat_da(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.expecto_unlock, player)
+
+
+def can_get_da_gc(state: CollectionState, player: int) -> bool:
+    return (
+            state.has(ItemName.reducto_unlock, player)
+            and char_is_strong(state, player)
+            and state.has(ItemName.specs_unlock, player)
+    )
+
+
+def can_get_da_sc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.focus_unlock, player)
+
+
+def can_get_da_rc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.apparition_unlock, player)
+
+
+def can_get_da_hc(state: CollectionState, player: int) -> bool:
+    return (
+            state.has(ItemName.reducto_unlock, player)
+            and state.has(ItemName.www_box_unlock, player)
+            and char_is_strong(state, player)
+            and state.has(ItemName.specs_unlock, player)
+    )
+
+
+def can_get_da_sip(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.reducto_unlock, player) and can_use_dark_magic(state, player)
+
+
+def can_collect_cho_winter(state: CollectionState, player: int) -> bool:
+    return(
+            state.has(ItemName.reducto_unlock, player)
+            and char_is_strong(state, player)
+            and state.has(ItemName.specs_unlock, player)
+    )
+
+
+def can_collect_herm_scarf(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.www_box_unlock, player)
+
+
+def can_collect_neville_winter(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.specs_unlock, player)
+
+
+# Focus!
+def can_get_foc_gc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.reducto_unlock, player)
+
+
+def can_get_foc_hc(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_get_foc_sip(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.agua_unlock, player)
+
+
+# Kreacher Discomforts
+def can_get_kd_gc(state: CollectionState, player: int) -> bool:
+    return char_is_strong(state, player) and state.has(ItemName.apparition_unlock, player)
+
+
+def can_get_kd_sc(state: CollectionState, player: int) -> bool:
+    return (
+            state.has(ItemName.reducto_unlock, player)
+            and state.has(ItemName.delum_unlock, player)
+            and can_use_dark_magic(state, player)
+            and state.has(ItemName.diffindo_unlock, player)
+    )
+
+
+def can_get_kd_hc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.reducto_unlock, player) and state.has(ItemName.diffindo_unlock, player)
+
+
+def can_get_kd_sip(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.reducto_unlock, player)
+
+
+# A Giant Virtuoso
+def can_get_agv_gc(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_get_agv_sc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.herm_bag_unlock, player)
+
+
+def can_get_agv_rc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.agua_unlock, player)
+
+
+def can_get_agv_hc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.reducto_unlock, player)
+
+
+def can_get_agv_sip(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.www_box_unlock, player)
+
+
+# A Veiled Threat Logic
+def can_beat_avt(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.diffindo_unlock, player)
+
+
+def can_get_rc(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.agua_unlock, player)
+
+
+def can_get_hc(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
 def set_rules(world: MultiWorld, options: LHP2Options, player: int):
     set_entrance_rules(world, options, player)
     set_win_con(world, options, player)
+    set_dt_logic(world, options, player)
+    set_da_logic(world, options, player)
 
 
 def set_entrance_rules(world: MultiWorld, options: LHP2Options, player: int):
+    # Level Entrance Rules
     set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.dt, player),
              lambda state: state.has(ItemName.dt_unlock, player))
     set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.da, player),
@@ -121,10 +264,37 @@ def set_entrance_rules(world: MultiWorld, options: LHP2Options, player: int):
              lambda state: state.has(ItemName.st_unlock, player))
     set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.tfitp, player),
              lambda state: state.has(ItemName.tfitp_unlock, player))
-
+    # Freeplay Entrance Rules
+    set_rule(world.get_entrance(RegionName.foc + " -> " + RegionName.focf, player),
+             lambda state: state.has(ItemName.focus_unlock, player))
 
 def set_win_con(world: MultiWorld, options: LHP2Options, player: int):
     if options.EndGoal == EndGoal.option_defeat_voldemort:
         world.completion_condition[player] = lambda state: state.can_reach_location(LocationName.tfitp_beat, player)
     # if options.EndGoal == EndGoal.option_the_collector:
     #     world.completion_condition[player] =
+
+
+def set_dt_logic(world: MultiWorld, options: LHP2Options, player: int):
+    set_rule(world.get_location(LocationName.dt_sc, player), lambda state: can_get_dt_sc(state, player))
+    set_rule(world.get_location(LocationName.dt_hc, player), lambda state: can_get_dt_hc(state, player))
+    set_rule(world.get_location(LocationName.dt_sip, player), lambda state: can_get_dt_sip(state, player))
+    set_rule(world.get_location(LocationName.arthur_suit_token, player),
+             lambda state: can_collect_arthur_suit_tok(state, player))
+    set_rule(world.get_location(LocationName.elphias_token, player),
+             lambda state: can_collect_doge_token(state, player))
+
+
+def set_da_logic(world: MultiWorld, options: LHP2Options, player: int):
+    set_rule(world.get_location(LocationName.da_beat, player), lambda state: can_beat_da(state, player))
+    set_rule(world.get_location(LocationName.da_gc, player), lambda state: can_get_da_gc(state, player))
+    set_rule(world.get_location(LocationName.da_sc, player), lambda state: can_get_da_sc(state, player))
+    set_rule(world.get_location(LocationName.da_rc, player), lambda state: can_get_da_rc(state, player))
+    set_rule(world.get_location(LocationName.da_hc, player), lambda state: can_get_da_hc(state, player))
+    set_rule(world.get_location(LocationName.da_sip, player), lambda state: can_get_da_sip(state, player))
+    set_rule(world.get_location(LocationName.cho_winter_token, player),
+             lambda state: can_collect_cho_winter(state, player))
+    set_rule(world.get_location(LocationName.herm_scarf_token, player),
+             lambda state: can_collect_herm_scarf(state, player))
+    set_rule(world.get_location(LocationName.neville_winter_token, player),
+             lambda state: can_collect_neville_winter(state, player))
