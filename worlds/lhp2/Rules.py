@@ -150,6 +150,13 @@ def can_get_foc_hc(state: CollectionState, player: int) -> bool:
 def can_get_foc_sip(state: CollectionState, player: int) -> bool:
     return state.has(ItemName.agua_unlock, player)
 
+def can_collect_molly_apron(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.reducto_unlock, player) and char_is_strong(state, player)
+
+
+def can_collect_snape_under(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.www_box_unlock, player)
+
 
 # Kreacher Discomforts
 def can_get_kd_gc(state: CollectionState, player: int) -> bool:
@@ -173,6 +180,14 @@ def can_get_kd_sip(state: CollectionState, player: int) -> bool:
     return state.has(ItemName.reducto_unlock, player)
 
 
+def can_collect_kreacher(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_collect_sirius(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.agua_unlock, player)
+
+
 # A Giant Virtuoso
 def can_get_agv_gc(state: CollectionState, player: int) -> bool:
     return can_use_dark_magic(state, player)
@@ -194,16 +209,40 @@ def can_get_agv_sip(state: CollectionState, player: int) -> bool:
     return state.has(ItemName.www_box_unlock, player)
 
 
+def can_collect_emmeline(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.agua_unlock, player)
+
+
+def can_collect_neville(state: CollectionState, player: int) -> bool:
+    return char_is_strong(state, player)
+
+
+def can_collect_prof_umbridge(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
 # A Veiled Threat Logic
 def can_beat_avt(state: CollectionState, player: int) -> bool:
     return state.has(ItemName.diffindo_unlock, player)
 
 
-def can_get_rc(state: CollectionState, player: int) -> bool:
+def can_get_avt_rc(state: CollectionState, player: int) -> bool:
     return state.has(ItemName.agua_unlock, player)
 
 
-def can_get_hc(state: CollectionState, player: int) -> bool:
+def can_get_avt_hc(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_collect_fudge_wizen(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.diffindo_unlock, player)
+
+
+def can_collect_herm_jumper(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.agua_unlock, player)
+
+
+def can_collect_lucius_death(state: CollectionState, player: int) -> bool:
     return can_use_dark_magic(state, player)
 
 
@@ -212,6 +251,10 @@ def set_rules(world: MultiWorld, options: LHP2Options, player: int):
     set_win_con(world, options, player)
     set_dt_logic(world, options, player)
     set_da_logic(world, options, player)
+    set_foc_logic(world, options, player)
+    set_kd_logic(world, options, player)
+    set_agv_logic(world, options, player)
+    set_avt_logic(world, options, player)
 
 
 def set_entrance_rules(world: MultiWorld, options: LHP2Options, player: int):
@@ -287,6 +330,7 @@ def set_dt_logic(world: MultiWorld, options: LHP2Options, player: int):
 
 def set_da_logic(world: MultiWorld, options: LHP2Options, player: int):
     set_rule(world.get_location(LocationName.da_beat, player), lambda state: can_beat_da(state, player))
+    set_rule(world.get_location(LocationName.da_tw, player), lambda state: can_beat_da(state, player))
     set_rule(world.get_location(LocationName.da_gc, player), lambda state: can_get_da_gc(state, player))
     set_rule(world.get_location(LocationName.da_sc, player), lambda state: can_get_da_sc(state, player))
     set_rule(world.get_location(LocationName.da_rc, player), lambda state: can_get_da_rc(state, player))
@@ -298,3 +342,51 @@ def set_da_logic(world: MultiWorld, options: LHP2Options, player: int):
              lambda state: can_collect_herm_scarf(state, player))
     set_rule(world.get_location(LocationName.neville_winter_token, player),
              lambda state: can_collect_neville_winter(state, player))
+
+
+def set_foc_logic(world: MultiWorld, options: LHP2Options, player: int):
+    set_rule(world.get_location(LocationName.foc_gc, player), lambda state: can_get_foc_gc(state, player))
+    set_rule(world.get_location(LocationName.foc_hc, player), lambda state: can_get_foc_hc(state, player))
+    set_rule(world.get_location(LocationName.foc_sip, player), lambda state: can_get_foc_sip(state, player))
+    set_rule(world.get_location(LocationName.molly_apron_token, player),
+             lambda state: can_collect_molly_apron(state, player))
+    set_rule(world.get_location(LocationName.snape_underwear_token, player),
+             lambda state: can_collect_snape_under(state, player))
+
+
+def set_kd_logic(world: MultiWorld, options: LHP2Options, player: int):
+    set_rule(world.get_location(LocationName.kd_gc, player), lambda state: can_get_kd_gc(state, player))
+    set_rule(world.get_location(LocationName.kd_sc, player), lambda state: can_get_kd_sc(state, player))
+    set_rule(world.get_location(LocationName.kd_hc, player), lambda state: can_get_kd_hc(state, player))
+    set_rule(world.get_location(LocationName.kd_sip, player), lambda state: can_get_kd_sip(state, player))
+    set_rule(world.get_location(LocationName.kreacher_token, player),
+             lambda state: can_collect_kreacher(state, player))
+    set_rule(world.get_location(LocationName.sirius_black_token, player),
+             lambda state: can_collect_sirius(state, player))
+
+
+def set_agv_logic(world: MultiWorld, options: LHP2Options, player: int):
+    set_rule(world.get_location(LocationName.agv_gc, player), lambda state: can_get_agv_gc(state, player))
+    set_rule(world.get_location(LocationName.agv_sc, player), lambda state: can_get_agv_sc(state, player))
+    set_rule(world.get_location(LocationName.agv_rc, player), lambda state: can_get_agv_rc(state, player))
+    set_rule(world.get_location(LocationName.agv_hc, player), lambda state: can_get_agv_hc(state, player))
+    set_rule(world.get_location(LocationName.agv_sip, player), lambda state: can_get_agv_sip(state, player))
+    set_rule(world.get_location(LocationName.emmeline_token, player),
+             lambda state: can_collect_emmeline(state, player))
+    set_rule(world.get_location(LocationName.neville_token, player),
+             lambda state: can_collect_neville(state, player))
+    set_rule(world.get_location(LocationName.prof_umbridge_token, player),
+             lambda state: can_collect_prof_umbridge(state, player))
+
+
+def set_avt_logic(world: MultiWorld, options: LHP2Options, player: int):
+    set_rule(world.get_location(LocationName.avt_beat, player), lambda state: can_beat_avt(state, player))
+    set_rule(world.get_location(LocationName.avt_tw, player), lambda state: can_beat_avt(state, player))
+    set_rule(world.get_location(LocationName.avt_rc, player), lambda state: can_get_avt_rc(state, player))
+    set_rule(world.get_location(LocationName.avt_hc, player), lambda state: can_get_avt_hc(state, player))
+    set_rule(world.get_location(LocationName.fudge_wizengamot_token, player),
+             lambda state: can_collect_fudge_wizen(state, player))
+    set_rule(world.get_location(LocationName.herm_jumper_token, player),
+             lambda state: can_collect_herm_jumper(state, player))
+    set_rule(world.get_location(LocationName.lucius_death_eater_token, player),
+             lambda state: can_collect_lucius_death(state, player))
