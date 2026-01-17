@@ -76,3 +76,9 @@ class LHP2World(World):
             starting_level = starting_level + ": Level Unlocked"
             self.multiworld.push_precollected(self.create_item(starting_level))
             levels_pushed += 1
+
+    def fill_slot_data(self):
+        return {
+            "EndGoal": self.options.EndGoal.value,
+            "CollectiblesRequired": self.options.CollectibleQuantity.value,
+        }
