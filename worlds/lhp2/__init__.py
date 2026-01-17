@@ -42,7 +42,13 @@ class LHP2World(World):
     web = LHP2Web()
 
     def generate_early(self):
+        self.validate_yaml()
         self.multiworld.push_precollected(self.create_item(ItemName.dt_unlock))
+        self.choose_starting_levels()
+
+    def validate_yaml(self):
+        if self.options.NumStartLevels > len(self.options.StartingLevelOptions.value) + 1:
+            raise OptionError("You want to start with more levels than are in the starting pool")
 
     def create_regions(self):
         self.seed_location_table = setup_locations(self.options)
@@ -61,3 +67,12 @@ class LHP2World(World):
 
     def set_rules(self):
         set_rules(self.multiworld, self.options, self.player)
+
+    def choose_starting_levels(self):
+        levels_pushed: int = 1
+        while levels_pushed < self.options.NumStartLevels.value:
+            starting_level = self.random.choice(self.options.StartingLevelOptions.value)
+            self.options.StartingLevelOptions.value.remove(starting_level)
+            starting_level = starting_level + ": Level Unlocked"
+            self.multiworld.push_precollected(self.create_item(starting_level))
+            levels_pushed += 1
