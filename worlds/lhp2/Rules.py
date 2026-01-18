@@ -246,6 +246,63 @@ def can_collect_lucius_death(state: CollectionState, player: int) -> bool:
     return can_use_dark_magic(state, player)
 
 
+# Out of Retirement Logic
+def can_access_oor_freeplay(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.apparition_unlock, player) and state.has(ItemName.reducto_unlock, player)
+
+
+def can_beat_oor(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.www_box_unlock, player)
+
+
+def can_get_oor_gc(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_get_oor_sc(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player) and state.has(ItemName.agua_unlock, player)
+
+
+def can_get_oor_rc(state: CollectionState, player: int) -> bool:
+    return (
+            state.has(ItemName.apparition_unlock, player)
+            and state.has(ItemName.specs_unlock, player)
+            and can_use_dark_magic(state, player)
+    )
+
+
+def can_get_oor_hc(state: CollectionState, player: int) -> bool:
+    return (
+            can_use_dark_magic(state, player)
+            and state.has(ItemName.www_box_unlock, player)
+            and state.has(ItemName.diffindo_unlock, player)
+    )
+
+
+def can_get_oor_sip(state: CollectionState, player: int) -> bool:
+    return (
+            can_use_dark_magic(state, player)
+            and state.has(ItemName.www_box_unlock, player)
+            and state.has(ItemName.diffindo_unlock, player)
+    )
+
+
+def can_collect_dumble_cursed(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_collect_milk_man(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.herm_bag_unlock, player)
+
+
+def can_collect_slug_pajamas(state: CollectionState, player: int) -> bool:
+    return(
+            state.has(ItemName.apparition_unlock, player)
+            and can_use_dark_magic(state, player)
+            and can_use_key(state, player)
+    )
+
+
 def set_rules(world: MultiWorld, options: LHP2Options, player: int):
     set_entrance_rules(world, options, player)
     set_win_con(world, options, player)
@@ -310,6 +367,8 @@ def set_entrance_rules(world: MultiWorld, options: LHP2Options, player: int):
     # Freeplay Entrance Rules
     set_rule(world.get_entrance(RegionName.foc + " -> " + RegionName.focf, player),
              lambda state: state.has(ItemName.focus_unlock, player))
+    set_rule(world.get_entrance(RegionName.oor + " -> " + RegionName.oorf, player),
+             lambda state: can_access_oor_freeplay(state, player))
 
 def set_win_con(world: MultiWorld, options: LHP2Options, player: int):
     if options.EndGoal == EndGoal.option_defeat_voldemort:
@@ -390,3 +449,19 @@ def set_avt_logic(world: MultiWorld, options: LHP2Options, player: int):
              lambda state: can_collect_herm_jumper(state, player))
     set_rule(world.get_location(LocationName.lucius_death_eater_token, player),
              lambda state: can_collect_lucius_death(state, player))
+
+
+def set_oor_logic(world: MultiWorld, options: LHP2Options, player: int):
+    set_rule(world.get_location(LocationName.oor_beat, player), lambda state: can_beat_oor(state, player))
+    set_rule(world.get_location(LocationName.oor_tw, player), lambda state: can_beat_oor(state, player))
+    set_rule(world.get_location(LocationName.oor_gc, player), lambda state: can_get_oor_gc(state, player))
+    set_rule(world.get_location(LocationName.oor_sc, player), lambda state: can_get_oor_sc(state, player))
+    set_rule(world.get_location(LocationName.oor_rc, player), lambda state: can_get_oor_rc(state, player))
+    set_rule(world.get_location(LocationName.oor_hc, player), lambda state: can_get_oor_hc(state, player))
+    set_rule(world.get_location(LocationName.oor_sip, player), lambda state: can_get_oor_sip(state, player))
+    set_rule(world.get_location(LocationName.dumble_cursed_token, player),
+             lambda state: can_collect_dumble_cursed(state, player))
+    set_rule(world.get_location(LocationName.milk_man_token, player),
+             lambda state: can_collect_milk_man(state, player))
+    set_rule(world.get_location(LocationName.slughorn_pajamas_token, player),
+             lambda state: can_collect_slug_pajamas(state, player))

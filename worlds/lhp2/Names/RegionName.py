@@ -25,7 +25,8 @@ st = "Snape's Tears"
 tfitp = "The Flaw in the Plan"
 
 # Freeplay Regions
-focf = "Focus!: Freeplay"
+focf = "Focus! Freeplay"
+oorf = "Out of Retirement Freeplay"
 
 # Hub Regions
 diag = "Diagon Alley"

@@ -79,6 +79,7 @@ hub_regions = [
 
 freeplay_regions = [
     RegionName.focf,
+    RegionName.oorf,
 ]
 
 
@@ -146,6 +147,7 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
         connect_regions(world, player, RegionName.leaky, region)
 
     connect_regions(world, player, RegionName.foc, RegionName.focf)
+    connect_regions(world, player, RegionName.oor, RegionName.oorf)
 
 def connect_regions(world: MultiWorld, player: int, source: str, target: str) -> Entrance:
     source_region = world.get_region(source, player)
