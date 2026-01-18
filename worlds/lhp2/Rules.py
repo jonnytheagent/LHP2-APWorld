@@ -30,12 +30,12 @@ def can_use_dark_magic(state: CollectionState, player: int) -> bool:
             or state.has(ItemName.snatcher_play, player)
             or state.has(ItemName.rowle_play, player)
             or state.has(ItemName.tom_riddle_play, player)
-            or state.has(ItemName.tr_orphanage_play, player) # TODO: to check
+            or state.has(ItemName.tr_orphanage_play, player)  # TODO: to check
     )
 
 
 def can_use_spanner(state: CollectionState, player: int) -> bool:
-    return(
+    return (
             state.has(ItemName.arthur_play, player)
             or state.has(ItemName.arthur_suit_play, player)
             or state.has(ItemName.arthur_play, player)
@@ -44,7 +44,7 @@ def can_use_spanner(state: CollectionState, player: int) -> bool:
 
 
 def can_use_key(state: CollectionState, player: int) -> bool:
-    return(
+    return (
             state.has(ItemName.bogrod_play, player)
             or state.has(ItemName.cole_play, player)
             or state.has(ItemName.griphook_play, player)
@@ -52,7 +52,7 @@ def can_use_key(state: CollectionState, player: int) -> bool:
 
 
 def char_is_strong(state: CollectionState, player: int) -> bool:
-    return(
+    return (
             state.has(ItemName.dudley_play, player)
             or state.has(ItemName.dudley_shirt_play, player)
             or state.has(ItemName.dudley_grey_play, player)
@@ -62,7 +62,7 @@ def char_is_strong(state: CollectionState, player: int) -> bool:
             or state.has(ItemName.hagrid_wed_play, player)
             or state.has(ItemName.remus_lupin_play, player)
             or state.has(ItemName.sirius_black_play, player)
-            or state.has(ItemName.sirius_azkaban_play, player) # TODO: to verify
+            or state.has(ItemName.sirius_azkaban_play, player)  # TODO: to verify
             or state.has(ItemName.super_strength_unlock, player)
     )
 
@@ -123,7 +123,7 @@ def can_get_da_sip(state: CollectionState, player: int) -> bool:
 
 
 def can_collect_cho_winter(state: CollectionState, player: int) -> bool:
-    return(
+    return (
             state.has(ItemName.reducto_unlock, player)
             and char_is_strong(state, player)
             and state.has(ItemName.specs_unlock, player)
@@ -149,6 +149,7 @@ def can_get_foc_hc(state: CollectionState, player: int) -> bool:
 
 def can_get_foc_sip(state: CollectionState, player: int) -> bool:
     return state.has(ItemName.agua_unlock, player)
+
 
 def can_collect_molly_apron(state: CollectionState, player: int) -> bool:
     return state.has(ItemName.reducto_unlock, player) and char_is_strong(state, player)
@@ -296,7 +297,7 @@ def can_collect_milk_man(state: CollectionState, player: int) -> bool:
 
 
 def can_collect_slug_pajamas(state: CollectionState, player: int) -> bool:
-    return(
+    return (
             state.has(ItemName.apparition_unlock, player)
             and can_use_dark_magic(state, player)
             and can_use_key(state, player)
@@ -369,6 +370,7 @@ def set_entrance_rules(world: MultiWorld, options: LHP2Options, player: int):
              lambda state: state.has(ItemName.focus_unlock, player))
     set_rule(world.get_entrance(RegionName.oor + " -> " + RegionName.oorf, player),
              lambda state: can_access_oor_freeplay(state, player))
+
 
 def set_win_con(world: MultiWorld, options: LHP2Options, player: int):
     if options.EndGoal == EndGoal.option_defeat_voldemort:
