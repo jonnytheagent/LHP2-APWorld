@@ -30,7 +30,6 @@ def can_use_dark_magic(state: CollectionState, player: int) -> bool:
             or state.has(ItemName.snatcher_play, player)
             or state.has(ItemName.rowle_play, player)
             or state.has(ItemName.tom_riddle_play, player)
-            or state.has(ItemName.tr_orphanage_play, player)  # TODO: to check
     )
 
 
@@ -62,7 +61,7 @@ def char_is_strong(state: CollectionState, player: int) -> bool:
             or state.has(ItemName.hagrid_wed_play, player)
             or state.has(ItemName.remus_lupin_play, player)
             or state.has(ItemName.sirius_black_play, player)
-            or state.has(ItemName.sirius_azkaban_play, player)  # TODO: to verify
+            or state.has(ItemName.sirius_azkaban_play, player)
             or state.has(ItemName.super_strength_unlock, player)
     )
 
