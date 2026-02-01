@@ -303,6 +303,48 @@ def can_collect_slug_pajamas(state: CollectionState, player: int) -> bool:
     )
 
 
+# Just Desserts Logic
+def can_get_jd_sc(state: CollectionState, player: int) -> bool:
+    return char_is_strong(state, player)
+
+
+def can_get_jd_rc(state: CollectionState, player: int) -> bool:
+    return (
+            state.has(ItemName.delum_unlock, player)
+            and can_use_dark_magic(state, player)
+            and state.has(ItemName.herm_bag_unlock, player)
+    )
+
+
+def can_get_jd_hc(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_get_jd_sip(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+def can_collect_cormac_suit(state: CollectionState, player: int) -> bool:
+    return state.has(ItemName.agua_unlock, player)
+
+
+def can_collect_harry_christ(state: CollectionState, player: int) -> bool:
+    return (
+            can_use_dark_magic(state, player)
+            and state.has(ItemName.herm_bag_unlock, player)
+            and state.has(ItemName.specs_unlock, player)
+    )
+
+
+def can_collect_madam_rosmerta(state: CollectionState, player: int) -> bool:
+    return can_use_dark_magic(state, player)
+
+
+
+# A Not So Merry Christmas Logic
+
+
+
 def set_rules(world: MultiWorld, options: LHP2Options, player: int):
     set_entrance_rules(world, options, player)
     set_win_con(world, options, player)
@@ -312,6 +354,7 @@ def set_rules(world: MultiWorld, options: LHP2Options, player: int):
     set_kd_logic(world, options, player)
     set_agv_logic(world, options, player)
     set_avt_logic(world, options, player)
+    set_jd_logic(world, options, player)
 
 
 def set_entrance_rules(world: MultiWorld, options: LHP2Options, player: int):
@@ -465,3 +508,15 @@ def set_oor_logic(world: MultiWorld, options: LHP2Options, player: int):
              lambda state: can_collect_milk_man(state, player))
     set_rule(world.get_location(LocationName.slughorn_pajamas_token, player),
              lambda state: can_collect_slug_pajamas(state, player))
+
+
+def set_jd_logic(world: MultiWorld, options: LHP2Options, player: int):
+    set_rule(world.get_location(LocationName.jd_sc, player), lambda state: can_get_jd_sc(state, player))
+    set_rule(world.get_location(LocationName.jd_rc, player), lambda state: can_get_jd_rc(state, player))
+    set_rule(world.get_location(LocationName.jd_hc, player), lambda state: can_get_jd_hc(state, player))
+    set_rule(world.get_location(LocationName.cormac_suit_token, player),
+             lambda state: can_collect_cormac_suit(state, player))
+    set_rule(world.get_location(LocationName.harry_christmas_token, player),
+             lambda state: can_collect_harry_christ(state, player))
+    set_rule(world.get_location(LocationName.madam_rosmerta_token, player),
+             lambda state: can_collect_madam_rosmerta(state, player))
