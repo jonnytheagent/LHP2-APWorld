@@ -115,7 +115,10 @@ can_get_madam_rosmerta = can_use_dark_magic
 
 
 # A Not So Merry Christmas Logic
-
+can_access_ansmc_free = HasAll(ItemName.reducto_unlock, ItemName.specs_unlock, ItemName.agua_unlock)
+can_get_ansmc_gc = Has(ItemName.apparition_unlock) & can_use_key
+can_get_ansmc_sc = can_use_dark_magic
+can_get_bill_wedding = HasAll(ItemName.reducto_unlock, ItemName.delum_unlock)
 
 
 def set_rules(world: "LHP2World"):
@@ -127,7 +130,9 @@ def set_rules(world: "LHP2World"):
     set_kd_logic(world)
     set_agv_logic(world)
     set_avt_logic(world)
+    set_oor_logic(world)
     set_jd_logic(world)
+    set_ansmc_logic(world)
 
 
 def set_entrance_rules(world):
@@ -159,6 +164,7 @@ def set_entrance_rules(world):
     # Freeplay Entrance Rules
     world.set_rule(world.get_entrance(RegionName.foc + " -> " + RegionName.focf), Has(ItemName.focus_unlock))
     world.set_rule(world.get_entrance(RegionName.oor + " -> " + RegionName.oorf), can_access_oor_free)
+    world.set_rule(world.get_entrance(RegionName.ansmc + " -> " + RegionName.ansmcf), can_access_ansmc_free)
 
 
 def set_win_con(world):
@@ -247,3 +253,9 @@ def set_jd_logic(world):
     world.set_rule(world.get_location(LocationName.cormac_suit_token), can_get_cormac_suit)
     world.set_rule(world.get_location(LocationName.harry_christmas_token), can_get_harry_christ)
     world.set_rule(world.get_location(LocationName.madam_rosmerta_token), can_get_madam_rosmerta)
+
+
+def set_ansmc_logic(world):
+    world.set_rule(world.get_location(LocationName.ansmc_gc), can_get_ansmc_gc)
+    world.set_rule(world.get_location(LocationName.ansmc_sc), can_get_ansmc_sc)
+    world.set_rule(world.get_location(LocationName.bill_wedding_token), can_get_bill_wedding)
