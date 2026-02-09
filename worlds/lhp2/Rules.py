@@ -36,7 +36,7 @@ char_is_strong = (Has(ItemName.dudley_play) | Has(ItemName.dudley_grey_play) | H
 can_get_dt_sc = Has(ItemName.diffindo_unlock)
 can_get_dt_hc = Has(ItemName.www_box_unlock)
 can_get_dt_sip = can_use_dark_magic
-can_get_arthur_suit = can_use_spanner
+can_get_arthur_suit = can_use_dark_magic
 can_get_elphias = Has(ItemName.agua_unlock)
 
 
@@ -64,7 +64,7 @@ can_get_snape_under = Has(ItemName.www_box_unlock)
 # Kreacher Discomforts
 can_get_kd_gc = Has(ItemName.apparition_unlock) & char_is_strong
 can_get_kd_sc = (HasAll(ItemName.reducto_unlock, ItemName.delum_unlock, ItemName.diffindo_unlock)
-                 & char_is_strong)
+                 & can_use_dark_magic)
 can_get_kd_hc = HasAll(ItemName.reducto_unlock, ItemName.diffindo_unlock)
 can_get_kd_sip = Has(ItemName.reducto_unlock)
 can_get_kreacher = can_use_dark_magic
@@ -72,7 +72,7 @@ can_get_sirius = Has(ItemName.agua_unlock)
 
 
 # A Giant Virtuoso
-can_get_agv_gc = can_use_dark_magic
+can_get_agv_gc = can_use_key
 can_get_agv_sc = Has(ItemName.herm_bag_unlock)
 can_get_agv_rc = Has(ItemName.agua_unlock)
 can_get_agv_hc = Has(ItemName.reducto_unlock)
@@ -94,7 +94,7 @@ can_get_lucius_death = can_use_dark_magic
 # Out of Retirement Logic
 can_access_oor_free = HasAll(ItemName.reducto_unlock, ItemName.apparition_unlock)
 can_beat_oor = Has(ItemName.www_box_unlock)
-can_get_oor_gc = can_use_dark_magic
+can_get_oor_gc = can_use_spanner
 can_get_oor_sc = Has(ItemName.agua_unlock) & can_use_dark_magic
 can_get_oor_rc = HasAll(ItemName.apparition_unlock, ItemName.specs_unlock) & can_use_dark_magic
 can_get_oor_hc = HasAll(ItemName.www_box_unlock, ItemName.diffindo_unlock) & can_use_dark_magic
@@ -166,7 +166,6 @@ def set_win_con(world):
         world.set_completion_rule(Has("Voldemort Defeated"))
     # if options.EndGoal == EndGoal.option_the_collector:
     #     world.completion_condition[player] =
-
 
 
 def set_dt_logic(world):
