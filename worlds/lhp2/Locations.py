@@ -687,22 +687,22 @@ true_wizard_loc_table: Dict[str, LocationData] = {
 
 # 700 - 715
 bb_gb_loc_table: Dict[str, LocationData] = {
-    LocationName.bb_gb1: LocationData(base_location_id + 700, RegionName.bb),
-    LocationName.bb_gb2: LocationData(base_location_id + 701, RegionName.bb, 100000),
-    LocationName.bb_gb3: LocationData(base_location_id + 702, RegionName.bb, 200000),
-    LocationName.bb_gb4: LocationData(base_location_id + 703, RegionName.bb, 300000),
-    LocationName.bb_gb5: LocationData(base_location_id + 704, RegionName.bb, 400000),
-    LocationName.bb_gb6: LocationData(base_location_id + 705, RegionName.bb, 500000),
-    LocationName.bb_gb7: LocationData(base_location_id + 706, RegionName.bb, 600000),
-    LocationName.bb_gb8: LocationData(base_location_id + 707, RegionName.bb, 700000),
-    LocationName.bb_gb9: LocationData(base_location_id + 708, RegionName.bb, 800000),
-    LocationName.bb_gb10: LocationData(base_location_id + 709, RegionName.bb, 900000),
-    LocationName.bb_gb11: LocationData(base_location_id + 710, RegionName.bb, 1000000),
-    LocationName.bb_gb12: LocationData(base_location_id + 711, RegionName.bb, 1100000),
-    LocationName.bb_gb13: LocationData(base_location_id + 712, RegionName.bb, 1200000),
-    LocationName.bb_gb14: LocationData(base_location_id + 713, RegionName.bb, 1300000),
-    LocationName.bb_gb15: LocationData(base_location_id + 714, RegionName.bb, 1400000),
-    LocationName.bb_gb16: LocationData(base_location_id + 715, RegionName.bb, 1500000),
+    LocationName.bb_gb1: LocationData(base_location_id + 700, RegionName.knock),
+    LocationName.bb_gb2: LocationData(base_location_id + 701, RegionName.knock, 100000),
+    LocationName.bb_gb3: LocationData(base_location_id + 702, RegionName.knock, 200000),
+    LocationName.bb_gb4: LocationData(base_location_id + 703, RegionName.knock, 300000),
+    LocationName.bb_gb5: LocationData(base_location_id + 704, RegionName.knock, 400000),
+    LocationName.bb_gb6: LocationData(base_location_id + 705, RegionName.knock, 500000),
+    LocationName.bb_gb7: LocationData(base_location_id + 706, RegionName.knock, 600000),
+    LocationName.bb_gb8: LocationData(base_location_id + 707, RegionName.knock, 700000),
+    LocationName.bb_gb9: LocationData(base_location_id + 708, RegionName.knock, 800000),
+    LocationName.bb_gb10: LocationData(base_location_id + 709, RegionName.knock, 900000),
+    LocationName.bb_gb11: LocationData(base_location_id + 710, RegionName.knock, 1000000),
+    LocationName.bb_gb12: LocationData(base_location_id + 711, RegionName.knock, 1100000),
+    LocationName.bb_gb13: LocationData(base_location_id + 712, RegionName.knock, 1200000),
+    LocationName.bb_gb14: LocationData(base_location_id + 713, RegionName.knock, 1300000),
+    LocationName.bb_gb15: LocationData(base_location_id + 714, RegionName.knock, 1400000),
+    LocationName.bb_gb16: LocationData(base_location_id + 715, RegionName.knock, 1500000),
 }
 
 # 716 - 755

@@ -1,5 +1,6 @@
-from BaseClasses import MultiWorld, Region, Entrance
+from BaseClasses import MultiWorld, Region, Entrance, Location, ItemClassification
 from .Locations import LHP2Location
+from .Items import LHP2Item
 from .Names import RegionName
 
 
@@ -149,6 +150,9 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.foc, RegionName.focf)
     connect_regions(world, player, RegionName.oor, RegionName.oorf)
 
+    tfitp_region = world.get_region(RegionName.tfitp, player)
+    create_event("Defeat Voldemort", "Voldemort Defeated", tfitp_region, player)
+
 
 def connect_regions(world: MultiWorld, player: int, source: str, target: str) -> Entrance:
     source_region = world.get_region(source, player)
@@ -180,8 +184,8 @@ def create_regions_and_locations(name: str, player: int, world: MultiWorld, seed
 #     return count
 #
 #
-# def create_event(name: str, item_name: str, region: Region, player: int) -> Location:
-#     event = LHP2Location(player, name, None, region)
-#     region.locations.append(event)
-#     event.place_locked_item(LHP2Item(item_name, ItemClassification.progression, None, player))
-#     return event
+def create_event(name: str, item_name: str, region: Region, player: int) -> Location:
+    event = LHP2Location(player, name, None, region)
+    region.locations.append(event)
+    event.place_locked_item(LHP2Item(item_name, ItemClassification.progression, None, player))
+    return event

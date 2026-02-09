@@ -66,7 +66,7 @@ class LHP2World(World):
         self.multiworld.itempool.extend(itempool)
 
     def set_rules(self):
-        set_rules(self.multiworld, self.options, self.player)
+        set_rules(self)
 
     def choose_starting_levels(self):
         levels_pushed: int = 1

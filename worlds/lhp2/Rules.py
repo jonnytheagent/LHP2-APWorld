@@ -1,523 +1,250 @@
-from typing import List, Callable
+from typing import TYPE_CHECKING
 
-from BaseClasses import MultiWorld, Location
-from worlds.generic.Rules import set_rule
-from worlds.AutoWorld import CollectionState
+from rule_builder.options import OptionFilter
+from rule_builder.rules import Has, HasAll, Rule
+
+if TYPE_CHECKING:
+    from . import LHP2World
 
 from .Names import LocationName, ItemName, RegionName
 from .Options import LHP2Options, EndGoal
 
 
-# Helper Functions
-def can_use_dark_magic(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.alecto_play, player)
-            or state.has(ItemName.amycus_play, player)
-            or state.has(ItemName.dolohov_play, player)
-            or state.has(ItemName.dolohov_play, player)
-            or state.has(ItemName.bellatrix_azka_play, player)
-            or state.has(ItemName.bellatrix_play, player)
-            or state.has(ItemName.death_eater_play, player)
-            or state.has(ItemName.fenrir_play, player)
-            or state.has(ItemName.grindel_old_play, player)
-            or state.has(ItemName.grindel_young_play, player)
-            or state.has(ItemName.lord_voldemort_play, player)
-            or state.has(ItemName.lucius_play, player)
-            or state.has(ItemName.lucius_death_eater_play, player)
-            or state.has(ItemName.black_play, player)
-            or state.has(ItemName.pius_play, player)
-            or state.has(ItemName.scabior_play, player)
-            or state.has(ItemName.snatcher_play, player)
-            or state.has(ItemName.rowle_play, player)
-            or state.has(ItemName.tom_riddle_play, player)
-    )
+#Helper Rules
+can_use_dark_magic = (Has(ItemName.alecto_play) | Has(ItemName.amycus_play) | Has(ItemName.dolohov_play) |
+        Has(ItemName.bellatrix_play) | Has(ItemName.bellatrix_azka_play) | Has(ItemName.death_eater_play) |
+        Has(ItemName.fenrir_play) | Has(ItemName.grindel_old_play) | Has(ItemName.grindel_young_play) |
+        Has(ItemName.lord_voldemort_play) | Has(ItemName.lucius_play) | Has(ItemName.lucius_death_eater_play) |
+        Has(ItemName.black_play) | Has(ItemName.pius_play) | Has(ItemName.scabior_play) |
+        Has(ItemName.snatcher_play) | Has(ItemName.rowle_play) | Has(ItemName.tom_riddle_play))
 
 
-def can_use_spanner(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.arthur_play, player)
-            or state.has(ItemName.arthur_suit_play, player)
-            or state.has(ItemName.arthur_play, player)
-            or state.has(ItemName.arthur_torn_suit_play, player)
-    )
+can_use_spanner = (Has(ItemName.arthur_play) | Has(ItemName.arthur_suit_play) | Has(ItemName.arthur_cardigan_play) |
+                   Has(ItemName.arthur_torn_suit_play))
 
 
-def can_use_key(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.bogrod_play, player)
-            or state.has(ItemName.cole_play, player)
-            or state.has(ItemName.griphook_play, player)
-    )
+can_use_key = Has(ItemName.bogrod_play) | Has(ItemName.cole_play) | Has(ItemName.griphook_play)
 
 
-def char_is_strong(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.dudley_play, player)
-            or state.has(ItemName.dudley_shirt_play, player)
-            or state.has(ItemName.dudley_grey_play, player)
-            or state.has(ItemName.fenrir_play, player)
-            or state.has(ItemName.fang_play, player)
-            or state.has(ItemName.hagrid_play, player)
-            or state.has(ItemName.hagrid_wed_play, player)
-            or state.has(ItemName.remus_lupin_play, player)
-            or state.has(ItemName.sirius_black_play, player)
-            or state.has(ItemName.sirius_azkaban_play, player)
-            or state.has(ItemName.super_strength_unlock, player)
-    )
+char_is_strong = (Has(ItemName.dudley_play) | Has(ItemName.dudley_grey_play) | Has(ItemName.dudley_shirt_play) |
+                  Has(ItemName.fenrir_play) | Has(ItemName.fang_play) | Has(ItemName.hagrid_play) |
+                  Has(ItemName.hagrid_wed_play) | Has(ItemName.remus_lupin_play) | Has(ItemName.sirius_black_play) |
+                  Has(ItemName.sirius_azkaban_play) | Has(ItemName.super_strength_unlock))
 
 
 # Dark Times Logic
-def can_get_dt_sc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.diffindo_unlock, player)
-
-
-def can_get_dt_hc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.www_box_unlock, player)
-
-
-def can_get_dt_sip(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_collect_arthur_suit_tok(state: CollectionState, player: int) -> bool:
-    return can_use_spanner(state, player)
-
-
-def can_collect_doge_token(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.agua_unlock, player)
+can_get_dt_sc = Has(ItemName.diffindo_unlock)
+can_get_dt_hc = Has(ItemName.www_box_unlock)
+can_get_dt_sip = can_use_dark_magic
+can_get_arthur_suit = can_use_spanner
+can_get_elphias = Has(ItemName.agua_unlock)
 
 
 # Dumbledore's Army Logic
-def can_beat_da(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.expecto_unlock, player)
-
-
-def can_get_da_gc(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.reducto_unlock, player)
-            and char_is_strong(state, player)
-            and state.has(ItemName.specs_unlock, player)
-    )
-
-
-def can_get_da_sc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.focus_unlock, player)
-
-
-def can_get_da_rc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.apparition_unlock, player)
-
-
-def can_get_da_hc(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.reducto_unlock, player)
-            and state.has(ItemName.www_box_unlock, player)
-            and char_is_strong(state, player)
-            and state.has(ItemName.specs_unlock, player)
-    )
-
-
-def can_get_da_sip(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.reducto_unlock, player) and can_use_dark_magic(state, player)
-
-
-def can_collect_cho_winter(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.reducto_unlock, player)
-            and char_is_strong(state, player)
-            and state.has(ItemName.specs_unlock, player)
-    )
-
-
-def can_collect_herm_scarf(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.www_box_unlock, player)
-
-
-def can_collect_neville_winter(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.specs_unlock, player)
+can_beat_da = Has(ItemName.expecto_unlock)
+can_get_da_gc = HasAll(ItemName.reducto_unlock, ItemName.specs_unlock) & char_is_strong
+can_get_da_sc = Has(ItemName.focus_unlock)
+can_get_da_rc = Has(ItemName.apparition_unlock)
+can_get_da_hc = (HasAll(ItemName.reducto_unlock, ItemName.www_box_unlock, ItemName.specs_unlock) 
+                 & char_is_strong)
+can_get_da_sip = Has(ItemName.reducto_unlock) & can_use_dark_magic
+can_get_cho_winter = HasAll(ItemName.reducto_unlock, ItemName.specs_unlock) & char_is_strong
+can_get_herm_scarf = Has(ItemName.www_box_unlock)
+can_get_neville_winter = Has(ItemName.specs_unlock)
 
 
 # Focus!
-def can_get_foc_gc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.reducto_unlock, player)
-
-
-def can_get_foc_hc(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_get_foc_sip(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.agua_unlock, player)
-
-
-def can_collect_molly_apron(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.reducto_unlock, player) and char_is_strong(state, player)
-
-
-def can_collect_snape_under(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.www_box_unlock, player)
+can_get_foc_gc = Has(ItemName.reducto_unlock)
+can_get_foc_hc = can_use_dark_magic
+can_get_foc_sip = Has(ItemName.agua_unlock)
+can_get_molly_apron = Has(ItemName.reducto_unlock) & char_is_strong
+can_get_snape_under = Has(ItemName.www_box_unlock)
 
 
 # Kreacher Discomforts
-def can_get_kd_gc(state: CollectionState, player: int) -> bool:
-    return char_is_strong(state, player) and state.has(ItemName.apparition_unlock, player)
-
-
-def can_get_kd_sc(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.reducto_unlock, player)
-            and state.has(ItemName.delum_unlock, player)
-            and can_use_dark_magic(state, player)
-            and state.has(ItemName.diffindo_unlock, player)
-    )
-
-
-def can_get_kd_hc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.reducto_unlock, player) and state.has(ItemName.diffindo_unlock, player)
-
-
-def can_get_kd_sip(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.reducto_unlock, player)
-
-
-def can_collect_kreacher(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_collect_sirius(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.agua_unlock, player)
+can_get_kd_gc = Has(ItemName.apparition_unlock) & char_is_strong
+can_get_kd_sc = (HasAll(ItemName.reducto_unlock, ItemName.delum_unlock, ItemName.diffindo_unlock)
+                 & char_is_strong)
+can_get_kd_hc = HasAll(ItemName.reducto_unlock, ItemName.diffindo_unlock)
+can_get_kd_sip = Has(ItemName.reducto_unlock)
+can_get_kreacher = can_use_dark_magic
+can_get_sirius = Has(ItemName.agua_unlock)
 
 
 # A Giant Virtuoso
-def can_get_agv_gc(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_get_agv_sc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.herm_bag_unlock, player)
-
-
-def can_get_agv_rc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.agua_unlock, player)
-
-
-def can_get_agv_hc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.reducto_unlock, player)
-
-
-def can_get_agv_sip(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.www_box_unlock, player)
-
-
-def can_collect_emmeline(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.agua_unlock, player)
-
-
-def can_collect_neville(state: CollectionState, player: int) -> bool:
-    return char_is_strong(state, player)
-
-
-def can_collect_prof_umbridge(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
+can_get_agv_gc = can_use_dark_magic
+can_get_agv_sc = Has(ItemName.herm_bag_unlock)
+can_get_agv_rc = Has(ItemName.agua_unlock)
+can_get_agv_hc = Has(ItemName.reducto_unlock)
+can_get_agv_sip = Has(ItemName.www_box_unlock)
+can_get_emmeline = Has(ItemName.agua_unlock)
+can_get_neville = char_is_strong
+can_get_prof_umbridge = can_use_dark_magic
 
 
 # A Veiled Threat Logic
-def can_beat_avt(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.diffindo_unlock, player)
-
-
-def can_get_avt_rc(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.agua_unlock, player)
-
-
-def can_get_avt_hc(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_collect_fudge_wizen(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.diffindo_unlock, player)
-
-
-def can_collect_herm_jumper(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.agua_unlock, player)
-
-
-def can_collect_lucius_death(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
+can_beat_avt = Has(ItemName.diffindo_unlock)
+can_get_avt_rc = Has(ItemName.agua_unlock)
+can_get_avt_hc = can_use_dark_magic
+can_get_fudge_wizen = Has(ItemName.diffindo_unlock)
+can_get_herm_jumper = Has(ItemName.agua_unlock)
+can_get_lucius_death = can_use_dark_magic
 
 
 # Out of Retirement Logic
-def can_access_oor_freeplay(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.apparition_unlock, player) and state.has(ItemName.reducto_unlock, player)
-
-
-def can_beat_oor(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.www_box_unlock, player)
-
-
-def can_get_oor_gc(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_get_oor_sc(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player) and state.has(ItemName.agua_unlock, player)
-
-
-def can_get_oor_rc(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.apparition_unlock, player)
-            and state.has(ItemName.specs_unlock, player)
-            and can_use_dark_magic(state, player)
-    )
-
-
-def can_get_oor_hc(state: CollectionState, player: int) -> bool:
-    return (
-            can_use_dark_magic(state, player)
-            and state.has(ItemName.www_box_unlock, player)
-            and state.has(ItemName.diffindo_unlock, player)
-    )
-
-
-def can_get_oor_sip(state: CollectionState, player: int) -> bool:
-    return (
-            can_use_dark_magic(state, player)
-            and state.has(ItemName.www_box_unlock, player)
-            and state.has(ItemName.diffindo_unlock, player)
-    )
-
-
-def can_collect_dumble_cursed(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_collect_milk_man(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.herm_bag_unlock, player)
-
-
-def can_collect_slug_pajamas(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.apparition_unlock, player)
-            and can_use_dark_magic(state, player)
-            and can_use_key(state, player)
-    )
+can_access_oor_free = HasAll(ItemName.reducto_unlock, ItemName.apparition_unlock)
+can_beat_oor = Has(ItemName.www_box_unlock)
+can_get_oor_gc = can_use_dark_magic
+can_get_oor_sc = Has(ItemName.agua_unlock) & can_use_dark_magic
+can_get_oor_rc = HasAll(ItemName.apparition_unlock, ItemName.specs_unlock) & can_use_dark_magic
+can_get_oor_hc = HasAll(ItemName.www_box_unlock, ItemName.diffindo_unlock) & can_use_dark_magic
+can_get_oor_sip = HasAll(ItemName.www_box_unlock, ItemName.diffindo_unlock) & can_use_dark_magic
+can_get_dumble_cursed = can_use_dark_magic
+can_get_milk_man = Has(ItemName.herm_bag_unlock)
+can_get_slug_pajamas = HasAll(ItemName.apparition_unlock) & can_use_dark_magic & can_use_key
 
 
 # Just Desserts Logic
-def can_get_jd_sc(state: CollectionState, player: int) -> bool:
-    return char_is_strong(state, player)
-
-
-def can_get_jd_rc(state: CollectionState, player: int) -> bool:
-    return (
-            state.has(ItemName.delum_unlock, player)
-            and can_use_dark_magic(state, player)
-            and state.has(ItemName.herm_bag_unlock, player)
-    )
-
-
-def can_get_jd_hc(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_get_jd_sip(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
-
-def can_collect_cormac_suit(state: CollectionState, player: int) -> bool:
-    return state.has(ItemName.agua_unlock, player)
-
-
-def can_collect_harry_christ(state: CollectionState, player: int) -> bool:
-    return (
-            can_use_dark_magic(state, player)
-            and state.has(ItemName.herm_bag_unlock, player)
-            and state.has(ItemName.specs_unlock, player)
-    )
-
-
-def can_collect_madam_rosmerta(state: CollectionState, player: int) -> bool:
-    return can_use_dark_magic(state, player)
-
+can_get_jd_sc = char_is_strong
+can_get_jd_rc = HasAll(ItemName.delum_unlock, ItemName.herm_bag_unlock) & can_use_dark_magic
+can_get_jd_hc = can_use_dark_magic
+can_get_jd_sip = can_use_dark_magic
+can_get_cormac_suit = Has(ItemName.agua_unlock)
+can_get_harry_christ = HasAll(ItemName.herm_bag_unlock, ItemName.specs_unlock) & can_use_dark_magic
+can_get_madam_rosmerta = can_use_dark_magic
 
 
 # A Not So Merry Christmas Logic
 
 
 
-def set_rules(world: MultiWorld, options: LHP2Options, player: int):
-    set_entrance_rules(world, options, player)
-    set_win_con(world, options, player)
-    set_dt_logic(world, options, player)
-    set_da_logic(world, options, player)
-    set_foc_logic(world, options, player)
-    set_kd_logic(world, options, player)
-    set_agv_logic(world, options, player)
-    set_avt_logic(world, options, player)
-    set_jd_logic(world, options, player)
+def set_rules(world: "LHP2World"):
+    set_entrance_rules(world)
+    set_win_con(world)
+    set_dt_logic(world)
+    set_da_logic(world)
+    set_foc_logic(world)
+    set_kd_logic(world)
+    set_agv_logic(world)
+    set_avt_logic(world)
+    set_jd_logic(world)
 
 
-def set_entrance_rules(world: MultiWorld, options: LHP2Options, player: int):
+def set_entrance_rules(world):
     # Level Entrance Rules
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.dt, player),
-             lambda state: state.has(ItemName.dt_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.da, player),
-             lambda state: state.has(ItemName.da_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.foc, player),
-             lambda state: state.has(ItemName.foc_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.kd, player),
-             lambda state: state.has(ItemName.kd_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.agv, player),
-             lambda state: state.has(ItemName.agv_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.avt, player),
-             lambda state: state.has(ItemName.avt_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.oor, player),
-             lambda state: state.has(ItemName.oor_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.jd, player),
-             lambda state: state.has(ItemName.jd_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ansmc, player),
-             lambda state: state.has(ItemName.ansmc_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.lh, player),
-             lambda state: state.has(ItemName.lh_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ff, player),
-             lambda state: state.has(ItemName.ff_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.thath, player),
-             lambda state: state.has(ItemName.thath_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.tsh, player),
-             lambda state: state.has(ItemName.tsh_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.mim, player),
-             lambda state: state.has(ItemName.mim_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.igd, player),
-             lambda state: state.has(ItemName.igd_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.sal, player),
-             lambda state: state.has(ItemName.sal_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ll, player),
-             lambda state: state.has(ItemName.ll_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.dob, player),
-             lambda state: state.has(ItemName.dob_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ttd, player),
-             lambda state: state.has(ItemName.ttd_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.bts, player),
-             lambda state: state.has(ItemName.bts_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.bb, player),
-             lambda state: state.has(ItemName.bb_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.fiend, player),
-             lambda state: state.has(ItemName.fiend_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.st, player),
-             lambda state: state.has(ItemName.st_unlock, player))
-    set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.tfitp, player),
-             lambda state: state.has(ItemName.tfitp_unlock, player))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.dt), Has(ItemName.dt_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.da), Has(ItemName.da_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.foc), Has(ItemName.foc_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.kd), Has(ItemName.kd_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.agv), Has(ItemName.agv_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.avt), Has(ItemName.avt_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.oor), Has(ItemName.oor_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.jd), Has(ItemName.jd_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ansmc), Has(ItemName.ansmc_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.lh), Has(ItemName.lh_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ff), Has(ItemName.ff_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.thath), Has(ItemName.thath_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.tsh), Has(ItemName.tsh_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.mim), Has(ItemName.mim_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.igd), Has(ItemName.igd_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.sal), Has(ItemName.sal_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ll), Has(ItemName.ll_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.dob), Has(ItemName.dob_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ttd), Has(ItemName.ttd_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.bts), Has(ItemName.bts_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.bb), Has(ItemName.bb_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.fiend), Has(ItemName.fiend_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.st), Has(ItemName.st_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.tfitp), Has(ItemName.tfitp_unlock))
     # Freeplay Entrance Rules
-    set_rule(world.get_entrance(RegionName.foc + " -> " + RegionName.focf, player),
-             lambda state: state.has(ItemName.focus_unlock, player))
-    set_rule(world.get_entrance(RegionName.oor + " -> " + RegionName.oorf, player),
-             lambda state: can_access_oor_freeplay(state, player))
+    world.set_rule(world.get_entrance(RegionName.foc + " -> " + RegionName.focf), Has(ItemName.focus_unlock))
+    world.set_rule(world.get_entrance(RegionName.oor + " -> " + RegionName.oorf), can_access_oor_free)
 
 
-def set_win_con(world: MultiWorld, options: LHP2Options, player: int):
-    if options.EndGoal == EndGoal.option_defeat_voldemort:
-        world.completion_condition[player] = lambda state: state.can_reach_location(LocationName.tfitp_beat, player)
+def set_win_con(world):
+    if world.options.EndGoal == EndGoal.option_defeat_voldemort:
+        world.set_completion_rule(Has("Voldemort Defeated"))
     # if options.EndGoal == EndGoal.option_the_collector:
     #     world.completion_condition[player] =
 
 
-def set_dt_logic(world: MultiWorld, options: LHP2Options, player: int):
-    set_rule(world.get_location(LocationName.dt_sc, player), lambda state: can_get_dt_sc(state, player))
-    set_rule(world.get_location(LocationName.dt_hc, player), lambda state: can_get_dt_hc(state, player))
-    set_rule(world.get_location(LocationName.dt_sip, player), lambda state: can_get_dt_sip(state, player))
-    set_rule(world.get_location(LocationName.arthur_suit_token, player),
-             lambda state: can_collect_arthur_suit_tok(state, player))
-    set_rule(world.get_location(LocationName.elphias_token, player),
-             lambda state: can_collect_doge_token(state, player))
+
+def set_dt_logic(world):
+    world.set_rule(world.get_location(LocationName.dt_sc), can_get_dt_sc)
+    world.set_rule(world.get_location(LocationName.dt_hc), can_get_dt_hc)
+    world.set_rule(world.get_location(LocationName.dt_sip), can_get_dt_sip)
+    world.set_rule(world.get_location(LocationName.arthur_suit_token), can_get_arthur_suit)
+    world.set_rule(world.get_location(LocationName.elphias_token), can_get_elphias)
 
 
-def set_da_logic(world: MultiWorld, options: LHP2Options, player: int):
-    set_rule(world.get_location(LocationName.da_beat, player), lambda state: can_beat_da(state, player))
-    set_rule(world.get_location(LocationName.da_tw, player), lambda state: can_beat_da(state, player))
-    set_rule(world.get_location(LocationName.da_gc, player), lambda state: can_get_da_gc(state, player))
-    set_rule(world.get_location(LocationName.da_sc, player), lambda state: can_get_da_sc(state, player))
-    set_rule(world.get_location(LocationName.da_rc, player), lambda state: can_get_da_rc(state, player))
-    set_rule(world.get_location(LocationName.da_hc, player), lambda state: can_get_da_hc(state, player))
-    set_rule(world.get_location(LocationName.da_sip, player), lambda state: can_get_da_sip(state, player))
-    set_rule(world.get_location(LocationName.cho_winter_token, player),
-             lambda state: can_collect_cho_winter(state, player))
-    set_rule(world.get_location(LocationName.herm_scarf_token, player),
-             lambda state: can_collect_herm_scarf(state, player))
-    set_rule(world.get_location(LocationName.neville_winter_token, player),
-             lambda state: can_collect_neville_winter(state, player))
+def set_da_logic(world):
+    world.set_rule(world.get_location(LocationName.da_beat), can_beat_da)
+    world.set_rule(world.get_location(LocationName.da_tw), can_beat_da)
+    world.set_rule(world.get_location(LocationName.da_gc), can_get_da_gc)
+    world.set_rule(world.get_location(LocationName.da_sc), can_get_da_sc)
+    world.set_rule(world.get_location(LocationName.da_rc), can_get_da_rc)
+    world.set_rule(world.get_location(LocationName.da_hc), can_get_da_hc)
+    world.set_rule(world.get_location(LocationName.da_sip), can_get_da_sip)
+    world.set_rule(world.get_location(LocationName.cho_winter_token), can_get_cho_winter)
+    world.set_rule(world.get_location(LocationName.herm_scarf_token), can_get_herm_scarf)
+    world.set_rule(world.get_location(LocationName.neville_winter_token), can_get_neville_winter)
 
 
-def set_foc_logic(world: MultiWorld, options: LHP2Options, player: int):
-    set_rule(world.get_location(LocationName.foc_gc, player), lambda state: can_get_foc_gc(state, player))
-    set_rule(world.get_location(LocationName.foc_hc, player), lambda state: can_get_foc_hc(state, player))
-    set_rule(world.get_location(LocationName.foc_sip, player), lambda state: can_get_foc_sip(state, player))
-    set_rule(world.get_location(LocationName.molly_apron_token, player),
-             lambda state: can_collect_molly_apron(state, player))
-    set_rule(world.get_location(LocationName.snape_underwear_token, player),
-             lambda state: can_collect_snape_under(state, player))
+def set_foc_logic(world):
+    world.set_rule(world.get_location(LocationName.foc_gc), can_get_foc_gc)
+    world.set_rule(world.get_location(LocationName.foc_hc), can_get_foc_hc)
+    world.set_rule(world.get_location(LocationName.foc_sip), can_get_foc_sip)
+    world.set_rule(world.get_location(LocationName.molly_apron_token), can_get_molly_apron)
+    world.set_rule(world.get_location(LocationName.snape_underwear_token), can_get_snape_under)
 
 
-def set_kd_logic(world: MultiWorld, options: LHP2Options, player: int):
-    set_rule(world.get_location(LocationName.kd_gc, player), lambda state: can_get_kd_gc(state, player))
-    set_rule(world.get_location(LocationName.kd_sc, player), lambda state: can_get_kd_sc(state, player))
-    set_rule(world.get_location(LocationName.kd_hc, player), lambda state: can_get_kd_hc(state, player))
-    set_rule(world.get_location(LocationName.kd_sip, player), lambda state: can_get_kd_sip(state, player))
-    set_rule(world.get_location(LocationName.kreacher_token, player),
-             lambda state: can_collect_kreacher(state, player))
-    set_rule(world.get_location(LocationName.sirius_black_token, player),
-             lambda state: can_collect_sirius(state, player))
+def set_kd_logic(world):
+    world.set_rule(world.get_location(LocationName.kd_gc), can_get_kd_gc)
+    world.set_rule(world.get_location(LocationName.kd_sc), can_get_kd_sc)
+    world.set_rule(world.get_location(LocationName.kd_hc), can_get_kd_hc)
+    world.set_rule(world.get_location(LocationName.kd_sip), can_get_kd_sip)
+    world.set_rule(world.get_location(LocationName.kreacher_token), can_get_kreacher)
+    world.set_rule(world.get_location(LocationName.sirius_black_token), can_get_sirius)
 
 
-def set_agv_logic(world: MultiWorld, options: LHP2Options, player: int):
-    set_rule(world.get_location(LocationName.agv_gc, player), lambda state: can_get_agv_gc(state, player))
-    set_rule(world.get_location(LocationName.agv_sc, player), lambda state: can_get_agv_sc(state, player))
-    set_rule(world.get_location(LocationName.agv_rc, player), lambda state: can_get_agv_rc(state, player))
-    set_rule(world.get_location(LocationName.agv_hc, player), lambda state: can_get_agv_hc(state, player))
-    set_rule(world.get_location(LocationName.agv_sip, player), lambda state: can_get_agv_sip(state, player))
-    set_rule(world.get_location(LocationName.emmeline_token, player),
-             lambda state: can_collect_emmeline(state, player))
-    set_rule(world.get_location(LocationName.neville_token, player),
-             lambda state: can_collect_neville(state, player))
-    set_rule(world.get_location(LocationName.prof_umbridge_token, player),
-             lambda state: can_collect_prof_umbridge(state, player))
+def set_agv_logic(world):
+    world.set_rule(world.get_location(LocationName.agv_gc), can_get_agv_gc)
+    world.set_rule(world.get_location(LocationName.agv_sc), can_get_agv_sc)
+    world.set_rule(world.get_location(LocationName.agv_rc), can_get_agv_rc)
+    world.set_rule(world.get_location(LocationName.agv_hc), can_get_agv_hc)
+    world.set_rule(world.get_location(LocationName.agv_sip), can_get_agv_sip)
+    world.set_rule(world.get_location(LocationName.emmeline_token), can_get_emmeline)
+    world.set_rule(world.get_location(LocationName.neville_token), can_get_neville)
+    world.set_rule(world.get_location(LocationName.prof_umbridge_token), can_get_prof_umbridge)
 
 
-def set_avt_logic(world: MultiWorld, options: LHP2Options, player: int):
-    set_rule(world.get_location(LocationName.avt_beat, player), lambda state: can_beat_avt(state, player))
-    set_rule(world.get_location(LocationName.avt_tw, player), lambda state: can_beat_avt(state, player))
-    set_rule(world.get_location(LocationName.avt_rc, player), lambda state: can_get_avt_rc(state, player))
-    set_rule(world.get_location(LocationName.avt_hc, player), lambda state: can_get_avt_hc(state, player))
-    set_rule(world.get_location(LocationName.fudge_wizengamot_token, player),
-             lambda state: can_collect_fudge_wizen(state, player))
-    set_rule(world.get_location(LocationName.herm_jumper_token, player),
-             lambda state: can_collect_herm_jumper(state, player))
-    set_rule(world.get_location(LocationName.lucius_death_eater_token, player),
-             lambda state: can_collect_lucius_death(state, player))
+def set_avt_logic(world):
+    world.set_rule(world.get_location(LocationName.avt_beat), can_beat_avt)
+    world.set_rule(world.get_location(LocationName.avt_tw), can_beat_avt)
+    world.set_rule(world.get_location(LocationName.avt_rc), can_get_avt_rc)
+    world.set_rule(world.get_location(LocationName.avt_hc), can_get_avt_hc)
+    world.set_rule(world.get_location(LocationName.fudge_wizengamot_token), can_get_fudge_wizen)
+    world.set_rule(world.get_location(LocationName.herm_jumper_token), can_get_herm_jumper)
+    world.set_rule(world.get_location(LocationName.lucius_death_eater_token), can_get_lucius_death)
 
 
-def set_oor_logic(world: MultiWorld, options: LHP2Options, player: int):
-    set_rule(world.get_location(LocationName.oor_beat, player), lambda state: can_beat_oor(state, player))
-    set_rule(world.get_location(LocationName.oor_tw, player), lambda state: can_beat_oor(state, player))
-    set_rule(world.get_location(LocationName.oor_gc, player), lambda state: can_get_oor_gc(state, player))
-    set_rule(world.get_location(LocationName.oor_sc, player), lambda state: can_get_oor_sc(state, player))
-    set_rule(world.get_location(LocationName.oor_rc, player), lambda state: can_get_oor_rc(state, player))
-    set_rule(world.get_location(LocationName.oor_hc, player), lambda state: can_get_oor_hc(state, player))
-    set_rule(world.get_location(LocationName.oor_sip, player), lambda state: can_get_oor_sip(state, player))
-    set_rule(world.get_location(LocationName.dumble_cursed_token, player),
-             lambda state: can_collect_dumble_cursed(state, player))
-    set_rule(world.get_location(LocationName.milk_man_token, player),
-             lambda state: can_collect_milk_man(state, player))
-    set_rule(world.get_location(LocationName.slughorn_pajamas_token, player),
-             lambda state: can_collect_slug_pajamas(state, player))
+def set_oor_logic(world):
+    world.set_rule(world.get_location(LocationName.oor_beat), can_beat_oor)
+    world.set_rule(world.get_location(LocationName.oor_tw), can_beat_oor)
+    world.set_rule(world.get_location(LocationName.oor_gc), can_get_oor_gc)
+    world.set_rule(world.get_location(LocationName.oor_sc), can_get_oor_sc)
+    world.set_rule(world.get_location(LocationName.oor_rc), can_get_oor_rc)
+    world.set_rule(world.get_location(LocationName.oor_hc), can_get_oor_hc)
+    world.set_rule(world.get_location(LocationName.oor_sip), can_get_oor_sip)
+    world.set_rule(world.get_location(LocationName.dumble_cursed_token), can_get_dumble_cursed)
+    world.set_rule(world.get_location(LocationName.milk_man_token), can_get_milk_man)
+    world.set_rule(world.get_location(LocationName.slughorn_pajamas_token), can_get_slug_pajamas)
 
 
-def set_jd_logic(world: MultiWorld, options: LHP2Options, player: int):
-    set_rule(world.get_location(LocationName.jd_sc, player), lambda state: can_get_jd_sc(state, player))
-    set_rule(world.get_location(LocationName.jd_rc, player), lambda state: can_get_jd_rc(state, player))
-    set_rule(world.get_location(LocationName.jd_hc, player), lambda state: can_get_jd_hc(state, player))
-    set_rule(world.get_location(LocationName.cormac_suit_token, player),
-             lambda state: can_collect_cormac_suit(state, player))
-    set_rule(world.get_location(LocationName.harry_christmas_token, player),
-             lambda state: can_collect_harry_christ(state, player))
-    set_rule(world.get_location(LocationName.madam_rosmerta_token, player),
-             lambda state: can_collect_madam_rosmerta(state, player))
+def set_jd_logic(world):
+    world.set_rule(world.get_location(LocationName.jd_sc), can_get_jd_sc)
+    world.set_rule(world.get_location(LocationName.jd_rc), can_get_jd_rc)
+    world.set_rule(world.get_location(LocationName.jd_hc), can_get_jd_hc)
+    world.set_rule(world.get_location(LocationName.cormac_suit_token), can_get_cormac_suit)
+    world.set_rule(world.get_location(LocationName.harry_christmas_token), can_get_harry_christ)
+    world.set_rule(world.get_location(LocationName.madam_rosmerta_token), can_get_madam_rosmerta)
