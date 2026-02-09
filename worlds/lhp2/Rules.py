@@ -121,6 +121,19 @@ can_get_ansmc_sc = can_use_dark_magic
 can_get_bill_wedding = HasAll(ItemName.reducto_unlock, ItemName.delum_unlock)
 
 
+# Love Hurts Logic
+can_access_lh_free = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock)
+can_beat_lh = HasAll(ItemName.diffindo_unlock, ItemName.www_box_unlock)
+can_get_lh_gc = Has(ItemName.www_box_unlock) & can_use_spanner
+can_get_lh_sc = Has(ItemName.www_box_unlock) & can_use_dark_magic
+can_get_lh_rc = Has(ItemName.reducto_unlock) & can_use_key
+can_get_lh_hc = char_is_strong
+can_get_lh_sip = can_use_dark_magic
+can_get_draco_suit = Has(ItemName.delum_unlock) & can_use_dark_magic
+can_get_ginny = Has(ItemName.agua_unlock)
+can_get_prof_slug = char_is_strong
+
+
 def set_rules(world: "LHP2World"):
     set_entrance_rules(world)
     set_win_con(world)
@@ -133,6 +146,7 @@ def set_rules(world: "LHP2World"):
     set_oor_logic(world)
     set_jd_logic(world)
     set_ansmc_logic(world)
+    set_lh_logic(world)
 
 
 def set_entrance_rules(world):
@@ -165,6 +179,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.foc + " -> " + RegionName.focf), Has(ItemName.focus_unlock))
     world.set_rule(world.get_entrance(RegionName.oor + " -> " + RegionName.oorf), can_access_oor_free)
     world.set_rule(world.get_entrance(RegionName.ansmc + " -> " + RegionName.ansmcf), can_access_ansmc_free)
+    world.set_rule(world.get_entrance(RegionName.lh + " -> " + RegionName.lhf), can_access_lh_free)
 
 
 def set_win_con(world):
@@ -259,3 +274,16 @@ def set_ansmc_logic(world):
     world.set_rule(world.get_location(LocationName.ansmc_gc), can_get_ansmc_gc)
     world.set_rule(world.get_location(LocationName.ansmc_sc), can_get_ansmc_sc)
     world.set_rule(world.get_location(LocationName.bill_wedding_token), can_get_bill_wedding)
+
+
+def set_lh_logic(world):
+    world.set_rule(world.get_location(LocationName.lh_beat), can_beat_lh)
+    world.set_rule(world.get_location(LocationName.lh_tw), can_beat_lh)
+    world.set_rule(world.get_location(LocationName.lh_gc), can_get_lh_gc)
+    world.set_rule(world.get_location(LocationName.lh_sc), can_get_lh_sc)
+    world.set_rule(world.get_location(LocationName.lh_rc), can_get_lh_rc)
+    world.set_rule(world.get_location(LocationName.lh_hc), can_get_lh_hc)
+    world.set_rule(world.get_location(LocationName.lh_sip), can_get_lh_sip)
+    world.set_rule(world.get_location(LocationName.draco_suit_token), can_get_draco_suit)
+    world.set_rule(world.get_location(LocationName.ginny_token), can_get_ginny)
+    world.set_rule(world.get_location(LocationName.prof_slughorn_token), can_get_prof_slug)

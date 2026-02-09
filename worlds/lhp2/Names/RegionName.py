@@ -28,6 +28,7 @@ tfitp = "The Flaw in the Plan"
 focf = "Focus! Freeplay"
 oorf = "Out of Retirement Freeplay"
 ansmcf = "A Not So Merry Christmas Freeplay"
+lhf = "Love Hurts Freeplay"
 
 # Hub Regions
 diag = "Diagon Alley"
