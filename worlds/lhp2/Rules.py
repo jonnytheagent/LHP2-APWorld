@@ -134,19 +134,47 @@ can_get_ginny = Has(ItemName.agua_unlock)
 can_get_prof_slug = char_is_strong
 
 
+# Felix Felicis Logic
+can_access_ff_free = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock)
+can_beat_ff = Has(ItemName.diffindo_unlock)
+can_get_ff_sc = can_use_key
+can_get_ff_rc = can_use_dark_magic
+can_get_ff_hc = can_use_dark_magic
+can_get_ff_sip = Has(ItemName.www_box_unlock)
+can_get_hagrid = Has(ItemName.herm_bag_unlock) & can_use_dark_magic
+can_get_prof_sprout = HasAll(ItemName.reducto_unlock, ItemName.specs_unlock)
+
+
+# The Horcrux and the Hand Logic
+can_access_thath_free = HasAll(ItemName.apparition_unlock, ItemName.diffindo_unlock)
+can_beat_thath = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock)
+can_get_thath_sc = char_is_strong
+can_get_thath_rc = HasAll(ItemName.apparition_unlock, ItemName.herm_bag_unlock)
+can_get_thath_hc = HasAll(ItemName.reducto_unlock, ItemName.delum_unlock)
+can_get_thath_sip = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock)
+can_get_hagrid_wed = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock) & char_is_strong
+can_get_prof_dumble = can_use_dark_magic
+can_get_tr_orphan = can_use_dark_magic
+
+
 def set_rules(world: "LHP2World"):
     set_entrance_rules(world)
     set_win_con(world)
+    # Y5
     set_dt_logic(world)
     set_da_logic(world)
     set_foc_logic(world)
     set_kd_logic(world)
     set_agv_logic(world)
     set_avt_logic(world)
+    # Y6
     set_oor_logic(world)
     set_jd_logic(world)
     set_ansmc_logic(world)
     set_lh_logic(world)
+    set_ff_logic(world)
+    set_thath_logic(world)
+    # Y7
 
 
 def set_entrance_rules(world):
@@ -180,6 +208,8 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.oor + " -> " + RegionName.oorf), can_access_oor_free)
     world.set_rule(world.get_entrance(RegionName.ansmc + " -> " + RegionName.ansmcf), can_access_ansmc_free)
     world.set_rule(world.get_entrance(RegionName.lh + " -> " + RegionName.lhf), can_access_lh_free)
+    world.set_rule(world.get_entrance(RegionName.ff + " -> " + RegionName.fff), can_access_ff_free)
+    world.set_rule(world.get_entrance(RegionName.thath + " -> " + RegionName.thathf), can_access_thath_free)
 
 
 def set_win_con(world):
@@ -287,3 +317,26 @@ def set_lh_logic(world):
     world.set_rule(world.get_location(LocationName.draco_suit_token), can_get_draco_suit)
     world.set_rule(world.get_location(LocationName.ginny_token), can_get_ginny)
     world.set_rule(world.get_location(LocationName.prof_slughorn_token), can_get_prof_slug)
+
+
+def set_ff_logic(world):
+    world.set_rule(world.get_location(LocationName.ff_beat), can_beat_ff)
+    world.set_rule(world.get_location(LocationName.ff_tw), can_beat_ff)
+    world.set_rule(world.get_location(LocationName.ff_sc), can_get_ff_sc)
+    world.set_rule(world.get_location(LocationName.ff_rc), can_get_ff_rc)
+    world.set_rule(world.get_location(LocationName.ff_hc), can_get_ff_hc)
+    world.set_rule(world.get_location(LocationName.ff_sip), can_get_ff_sip)
+    world.set_rule(world.get_location(LocationName.hagrid_token), can_get_hagrid)
+    world.set_rule(world.get_location(LocationName.prof_sprout_token), can_get_prof_sprout)
+
+
+def set_thath_logic(world):
+    world.set_rule(world.get_location(LocationName.thath_beat), can_beat_thath)
+    world.set_rule(world.get_location(LocationName.thath_tw), can_beat_thath)
+    world.set_rule(world.get_location(LocationName.thath_sc), can_get_thath_sc)
+    world.set_rule(world.get_location(LocationName.thath_rc), can_get_thath_rc)
+    world.set_rule(world.get_location(LocationName.thath_hc), can_get_thath_hc)
+    world.set_rule(world.get_location(LocationName.thath_sip), can_get_thath_sip)
+    world.set_rule(world.get_location(LocationName.hagrid_wed_token), can_get_hagrid_wed)
+    world.set_rule(world.get_location(LocationName.prof_dumble_token), can_get_prof_dumble)
+    world.set_rule(world.get_location(LocationName.tr_orphanage_token), can_get_tr_orphan)

@@ -29,6 +29,8 @@ focf = "Focus! Freeplay"
 oorf = "Out of Retirement Freeplay"
 ansmcf = "A Not So Merry Christmas Freeplay"
 lhf = "Love Hurts Freeplay"
+fff = "Felix Felicis Freeplay"
+thathf = "The Horcrux and the Hand Freeplay"
 
 # Hub Regions
 diag = "Diagon Alley"

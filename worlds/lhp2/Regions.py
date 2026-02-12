@@ -83,6 +83,8 @@ freeplay_regions = [
     RegionName.oorf,
     RegionName.ansmcf,
     RegionName.lhf,
+    RegionName.fff,
+    RegionName.thathf,
 ]
 
 
@@ -153,6 +155,8 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.oor, RegionName.oorf)
     connect_regions(world, player, RegionName.ansmc, RegionName.ansmcf)
     connect_regions(world, player, RegionName.lh, RegionName.lhf)
+    connect_regions(world, player, RegionName.ff, RegionName.fff)
+    connect_regions(world, player, RegionName.thath, RegionName.thathf)
 
     tfitp_region = world.get_region(RegionName.tfitp, player)
     create_event("Defeat Voldemort", "Voldemort Defeated", tfitp_region, player)
