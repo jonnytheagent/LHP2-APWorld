@@ -7,8 +7,7 @@ if TYPE_CHECKING:
     from . import LHP2World
 
 from .Names import LocationName, ItemName, RegionName
-from .Options import LHP2Options, EndGoal
-
+from .Options import LHP2Options, EndGoal, HardPurchases
 
 #Helper Rules
 can_use_dark_magic = (Has(ItemName.alecto_play) | Has(ItemName.amycus_play) | Has(ItemName.dolohov_play) |
@@ -155,6 +154,9 @@ can_get_thath_sip = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock)
 can_get_hagrid_wed = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock) & char_is_strong
 can_get_prof_dumble = can_use_dark_magic
 can_get_tr_orphan = can_use_dark_magic
+
+# Shop Logic
+need_stud_multi = OptionFilter(HardPurchases, True)
 
 
 def set_rules(world: "LHP2World"):

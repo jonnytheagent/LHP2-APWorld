@@ -81,4 +81,5 @@ class LHP2World(World):
         return {
             "EndGoal": self.options.EndGoal.value,
             "CollectiblesRequired": self.options.CollectibleQuantity.value,
+            "FlawInThePlanCondition": self.options.FlawInThePlanCondition.value,
         }

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import List
-from Options import DefaultOnToggle, Range, Choice, PerGameCommonOptions, OptionList, OptionDict
+from Options import DefaultOnToggle, Toggle, Range, Choice, PerGameCommonOptions, OptionList, OptionDict
 from .Names import ItemName
 
 
@@ -39,6 +39,15 @@ class CollectibleQuantity(OptionDict):
     }
     default = {ItemName.gb: 100, ItemName.sip: 30, ItemName.tw: 12, ItemName.ct: 100, ItemName.hcgb: 12}
 
+
+class FlawInThePlanCondition(Choice):
+    """
+    Determine the Level Unlock Condition for The Flaw in The Plan. Does nothing if Voldemort is not the goal.
+    """
+    display_name = "Flaw In The Plan Unlock Condition"
+    option_horcruxes = 0
+    option_level_shuffled = 1
+    default = 0
 
 class NumStartLevels(Range):
     """
@@ -136,9 +145,43 @@ class StartingLevelOptions(OptionList):
     ]
 
 
+class HardPurchases(Toggle):
+    """
+    Turning this on makes it so purchases no longer require a stud multiplier.
+    """
+    display_name = "Hard Purchases"
+
+
+class LowMultiplierPriceMinimum(Range):
+    """
+    Determines the starting price for a low multiplier.
+    A low multiplier is defined as any multiplier.
+    """
+    display_name = "Low Multiplier Price Minimum"
+    range_start = 10
+    range_end = 10000000
+    default = 50000
+
+
+class HighMultiplierMinimum(Range):
+    """
+    Determines the starting price for a high multiplier.
+    Must be larger than Low Multiplier Price.
+    A high multiplier is defined as Score x6, Score x8, Score x10 or both Score x2 and Score x4.
+    """
+    display_name = "High Multiplier Price Minimum"
+    range_start = 10
+    range_end = 10000000
+    default = 100000
+
+
 @dataclass
 class LHP2Options(PerGameCommonOptions):
     EndGoal: EndGoal
     CollectibleQuantity: CollectibleQuantity
+    FlawInThePlanCondition: FlawInThePlanCondition
     NumStartLevels: NumStartLevels
     StartingLevelOptions: StartingLevelOptions
+    HardPurchases: HardPurchases
+    LowMultiplierPriceMinimum: LowMultiplierPriceMinimum
+    HighMultiplierMinimum: HighMultiplierMinimum
