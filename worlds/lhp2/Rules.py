@@ -1,4 +1,6 @@
 from typing import TYPE_CHECKING
+from typing_extensions import override
+import dataclasses
 
 from rule_builder.options import OptionFilter
 from rule_builder.rules import Has, HasAll, Rule
@@ -9,27 +11,25 @@ if TYPE_CHECKING:
 from .Names import LocationName, ItemName, RegionName
 from .Options import LHP2Options, EndGoal, HardPurchases
 
-#Helper Rules
+# Helper Rules
 can_use_dark_magic = (Has(ItemName.alecto_play) | Has(ItemName.amycus_play) | Has(ItemName.dolohov_play) |
-        Has(ItemName.bellatrix_play) | Has(ItemName.bellatrix_azka_play) | Has(ItemName.death_eater_play) |
-        Has(ItemName.fenrir_play) | Has(ItemName.grindel_old_play) | Has(ItemName.grindel_young_play) |
-        Has(ItemName.lord_voldemort_play) | Has(ItemName.lucius_play) | Has(ItemName.lucius_death_eater_play) |
-        Has(ItemName.black_play) | Has(ItemName.pius_play) | Has(ItemName.scabior_play) |
-        Has(ItemName.snatcher_play) | Has(ItemName.rowle_play) | Has(ItemName.tom_riddle_play))
-
+                      Has(ItemName.bellatrix_play) | Has(ItemName.bellatrix_azka_play) | Has(
+            ItemName.death_eater_play) |
+                      Has(ItemName.fenrir_play) | Has(ItemName.grindel_old_play) | Has(ItemName.grindel_young_play) |
+                      Has(ItemName.lord_voldemort_play) | Has(ItemName.lucius_play) | Has(
+            ItemName.lucius_death_eater_play) |
+                      Has(ItemName.black_play) | Has(ItemName.pius_play) | Has(ItemName.scabior_play) |
+                      Has(ItemName.snatcher_play) | Has(ItemName.rowle_play) | Has(ItemName.tom_riddle_play))
 
 can_use_spanner = (Has(ItemName.arthur_play) | Has(ItemName.arthur_suit_play) | Has(ItemName.arthur_cardigan_play) |
                    Has(ItemName.arthur_torn_suit_play))
 
-
 can_use_key = Has(ItemName.bogrod_play) | Has(ItemName.cole_play) | Has(ItemName.griphook_play)
-
 
 char_is_strong = (Has(ItemName.dudley_play) | Has(ItemName.dudley_grey_play) | Has(ItemName.dudley_shirt_play) |
                   Has(ItemName.fenrir_play) | Has(ItemName.fang_play) | Has(ItemName.hagrid_play) |
                   Has(ItemName.hagrid_wed_play) | Has(ItemName.remus_lupin_play) | Has(ItemName.sirius_black_play) |
                   Has(ItemName.sirius_azkaban_play) | Has(ItemName.super_strength_unlock))
-
 
 # Dark Times Logic
 can_get_dt_sc = Has(ItemName.diffindo_unlock)
@@ -38,19 +38,17 @@ can_get_dt_sip = can_use_dark_magic
 can_get_arthur_suit = can_use_dark_magic
 can_get_elphias = Has(ItemName.agua_unlock)
 
-
 # Dumbledore's Army Logic
 can_beat_da = Has(ItemName.expecto_unlock)
 can_get_da_gc = HasAll(ItemName.reducto_unlock, ItemName.specs_unlock) & char_is_strong
 can_get_da_sc = Has(ItemName.focus_unlock)
 can_get_da_rc = Has(ItemName.apparition_unlock)
-can_get_da_hc = (HasAll(ItemName.reducto_unlock, ItemName.www_box_unlock, ItemName.specs_unlock) 
+can_get_da_hc = (HasAll(ItemName.reducto_unlock, ItemName.www_box_unlock, ItemName.specs_unlock)
                  & char_is_strong)
 can_get_da_sip = Has(ItemName.reducto_unlock) & can_use_dark_magic
 can_get_cho_winter = HasAll(ItemName.reducto_unlock, ItemName.specs_unlock) & char_is_strong
 can_get_herm_scarf = Has(ItemName.www_box_unlock)
 can_get_neville_winter = Has(ItemName.specs_unlock)
-
 
 # Focus!
 can_get_foc_gc = Has(ItemName.reducto_unlock)
@@ -58,7 +56,6 @@ can_get_foc_hc = can_use_dark_magic
 can_get_foc_sip = Has(ItemName.agua_unlock)
 can_get_molly_apron = Has(ItemName.reducto_unlock) & char_is_strong
 can_get_snape_under = Has(ItemName.www_box_unlock)
-
 
 # Kreacher Discomforts
 can_get_kd_gc = Has(ItemName.apparition_unlock) & char_is_strong
@@ -68,7 +65,6 @@ can_get_kd_hc = HasAll(ItemName.reducto_unlock, ItemName.diffindo_unlock)
 can_get_kd_sip = Has(ItemName.reducto_unlock)
 can_get_kreacher = can_use_dark_magic
 can_get_sirius = Has(ItemName.agua_unlock)
-
 
 # A Giant Virtuoso
 can_get_agv_gc = can_use_key
@@ -80,7 +76,6 @@ can_get_emmeline = Has(ItemName.agua_unlock)
 can_get_neville = char_is_strong
 can_get_prof_umbridge = can_use_dark_magic
 
-
 # A Veiled Threat Logic
 can_beat_avt = Has(ItemName.diffindo_unlock)
 can_get_avt_rc = Has(ItemName.agua_unlock)
@@ -88,7 +83,6 @@ can_get_avt_hc = can_use_dark_magic
 can_get_fudge_wizen = Has(ItemName.diffindo_unlock)
 can_get_herm_jumper = Has(ItemName.agua_unlock)
 can_get_lucius_death = can_use_dark_magic
-
 
 # Out of Retirement Logic
 can_access_oor_free = HasAll(ItemName.reducto_unlock, ItemName.apparition_unlock)
@@ -102,7 +96,6 @@ can_get_dumble_cursed = can_use_dark_magic
 can_get_milk_man = Has(ItemName.herm_bag_unlock)
 can_get_slug_pajamas = HasAll(ItemName.apparition_unlock) & can_use_dark_magic & can_use_key
 
-
 # Just Desserts Logic
 can_get_jd_sc = char_is_strong
 can_get_jd_rc = HasAll(ItemName.delum_unlock, ItemName.herm_bag_unlock) & can_use_dark_magic
@@ -112,13 +105,11 @@ can_get_cormac_suit = Has(ItemName.agua_unlock)
 can_get_harry_christ = HasAll(ItemName.herm_bag_unlock, ItemName.specs_unlock) & can_use_dark_magic
 can_get_madam_rosmerta = can_use_dark_magic
 
-
 # A Not So Merry Christmas Logic
 can_access_ansmc_free = HasAll(ItemName.reducto_unlock, ItemName.specs_unlock, ItemName.agua_unlock)
 can_get_ansmc_gc = Has(ItemName.apparition_unlock) & can_use_key
 can_get_ansmc_sc = can_use_dark_magic
 can_get_bill_wedding = HasAll(ItemName.reducto_unlock, ItemName.delum_unlock)
-
 
 # Love Hurts Logic
 can_access_lh_free = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock)
@@ -132,7 +123,6 @@ can_get_draco_suit = Has(ItemName.delum_unlock) & can_use_dark_magic
 can_get_ginny = Has(ItemName.agua_unlock)
 can_get_prof_slug = char_is_strong
 
-
 # Felix Felicis Logic
 can_access_ff_free = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock)
 can_beat_ff = Has(ItemName.diffindo_unlock)
@@ -142,7 +132,6 @@ can_get_ff_hc = can_use_dark_magic
 can_get_ff_sip = Has(ItemName.www_box_unlock)
 can_get_hagrid = Has(ItemName.herm_bag_unlock) & can_use_dark_magic
 can_get_prof_sprout = HasAll(ItemName.reducto_unlock, ItemName.specs_unlock)
-
 
 # The Horcrux and the Hand Logic
 can_access_thath_free = HasAll(ItemName.apparition_unlock, ItemName.diffindo_unlock)
@@ -157,6 +146,18 @@ can_get_tr_orphan = can_use_dark_magic
 
 # Shop Logic
 need_stud_multi = OptionFilter(HardPurchases, True)
+has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
+                  HasAll(ItemName.score_x2_unlock, ItemName.score_x4_unlock))
+has_low_multi = Has(ItemName.score_x2_unlock) | Has(ItemName.score_x4_unlock) | has_high_multi
+
+#
+# @dataclasses.dataclass()
+# class HasGoal(rules.Rule[AstalonWorldBase], game="LHP2World"):
+#     @override
+#     def _instantiate(self, world: AstalonWorldBase) -> rules.Rule.Resolved:
+#         if world.options.goal.value != Goal.option_eye_hunt:
+#             return rules.True_().resolve(world)
+#         return Has(Eye.GOLD, world.options.additional_eyes_required.value).resolve(world)
 
 
 def set_rules(world: "LHP2World"):

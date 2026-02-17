@@ -804,8 +804,8 @@ spell_item_table: Dict[str, LHP2ItemData] = {
 
 ability_item_table: Dict[str, LHP2ItemData] = {
     # ItemName.draught_unlock: LHP2ItemData(base_item_id + 1006),
-    ItemName.thest_unlock: LHP2ItemData(base_item_id + 1007,
-                                        ItemClassification.progression_deprioritized_skip_balancing),
+    # ItemName.thest_unlock: LHP2ItemData(base_item_id + 1007,
+    #                                     ItemClassification.progression_deprioritized_skip_balancing),
     # ItemName.dueling_unlock: LHP2ItemData(base_item_id + 1008),
     ItemName.apparition_unlock: LHP2ItemData(base_item_id + 1009, ItemClassification.progression),
     # ItemName.dada_unlock: LHP2ItemData(base_item_id + 1010),
@@ -817,7 +817,7 @@ ability_item_table: Dict[str, LHP2ItemData] = {
 }
 
 purp_stud_item_table: Dict[str, LHP2ItemData] = {
-    ItemName.purp_stud: LHP2ItemData(base_item_id + 1016, qty=5),
+    ItemName.purp_stud: LHP2ItemData(base_item_id + 2000, qty=10),
 }
 
 item_data_table = {

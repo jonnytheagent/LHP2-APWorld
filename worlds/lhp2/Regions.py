@@ -55,7 +55,10 @@ hub_regions = [
     RegionName.thest,
     RegionName.lake,
     RegionName.foyer,
-    RegionName.stair,
+    RegionName.low_stair,
+    RegionName.mid_stair,
+    RegionName.dumble_office,
+    RegionName.upper_stair,
     RegionName.house,
     RegionName.slyth,
     RegionName.huff,
@@ -132,9 +135,12 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.ghl, RegionName.wc)
     connect_regions(world, player, RegionName.wc, RegionName.wcs)
     connect_regions(world, player, RegionName.ghl, RegionName.ror)
-    connect_regions(world, player, RegionName.ror, RegionName.stair)
-    connect_regions(world, player, RegionName.foyer, RegionName.stair)
-    connect_regions(world, player, RegionName.stair, RegionName.house)
+    connect_regions(world, player, RegionName.ror, RegionName.upper_stair)
+    connect_regions(world, player, RegionName.foyer, RegionName.low_stair)
+    connect_regions(world, player, RegionName.low_stair, RegionName.house)
+    connect_regions(world, player, RegionName.low_stair, RegionName.mid_stair)
+    connect_regions(world, player, RegionName.mid_stair, RegionName.dumble_office)
+    connect_regions(world, player, RegionName.dumble_office, RegionName.upper_stair)
     connect_regions(world, player, RegionName.house, RegionName.slyth)
     connect_regions(world, player, RegionName.house, RegionName.huff)
     connect_regions(world, player, RegionName.house, RegionName.gryf)

@@ -312,7 +312,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.charity_token: LocationData(base_location_id + 287, RegionName.pot),
     LocationName.charlie_token: LocationData(base_location_id + 288, RegionName.wc),
     LocationName.cormac_token: LocationData(base_location_id + 289, RegionName.ror),
-    LocationName.dedalus_token: LocationData(base_location_id + 290, RegionName.stair),
+    LocationName.dedalus_token: LocationData(base_location_id + 290, RegionName.low_stair),
     LocationName.dirk_token: LocationData(base_location_id + 291, RegionName.ror),
     LocationName.dolohov_token: LocationData(base_location_id + 292, RegionName.ast),
     LocationName.dragomir_token: LocationData(base_location_id + 293, RegionName.wild),
@@ -368,7 +368,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.arthur_cardigan_token: LocationData(base_location_id + 343, RegionName.herb),
     LocationName.luna_pink_dress_token: LocationData(base_location_id + 344, RegionName.raven),
     LocationName.marietta_token: LocationData(base_location_id + 345, RegionName.hogs),
-    LocationName.dumble_young_token: LocationData(base_location_id + 346, RegionName.stair),
+    LocationName.dumble_young_token: LocationData(base_location_id + 346, RegionName.low_stair),
     LocationName.slughorn_young_token: LocationData(base_location_id + 347, RegionName.herb),
     LocationName.slughorn_pajamas_token: LocationData(base_location_id + 348, RegionName.oor),
     LocationName.lily_young_casual_token: LocationData(base_location_id + 349, RegionName.hogwpath),
@@ -392,7 +392,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.herm_ministry_token: LocationData(base_location_id + 367, RegionName.wild),
     LocationName.arthur_suit_token: LocationData(base_location_id + 368, RegionName.dt),
     LocationName.harry_christmas_token: LocationData(base_location_id + 369, RegionName.jd),
-    LocationName.ernie_token: LocationData(base_location_id + 370, RegionName.stair),
+    LocationName.ernie_token: LocationData(base_location_id + 370, RegionName.low_stair),
     LocationName.prof_snape_token: LocationData(base_location_id + 371, RegionName.st),
     LocationName.neville_token: LocationData(base_location_id + 372, RegionName.agv),
     # LocationName.ron_token: LocationData(base_location_id + 373, RegionName.mm),
@@ -411,12 +411,12 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.tonks_token: LocationData(base_location_id + 386, RegionName.qp),
     LocationName.pius_token: LocationData(base_location_id + 387, RegionName.knock),
     LocationName.reg_token: LocationData(base_location_id + 388, RegionName.wild),
-    LocationName.regulus_token: LocationData(base_location_id + 389, RegionName.stair),
+    LocationName.regulus_token: LocationData(base_location_id + 389, RegionName.low_stair),
     LocationName.scrimgeour_token: LocationData(base_location_id + 390, RegionName.lond),
     LocationName.scabior_token: LocationData(base_location_id + 391, RegionName.wild),
     LocationName.xeno_token: LocationData(base_location_id + 392, RegionName.wild),
     LocationName.yaxley_token: LocationData(base_location_id + 393, RegionName.wild),
-    LocationName.zacharias_token: LocationData(base_location_id + 394, RegionName.stair),
+    LocationName.zacharias_token: LocationData(base_location_id + 394, RegionName.low_stair),
     LocationName.waitress_treats_token: LocationData(base_location_id + 395, RegionName.kcs),
     LocationName.lord_voldemort_token: LocationData(base_location_id + 396, RegionName.tfitp),
     LocationName.ron_blue_pyjamas_token: LocationData(base_location_id + 397, RegionName.house),
@@ -540,7 +540,7 @@ hub_sip_loc_table: Dict[str, LocationData] = {
     LocationName.dada_sip: LocationData(base_location_id + 528, RegionName.dada),
     LocationName.divc_sip: LocationData(base_location_id + 529, RegionName.divc),
     LocationName.cl_sip: LocationData(base_location_id + 530, RegionName.cl),
-    LocationName.stair_sip: LocationData(base_location_id + 531, RegionName.stair),
+    LocationName.stair_sip: LocationData(base_location_id + 531, RegionName.low_stair),
     LocationName.lib_sip: LocationData(base_location_id + 532, RegionName.lib),
     LocationName.foyer_sip: LocationData(base_location_id + 533, RegionName.foyer),
     LocationName.mm_sip: LocationData(base_location_id + 534, RegionName.mm),
@@ -739,7 +739,7 @@ hub_gb_loc_table: Dict[str, LocationData] = {
     LocationName.dada_gb: LocationData(base_location_id + 745, RegionName.dada),
     LocationName.divc_gb: LocationData(base_location_id + 746, RegionName.divc),
     LocationName.cl_gb: LocationData(base_location_id + 747, RegionName.cl),
-    LocationName.stair_gb: LocationData(base_location_id + 748, RegionName.stair),
+    LocationName.stair_gb: LocationData(base_location_id + 748, RegionName.low_stair),
     LocationName.lib_gb: LocationData(base_location_id + 749, RegionName.lib),
     LocationName.foyer_gb: LocationData(base_location_id + 750, RegionName.foyer),
     LocationName.mm_gb: LocationData(base_location_id + 751, RegionName.mm),
@@ -783,7 +783,7 @@ red_brick_loc_table: Dict[str, LocationData] = {
     LocationName.dada_rb: LocationData(base_location_id + 929, RegionName.dada),
     LocationName.divc_rb: LocationData(base_location_id + 930, RegionName.divc),
     # LocationName.cl_rb: LocationData(base_location_id + 931, RegionName.cl),
-    # LocationName.stair_rb: LocationData(base_location_id + 932, RegionName.stair),
+    # LocationName.stair_rb: LocationData(base_location_id + 932, RegionName.low_stair),
     LocationName.lib_rb: LocationData(base_location_id + 933, RegionName.lib),
     # LocationName.foyer_rb: LocationData(base_location_id + 934, RegionName.foyer),
     # LocationName.mm_rb: LocationData(base_location_id + 935, RegionName.mm),
@@ -845,28 +845,38 @@ spell_loc_table: Dict[str, LocationData] = {
     LocationName.immob_purch: LocationData(base_location_id + 994, RegionName.www, 400000),
     # LocationName.pets_purch: LocationData(base_location_id + 995, RegionName.www),
     # LocationName.invis_purch: LocationData(base_location_id + 996, RegionName.www),
-    # LocationName.avada_purch: LocationData(base_location_id + 997, RegionName.www),
-    LocationName.diffindo_purch: LocationData(base_location_id + 998, RegionName.y5c),
-    # LocationName.lumos_purch: LocationData(base_location_id + 999, RegionName.www),
-    # lumos has 2 bits
-    LocationName.delum_purch: LocationData(base_location_id + 1001, RegionName.www),
-    LocationName.agua_purch: LocationData(base_location_id + 1002, RegionName.y6c),
-    LocationName.focus_purch: LocationData(base_location_id + 1003, RegionName.cl),
-    LocationName.expecto_purch: LocationData(base_location_id + 1004, RegionName.ror),
-    LocationName.reducto_purch: LocationData(base_location_id + 1005, RegionName.y6c),
+    # # LocationName.avada_purch: LocationData(base_location_id + 997, RegionName.www),
+    # LocationName.diffindo_purch: LocationData(base_location_id + 998, RegionName.y5c),
+    # # LocationName.lumos_purch: LocationData(base_location_id + 999, RegionName.www),
+    # # lumos has 2 bits
+    # LocationName.delum_purch: LocationData(base_location_id + 1001, RegionName.www),
+    # LocationName.agua_purch: LocationData(base_location_id + 1002, RegionName.y6c),
+    # LocationName.focus_purch: LocationData(base_location_id + 1003, RegionName.cl),
+    # LocationName.expecto_purch: LocationData(base_location_id + 1004, RegionName.ror),
+    # LocationName.reducto_purch: LocationData(base_location_id + 1005, RegionName.y6c),
 }
 
-ability_loc_table: Dict[str, LocationData] = {
-    LocationName.draught_purch: LocationData(base_location_id + 1006, RegionName.pot),
-    LocationName.thest_purch: LocationData(base_location_id + 1007, RegionName.thest),
-    LocationName.dueling_purch: LocationData(base_location_id + 1008, RegionName.ror),
-    LocationName.apparition_purch: LocationData(base_location_id + 1009, RegionName.tsh),
-    LocationName.dada_purch: LocationData(base_location_id + 1010, RegionName.dada),
-    LocationName.grawp_purch: LocationData(base_location_id + 1011, RegionName.ground),
-    LocationName.slug_vial_purch: LocationData(base_location_id + 1012, RegionName.stair),
-    LocationName.www_box_purch: LocationData(base_location_id + 1013, RegionName.wc),
-    LocationName.specs_purch: LocationData(base_location_id + 1014, RegionName.hogstat),
-    LocationName.herm_bag_purch: LocationData(base_location_id + 1015, RegionName.tsh),
+hub_progress_loc_table: Dict[str, LocationData] = {
+    LocationName.y5_hogwarts: LocationData(base_location_id + 1006, RegionName.hogwpath),
+    LocationName.dada_lesson: LocationData(base_location_id + 1007, RegionName.dada),
+    LocationName.thestral_lesson: LocationData(base_location_id + 1008, RegionName.thest),
+    LocationName.dueling_lesson: LocationData(base_location_id + 1009, RegionName.ror),
+    LocationName.diffindo_lesson: LocationData(base_location_id + 1010, RegionName.y5c),
+    LocationName.patroneous_lesson: LocationData(base_location_id + 1011, RegionName.ror),
+    LocationName.grawp_lesson: LocationData(base_location_id + 1012, RegionName.ground),
+    LocationName.focus_lesson: LocationData(base_location_id + 1013, RegionName.cl),
+    LocationName.owls_lesson: LocationData(base_location_id + 1014, RegionName.wc),
+    LocationName.specs_lesson: LocationData(base_location_id + 1015, RegionName.hogstat),
+    LocationName.y6_hogwarts: LocationData(base_location_id + 1016, RegionName.hogwpath),
+    LocationName.draught_lesson: LocationData(base_location_id + 1017, RegionName.pot),
+    LocationName.vial_lesson: LocationData(base_location_id + 1018, RegionName.dumble_office),
+    LocationName.agua_lesson: LocationData(base_location_id + 1019, RegionName.y6c),
+    LocationName.reducto_lesson: LocationData(base_location_id + 1020, RegionName.y5c),
+    LocationName.dumble_lesson: LocationData(base_location_id + 1021, RegionName.dumble_office),
+    LocationName.delum_lesson: LocationData(base_location_id + 1022, RegionName.tsh),
+    LocationName.bag_lesson: LocationData(base_location_id + 1023, RegionName.tsh),
+    LocationName.apparition_lesson: LocationData(base_location_id + 1024, RegionName.tsh),
+    LocationName.cafe_lesson: LocationData(base_location_id + 1025, RegionName.cafe),
 }
 
 all_location_table = {
@@ -882,7 +892,7 @@ all_location_table = {
     **hub_gb_loc_table,
     **red_brick_loc_table,
     **red_brick_purch_table,
-    **ability_loc_table,
+    **hub_progress_loc_table,
 }
 
 
@@ -900,5 +910,5 @@ def setup_locations(options: LHP2Options):
     temp_location_table.update(hub_gb_loc_table)
     temp_location_table.update(red_brick_loc_table)
     temp_location_table.update(red_brick_purch_table)
-    temp_location_table.update(ability_loc_table)
+    temp_location_table.update(hub_progress_loc_table)
     return temp_location_table
