@@ -779,3 +779,11 @@ fast_magic_unlock = "Fast Magic Unlocked"
 fast_dig_unlock = "Fast Dig Unlocked"
 
 purp_stud = "Purple Stud"
+
+# Horcrux Definitions
+tr_diary = "Horcrux: Tom Riddle's Diary"
+gaunt_ring = "Horcrux: Gaunt Family Ring"
+locket = "Horcrux: Slytherin's Locket"
+cup = "Horcrux: Hufflepuff's Cup"
+diadem = "Horcrux: Ravenclaw's Diadem"
+nagini = "Horcrux: Nagini"
