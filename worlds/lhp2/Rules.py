@@ -152,30 +152,30 @@ has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) 
 has_low_multi = Has(ItemName.score_x2_unlock) | Has(ItemName.score_x4_unlock) | has_high_multi
 
 
-def has_multi_for_shop(location_name: str) -> Rule:
-    return Or(True_(options=[OptionFilter(HardPurchases, True)]), HasMultiplier(location_name))
-
-
-@dataclasses.dataclass
-class HasMultiplier(Rule[LHP2World], game=LHP2World.game):
-    location_name: str
-
-    def _instantiate(self, world: LHP2World) -> Rule.Resolved:
-        # Look up the price
-        data = character_location_table[self.location_name]
-        price = data.price
-
-        # Get Multiplier Requirements
-        low = world.options.LowMultiplierPriceMinimum
-        high = world.options.HighMultiplierMinimum
-
-        # Compare and Return
-        if price < low:
-            return True_().resolve(world)
-        elif price < high:
-            return has_low_multi.resolve(world)
-        else:
-            return has_high_multi.resolve(world)
+# def has_multi_for_shop(location_name: str) -> Rule:
+#     return Or(True_(options=[OptionFilter(HardPurchases, True)]), HasMultiplier(location_name))
+#
+#
+# @dataclasses.dataclass
+# class HasMultiplier(Rule[LHP2World], game=LHP2World.game):
+#     location_name: str
+#
+#     def _instantiate(self, world: LHP2World) -> Rule.Resolved:
+#         # Look up the price
+#         data = character_location_table[self.location_name]
+#         price = data.price
+#
+#         # Get Multiplier Requirements
+#         low = world.options.LowMultiplierPriceMinimum
+#         high = world.options.HighMultiplierMinimum
+#
+#         # Compare and Return
+#         if price < low:
+#             return True_().resolve(world)
+#         elif price < high:
+#             return has_low_multi.resolve(world)
+#         else:
+#             return has_high_multi.resolve(world)
 
 
 def set_rules(world: "LHP2World"):

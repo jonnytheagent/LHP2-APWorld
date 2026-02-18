@@ -60,7 +60,7 @@ class LHP2World(World):
         return item
 
     def create_items(self):
-        itempool = []
+        itempool = []  # TODO: to break this out like Batman
         for name, data in item_data_table.items():
             itempool += [self.create_item(name) for _ in range(data.qty)]
         self.multiworld.itempool.extend(itempool)

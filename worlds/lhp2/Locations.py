@@ -450,8 +450,6 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.skeleton_token: LocationData(base_location_id + 425, RegionName.ll),
 }
 
-# 440 - 446
-
 
 # 450 - 473
 level_beaten_loc_table: Dict[str, LocationData] = {

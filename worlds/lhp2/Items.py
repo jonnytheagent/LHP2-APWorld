@@ -3,6 +3,7 @@ from typing import NamedTuple, Optional, Dict
 from BaseClasses import Item, ItemClassification
 from .Names import ItemName
 from .Options import LHP2Options
+from ..adventure import LocationData
 
 
 # from .Options import LHP2Options
@@ -474,6 +475,17 @@ character_token_item_table: Dict[str, LHP2ItemData] = {
     ItemName.skeleton_token: LHP2ItemData(base_item_id + 425, ItemClassification.progression),
 }
 
+
+# 440 - 445
+horcrux_item_table: Dict[str, LHP2ItemData] = {
+    ItemName.tr_diary: LHP2ItemData(base_item_id + 440, ItemClassification.progression),
+    ItemName.gaunt_ring: LHP2ItemData(base_item_id + 441, ItemClassification.progression),
+    ItemName.locket: LHP2ItemData(base_item_id + 442, ItemClassification.progression),
+    ItemName.cup: LHP2ItemData(base_item_id + 443, ItemClassification.progression),
+    ItemName.diadem: LHP2ItemData(base_item_id + 444, ItemClassification.progression),
+    ItemName.nagini: LHP2ItemData(base_item_id + 445, ItemClassification.progression),
+}
+
 # 450 - 473
 level_unlock_item_table: Dict[str, LHP2ItemData] = {
     ItemName.dt_unlock: LHP2ItemData(base_item_id + 450, ItemClassification.progression),
@@ -817,7 +829,7 @@ ability_item_table: Dict[str, LHP2ItemData] = {
 }
 
 purp_stud_item_table: Dict[str, LHP2ItemData] = {
-    ItemName.purp_stud: LHP2ItemData(base_item_id + 2000, qty=10),
+    ItemName.purp_stud: LHP2ItemData(base_item_id + 2000, qty=4),
 }
 
 item_data_table = {
@@ -834,4 +846,5 @@ item_data_table = {
     **red_brick_unlock_table,
     **ability_item_table,
     **purp_stud_item_table,
+    **horcrux_item_table,
 }
