@@ -3,13 +3,14 @@ from typing_extensions import override
 import dataclasses
 
 from rule_builder.options import OptionFilter
-from rule_builder.rules import Has, HasAll, Rule
+from rule_builder.rules import Rule, Has, HasAll, True_, False_, And, Or, CanReachRegion
 
 if TYPE_CHECKING:
     from . import LHP2World
 
 from .Names import LocationName, ItemName, RegionName
 from .Options import LHP2Options, EndGoal, HardPurchases
+from .Locations import character_location_table, red_brick_purch_table, bb_gb_loc_table
 
 # Helper Rules
 can_use_dark_magic = (Has(ItemName.alecto_play) | Has(ItemName.amycus_play) | Has(ItemName.dolohov_play) |
@@ -150,14 +151,31 @@ has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) 
                   HasAll(ItemName.score_x2_unlock, ItemName.score_x4_unlock))
 has_low_multi = Has(ItemName.score_x2_unlock) | Has(ItemName.score_x4_unlock) | has_high_multi
 
-#
-# @dataclasses.dataclass()
-# class HasGoal(rules.Rule[AstalonWorldBase], game="LHP2World"):
-#     @override
-#     def _instantiate(self, world: AstalonWorldBase) -> rules.Rule.Resolved:
-#         if world.options.goal.value != Goal.option_eye_hunt:
-#             return rules.True_().resolve(world)
-#         return Has(Eye.GOLD, world.options.additional_eyes_required.value).resolve(world)
+
+def has_multi_for_shop(location_name: str) -> Rule:
+    return Or(True_(options=[OptionFilter(HardPurchases, True)]), HasMultiplier(location_name))
+
+
+@dataclasses.dataclass
+class HasMultiplier(Rule[LHP2World], game=LHP2World.game):
+    location_name: str
+
+    def _instantiate(self, world: LHP2World) -> Rule.Resolved:
+        # Look up the price
+        data = character_location_table[self.location_name]
+        price = data.price
+
+        # Get Multiplier Requirements
+        low = world.options.LowMultiplierPriceMinimum
+        high = world.options.HighMultiplierMinimum
+
+        # Compare and Return
+        if price < low:
+            return True_().resolve(world)
+        elif price < high:
+            return has_low_multi.resolve(world)
+        else:
+            return has_high_multi.resolve(world)
 
 
 def set_rules(world: "LHP2World"):
