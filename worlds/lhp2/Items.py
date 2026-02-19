@@ -829,7 +829,7 @@ ability_item_table: Dict[str, LHP2ItemData] = {
 }
 
 purp_stud_item_table: Dict[str, LHP2ItemData] = {
-    ItemName.purp_stud: LHP2ItemData(base_item_id + 2000, qty=4),
+    ItemName.purp_stud: LHP2ItemData(base_item_id + 2000, qty=6),
 }
 
 item_data_table = {
