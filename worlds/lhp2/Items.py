@@ -815,17 +815,17 @@ spell_item_table: Dict[str, LHP2ItemData] = {
 }
 
 ability_item_table: Dict[str, LHP2ItemData] = {
-    # ItemName.draught_unlock: LHP2ItemData(base_item_id + 1006),
-    # ItemName.thest_unlock: LHP2ItemData(base_item_id + 1007,
+    # ItemName.draught_unlock: LHP2ItemData(base_item_id + 1017),
+    # ItemName.thest_unlock: LHP2ItemData(base_item_id + 1018,
     #                                     ItemClassification.progression_deprioritized_skip_balancing),
-    # ItemName.dueling_unlock: LHP2ItemData(base_item_id + 1008),
-    ItemName.apparition_unlock: LHP2ItemData(base_item_id + 1009, ItemClassification.progression),
-    # ItemName.dada_unlock: LHP2ItemData(base_item_id + 1010),
-    # ItemName.grawp_unlock: LHP2ItemData(base_item_id + 1011),
-    # ItemName.slug_vial_unlock: LHP2ItemData(base_item_id + 1012),
-    ItemName.www_box_unlock: LHP2ItemData(base_item_id + 1013, ItemClassification.progression),
-    ItemName.specs_unlock: LHP2ItemData(base_item_id + 1014, ItemClassification.progression),
-    ItemName.herm_bag_unlock: LHP2ItemData(base_item_id + 1015, ItemClassification.progression),
+    # ItemName.dueling_unlock: LHP2ItemData(base_item_id + 1019),
+    ItemName.apparition_unlock: LHP2ItemData(base_item_id + 1020, ItemClassification.progression),
+    # ItemName.dada_unlock: LHP2ItemData(base_item_id + 1021),
+    # ItemName.grawp_unlock: LHP2ItemData(base_item_id + 1022),
+    # ItemName.slug_vial_unlock: LHP2ItemData(base_item_id + 1023),
+    ItemName.www_box_unlock: LHP2ItemData(base_item_id + 1024, ItemClassification.progression),
+    ItemName.specs_unlock: LHP2ItemData(base_item_id + 1025, ItemClassification.progression),
+    ItemName.herm_bag_unlock: LHP2ItemData(base_item_id + 1026, ItemClassification.progression),
 }
 
 purp_stud_item_table: Dict[str, LHP2ItemData] = {
