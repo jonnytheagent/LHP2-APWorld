@@ -5,7 +5,6 @@ import dataclasses
 from Options import Option
 from rule_builder.options import OptionFilter, Operator
 from rule_builder.rules import Rule, Has, HasAll, True_, False_, And, Or, CanReachRegion, CanReachLocation
-from .Names.LocationName import lord_voldemort_purch
 
 if TYPE_CHECKING:
     from . import LHP2World
@@ -154,7 +153,7 @@ has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) 
 has_low_multi = Has(ItemName.score_x2_unlock) | Has(ItemName.score_x4_unlock) | has_high_multi
 
 
-def from_option(option: Option, value: Any, operator: str = "eq") -> Rule:
+def from_option(option: type[Option], value: Any, operator: Operator = "eq") -> Rule:
     return True_(options=[OptionFilter(option, value, operator)])
 
 
@@ -166,6 +165,7 @@ def has_multi_for_shop(location_name: str) -> Rule:
 class HasMultiplier(Rule, game="Lego Harry Potter 5-7"):
     location_name: str
 
+    @override
     def _instantiate(self, world: "LHP2World") -> Rule.Resolved:
         # Look up the price
         data = character_location_table[self.location_name]
@@ -202,6 +202,9 @@ def set_rules(world: "LHP2World"):
     set_ff_logic(world)
     set_thath_logic(world)
     # Y7
+
+    # Shop Logic
+    set_shop_rules(world)
 
 
 def set_entrance_rules(world):
@@ -370,7 +373,7 @@ def set_thath_logic(world):
 
 
 def set_shop_rules(world):
-    world.set_rule(world.get_location(LocationName.hagrid_purch), has_multi_for_shop(LocationName.hagrid_purch))
+    world.set_rule(world.get_location(LocationName.hagrid_purch), has_low_multi)
     world.set_rule(world.get_location(LocationName.fang_purch), has_multi_for_shop(LocationName.fang_purch))
     world.set_rule(world.get_location(LocationName.hagrid_wed_purch), has_multi_for_shop(LocationName.hagrid_wed_purch))
     world.set_rule(world.get_location(LocationName.prof_flit_purch), has_multi_for_shop(LocationName.prof_flit_purch))
@@ -444,7 +447,6 @@ def set_shop_rules(world):
                    has_multi_for_shop(LocationName.james_ghost_purch))
     world.set_rule(world.get_location(LocationName.madeye_purch), has_multi_for_shop(LocationName.madeye_purch))
     world.set_rule(world.get_location(LocationName.hannah_purch), has_multi_for_shop(LocationName.hannah_purch))
-    world.set_rule(world.get_location(LocationName.custom_f_purch), has_multi_for_shop(LocationName.custom_f_purch))
     world.set_rule(world.get_location(LocationName.kingsley_purch), has_multi_for_shop(LocationName.kingsley_purch))
     world.set_rule(world.get_location(LocationName.aberforth_purch), has_multi_for_shop(LocationName.aberforth_purch))
     world.set_rule(world.get_location(LocationName.runcorn_purch), has_multi_for_shop(LocationName.runcorn_purch))
