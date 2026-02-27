@@ -159,6 +159,7 @@ def from_option(option: type[Option], value: Any, operator: Operator = "eq") -> 
 
 def has_multi_for_shop(location_name: str) -> Rule:
     return Or(from_option(HardPurchases, "true"), HasMultiplier(location_name))
+# TODO: Hard purchases is not working
 
 
 @dataclasses.dataclass
@@ -373,7 +374,7 @@ def set_thath_logic(world):
 
 
 def set_shop_rules(world):
-    world.set_rule(world.get_location(LocationName.hagrid_purch), has_low_multi)
+    world.set_rule(world.get_location(LocationName.hagrid_purch), has_multi_for_shop(LocationName.hagrid_purch))
     world.set_rule(world.get_location(LocationName.fang_purch), has_multi_for_shop(LocationName.fang_purch))
     world.set_rule(world.get_location(LocationName.hagrid_wed_purch), has_multi_for_shop(LocationName.hagrid_wed_purch))
     world.set_rule(world.get_location(LocationName.prof_flit_purch), has_multi_for_shop(LocationName.prof_flit_purch))
