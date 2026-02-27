@@ -146,6 +146,13 @@ can_get_hagrid_wed = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock) & cha
 can_get_prof_dumble = can_use_dark_magic
 can_get_tr_orphan = can_use_dark_magic
 
+# The Seven Harry's Logic
+can_access_tsh_free = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock,
+                             ItemName.herm_bag_unlock, ItemName.delum_unlock)
+can_get_tsh_gc = Has(ItemName.reducto_unlock)
+can_get_mad_eye = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock) & can_use_dark_magic
+can_get_ron_wed = HasAll(ItemName.apparition_unlock, ItemName.specs_unlock)
+
 # Shop Logic
 need_stud_multi = OptionFilter(HardPurchases, True)
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
@@ -203,6 +210,7 @@ def set_rules(world: "LHP2World"):
     set_ff_logic(world)
     set_thath_logic(world)
     # Y7
+    set_tsh_logic(world)
 
     # Shop Logic
     set_shop_rules(world)
@@ -241,6 +249,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.lh + " -> " + RegionName.lhf), can_access_lh_free)
     world.set_rule(world.get_entrance(RegionName.ff + " -> " + RegionName.fff), can_access_ff_free)
     world.set_rule(world.get_entrance(RegionName.thath + " -> " + RegionName.thathf), can_access_thath_free)
+    world.set_rule(world.get_entrance(RegionName.tsh + " -> " + RegionName.tshf), can_access_tsh_free)
 
 
 def set_win_con(world):
@@ -371,6 +380,12 @@ def set_thath_logic(world):
     world.set_rule(world.get_location(LocationName.hagrid_wed_token), can_get_hagrid_wed)
     world.set_rule(world.get_location(LocationName.prof_dumble_token), can_get_prof_dumble)
     world.set_rule(world.get_location(LocationName.tr_orphanage_token), can_get_tr_orphan)
+
+
+def set_tsh_logic(world):
+    world.set_rule(world.get_location(LocationName.tsh_gc), can_get_tsh_gc)
+    world.set_rule(world.get_location(LocationName.madeye_token), can_get_mad_eye)
+    world.set_rule(world.get_location(LocationName.ron_wedding_token), can_get_ron_wed)
 
 
 def set_shop_rules(world):

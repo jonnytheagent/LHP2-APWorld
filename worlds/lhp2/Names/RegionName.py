@@ -31,6 +31,7 @@ ansmcf = "A Not So Merry Christmas Freeplay"
 lhf = "Love Hurts Freeplay"
 fff = "Felix Felicis Freeplay"
 thathf = "The Horcrux and the Hand Freeplay"
+tshf = "The Seven Harrys Freeplay"
 
 # Hub Regions
 diag = "Diagon Alley"
