@@ -33,6 +33,7 @@ fff = "Felix Felicis Freeplay"
 thathf = "The Horcrux and the Hand Freeplay"
 tshf = "The Seven Harrys Freeplay"
 mimf = "Magic is Might Freeplay"
+igdf = "In Grave Danger Freeplay"
 
 # Hub Regions
 diag = "Diagon Alley"

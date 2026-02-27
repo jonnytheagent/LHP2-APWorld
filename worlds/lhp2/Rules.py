@@ -33,6 +33,10 @@ char_is_strong = (Has(ItemName.dudley_play) | Has(ItemName.dudley_grey_play) | H
                   Has(ItemName.hagrid_wed_play) | Has(ItemName.remus_lupin_play) | Has(ItemName.sirius_black_play) |
                   Has(ItemName.sirius_azkaban_play) | Has(ItemName.super_strength_unlock))
 
+has_all_horcruxes = HasAll(ItemName.tr_diary, ItemName.gaunt_ring, ItemName.locket, ItemName.cup,
+                           ItemName.diadem, ItemName.nagini)
+defeat_voldemort = Has("Voldemort Defeated")
+
 # Dark Times Logic
 can_get_dt_sc = Has(ItemName.diffindo_unlock)
 can_get_dt_hc = Has(ItemName.www_box_unlock)
@@ -162,6 +166,18 @@ can_get_mim_hc = can_use_dark_magic
 can_get_mim_sip = can_use_dark_magic
 can_get_ron_reg = HasAll(ItemName.reducto_unlock, ItemName.diffindo_unlock)
 
+# In Grave Danger
+can_access_igd_free = HasAll(ItemName.diffindo_unlock, ItemName.reducto_unlock, ItemName.herm_bag_unlock)
+can_beat_igd = Has(ItemName.agua_unlock)
+can_get_igd_gc = HasAll(ItemName.www_box_unlock, ItemName.specs_unlock)
+can_get_igd_sc = can_use_dark_magic
+can_get_igd_rc = HasAll(ItemName.www_box_unlock, ItemName.delum_unlock, ItemName.herm_bag_unlock)
+can_get_igd_sip = can_use_dark_magic
+can_get_bathilda_snake = can_use_dark_magic
+can_get_harry_god_hollow = Has(ItemName.agua_unlock) & can_use_dark_magic
+can_get_lily = Has(ItemName.www_box_unlock)
+
+
 # Shop Logic
 need_stud_multi = OptionFilter(HardPurchases, True)
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
@@ -203,6 +219,7 @@ class HasMultiplier(Rule, game="Lego Harry Potter 5-7"):
 
 def set_rules(world: "LHP2World"):
     set_entrance_rules(world)
+    set_event_logic(world)
     set_win_con(world)
     # Y5
     set_dt_logic(world)
@@ -221,6 +238,7 @@ def set_rules(world: "LHP2World"):
     # Y7
     set_tsh_logic(world)
     set_mim_logic(world)
+    set_igd_logic(world)
 
     # Shop Logic
     set_shop_rules(world)
@@ -261,13 +279,18 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.thath + " -> " + RegionName.thathf), can_access_thath_free)
     world.set_rule(world.get_entrance(RegionName.tsh + " -> " + RegionName.tshf), can_access_tsh_free)
     world.set_rule(world.get_entrance(RegionName.mim + " -> " + RegionName.mimf), can_access_mim_free)
+    world.set_rule(world.get_entrance(RegionName.igd + " -> " + RegionName.igdf), can_access_igd_free)
 
 
 def set_win_con(world):
     if world.options.EndGoal == EndGoal.option_defeat_voldemort:
-        world.set_completion_rule(Has("Voldemort Defeated"))
+        world.set_completion_rule(defeat_voldemort)
     # if options.EndGoal == EndGoal.option_the_collector:
     #     world.completion_condition[player] =
+
+
+def set_event_logic(world):
+    world.set_rule(world.get_location("Defeat Voldemort"), has_all_horcruxes)
 
 
 def set_dt_logic(world):
@@ -404,6 +427,18 @@ def set_mim_logic(world):
     world.set_rule(world.get_location(LocationName.mim_hc), can_get_mim_hc)
     world.set_rule(world.get_location(LocationName.mim_sip), can_get_mim_sip)
     world.set_rule(world.get_location(LocationName.ron_reg_cattermole_token), can_get_ron_reg)
+
+
+def set_igd_logic(world):
+    world.set_rule(world.get_location(LocationName.igd_beat), can_beat_igd)
+    world.set_rule(world.get_location(LocationName.igd_tw), can_beat_igd)
+    world.set_rule(world.get_location(LocationName.igd_gc), can_get_igd_gc)
+    world.set_rule(world.get_location(LocationName.igd_sc), can_get_igd_sc)
+    world.set_rule(world.get_location(LocationName.igd_rc), can_get_igd_rc)
+    world.set_rule(world.get_location(LocationName.igd_sip), can_get_igd_sip)
+    world.set_rule(world.get_location(LocationName.bathilda_snake_token), can_get_bathilda_snake)
+    world.set_rule(world.get_location(LocationName.harry_godric_token), can_get_harry_god_hollow)
+    world.set_rule(world.get_location(LocationName.lily_token), can_get_lily)
 
 
 def set_shop_rules(world):
