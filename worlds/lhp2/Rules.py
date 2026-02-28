@@ -186,8 +186,17 @@ can_get_sal_sip = Has(ItemName.herm_bag_unlock) & can_use_dark_magic
 can_get_herm_gray_coat = HasAll(ItemName.herm_bag_unlock, ItemName.specs_unlock)
 
 
+# Lovegood's Lunacy Logic
+can_access_ll_free = HasAll(ItemName.agua_unlock, ItemName.herm_bag_unlock)
+can_access_lunas_room = Or(Has(ItemName.super_strength_unlock), char_is_strong,
+                           HasAll(ItemName.specs_unlock, ItemName.diffindo_unlock, ItemName.reducto_unlock))
+can_beat_ll = can_access_lunas_room & Has(ItemName.reducto_unlock)
+can_get_ll_rc = can_access_lunas_room & Has(ItemName.delum_unlock)
+can_get_ll_hc = can_use_spanner
+can_get_skeleton = can_use_dark_magic
+can_get_xeno_luna = HasAll(ItemName.www_box_unlock, ItemName.specs_unlock) & can_use_dark_magic
+
 # Shop Logic
-need_stud_multi = OptionFilter(HardPurchases, True)
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
                   HasAll(ItemName.score_x2_unlock, ItemName.score_x4_unlock))
 has_low_multi = Has(ItemName.score_x2_unlock) | Has(ItemName.score_x4_unlock) | has_high_multi
@@ -247,6 +256,7 @@ def set_rules(world: "LHP2World"):
     set_mim_logic(world)
     set_igd_logic(world)
     set_sal_logic(world)
+    set_ll_logic(world)
 
     # Shop Logic
     set_shop_rules(world)
@@ -288,6 +298,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.tsh + " -> " + RegionName.tshf), can_access_tsh_free)
     world.set_rule(world.get_entrance(RegionName.mim + " -> " + RegionName.mimf), can_access_mim_free)
     world.set_rule(world.get_entrance(RegionName.igd + " -> " + RegionName.igdf), can_access_igd_free)
+    world.set_rule(world.get_entrance(RegionName.ll + " -> " + RegionName.llf), can_access_ll_free)
 
 
 def set_event_logic(world):
@@ -457,6 +468,15 @@ def set_sal_logic(world):
     world.set_rule(world.get_location(LocationName.sal_rc), can_get_sal_rc)
     world.set_rule(world.get_location(LocationName.sal_sip), can_get_sal_sip)
     world.set_rule(world.get_location(LocationName.herm_grey_coat_token), can_get_herm_gray_coat)
+
+
+def set_ll_logic(world):
+    world.set_rule(world.get_location(LocationName.ll_beat), can_beat_ll)
+    world.set_rule(world.get_location(LocationName.ll_tw), can_beat_ll)
+    world.set_rule(world.get_location(LocationName.ll_rc), can_get_ll_rc)
+    world.set_rule(world.get_location(LocationName.ll_hc), can_get_ll_hc)
+    world.set_rule(world.get_location(LocationName.skeleton_token), can_get_skeleton)
+    world.set_rule(world.get_location(LocationName.xeno_luna_token), can_get_xeno_luna)
 
 
 def set_shop_rules(world):
