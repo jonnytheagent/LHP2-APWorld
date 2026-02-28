@@ -882,6 +882,31 @@ hub_progress_loc_table: Dict[str, LocationData] = {
     LocationName.cafe_lesson: LocationData(base_location_id + 1027, RegionName.cafe),
 }
 
+event_loc_table: Dict[str, LocationData] = {
+    LocationName.y5_hogwarts_event: LocationData(0, RegionName.hogwpath),
+    LocationName.dada_lesson_event: LocationData(0, RegionName.dada),
+    LocationName.thestral_lesson_event: LocationData(0, RegionName.thest),
+    LocationName.dueling_lesson_event: LocationData(0, RegionName.ror),
+    LocationName.diffindo_lesson_event: LocationData(0, RegionName.y5c),
+    LocationName.patroneous_lesson_event: LocationData(0, RegionName.ror),
+    LocationName.grawp_lesson_event: LocationData(0, RegionName.ground),
+    LocationName.focus_lesson_event: LocationData(0, RegionName.cl),
+    LocationName.owls_lesson_event: LocationData(0, RegionName.wc),
+    LocationName.y5_story_complete_event: LocationData(0, RegionName.wc),
+    LocationName.specs_lesson_event: LocationData(0, RegionName.hogstat),
+    LocationName.y6_hogwarts_event: LocationData(0, RegionName.hogwpath),
+    LocationName.draught_lesson_event: LocationData(0, RegionName.pot),
+    LocationName.vial_lesson_event: LocationData(0, RegionName.dumble_office),
+    LocationName.agua_lesson_event: LocationData(0, RegionName.y6c),
+    LocationName.reducto_lesson_event: LocationData(0, RegionName.y5c),
+    LocationName.dumble_lesson_event: LocationData(0, RegionName.dumble_office),
+    LocationName.y6_story_complete_event: LocationData(0, RegionName.dumble_office),
+    LocationName.delum_lesson_event: LocationData(0, RegionName.tshf),
+    LocationName.bag_lesson_event: LocationData(0, RegionName.tshf),
+    LocationName.apparition_lesson_event: LocationData(0, RegionName.tshf),
+    LocationName.cafe_lesson_event: LocationData(0, RegionName.cafe),
+}
+
 all_location_table = {
     **character_location_table,
     **character_token_location_table,

@@ -1,5 +1,5 @@
 from BaseClasses import MultiWorld, Region, Entrance, Location, ItemClassification
-from .Locations import LHP2Location
+from .Locations import LHP2Location, event_loc_table
 from .Items import LHP2Item
 from .Names import RegionName
 
@@ -171,6 +171,7 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.igd, RegionName.igdf)
 
     tfitp_region = world.get_region(RegionName.tfitp, player)
+    create_events(world, player)
     create_event("Defeat Voldemort", "Voldemort Defeated", tfitp_region, player)
 
 
@@ -192,18 +193,14 @@ def create_regions_and_locations(name: str, player: int, world: MultiWorld, seed
     return region
 
 
-# def create_events(world: MultiWorld, player: int) -> int:
-#     count = 0
-#
-#     for (name, data) in level_beaten_event_location_table.items():
-#         item_name = "Level Beaten Token"
-#         event: Location = create_event(name, item_name, world.get_region(data.region, player), player)
-#         event.show_in_spoiler = True
-#         count += 1
-#
-#     return count
-#
-#
+def create_events(world: MultiWorld, player: int):
+
+    for (name, data) in event_loc_table.items():
+        item_name = name + " Cleared"
+        event: Location = create_event(name, item_name, world.get_region(data.region, player), player)
+        event.show_in_spoiler = True
+
+
 def create_event(name: str, item_name: str, region: Region, player: int) -> Location:
     event = LHP2Location(player, name, None, region)
     region.locations.append(event)
