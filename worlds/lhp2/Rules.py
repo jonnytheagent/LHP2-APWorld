@@ -196,6 +196,14 @@ can_get_ll_hc = can_use_spanner
 can_get_skeleton = can_use_dark_magic
 can_get_xeno_luna = HasAll(ItemName.www_box_unlock, ItemName.specs_unlock) & can_use_dark_magic
 
+# Dobby! Logic
+can_access_dob_free = Has(ItemName.specs_unlock)
+can_get_dob_gc = Has(ItemName.diffindo_unlock)
+can_get_dob_rc = can_use_dark_magic
+can_get_dob_sip = Has(ItemName.reducto_unlock)
+can_get_dobby = can_use_dark_magic
+can_get_wormtail = can_use_dark_magic
+
 # Shop Logic
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
                   HasAll(ItemName.score_x2_unlock, ItemName.score_x4_unlock))
@@ -257,6 +265,8 @@ def set_rules(world: "LHP2World"):
     set_igd_logic(world)
     set_sal_logic(world)
     set_ll_logic(world)
+    set_dob_logic(world)
+    #Y8
 
     # Shop Logic
     set_shop_rules(world)
@@ -299,6 +309,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.mim + " -> " + RegionName.mimf), can_access_mim_free)
     world.set_rule(world.get_entrance(RegionName.igd + " -> " + RegionName.igdf), can_access_igd_free)
     world.set_rule(world.get_entrance(RegionName.ll + " -> " + RegionName.llf), can_access_ll_free)
+    world.set_rule(world.get_entrance(RegionName.dob + " -> " + RegionName.dobf), can_access_dob_free)
 
 
 def set_event_logic(world):
@@ -477,6 +488,14 @@ def set_ll_logic(world):
     world.set_rule(world.get_location(LocationName.ll_hc), can_get_ll_hc)
     world.set_rule(world.get_location(LocationName.skeleton_token), can_get_skeleton)
     world.set_rule(world.get_location(LocationName.xeno_luna_token), can_get_xeno_luna)
+
+
+def set_dob_logic(world):
+    world.set_rule(world.get_location(LocationName.dob_gc), can_get_dob_gc)
+    world.set_rule(world.get_location(LocationName.dob_rc), can_get_dob_rc)
+    world.set_rule(world.get_location(LocationName.dob_sip), can_get_dob_sip)
+    world.set_rule(world.get_location(LocationName.dobby_token), can_get_dobby)
+    world.set_rule(world.get_location(LocationName.wormtail_token), can_get_wormtail)
 
 
 def set_shop_rules(world):

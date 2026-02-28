@@ -35,6 +35,7 @@ tshf = "The Seven Harrys Freeplay"
 mimf = "Magic is Might Freeplay"
 igdf = "In Grave Danger Freeplay"
 llf = "Lovegood's Lunacy Freeplay"
+dobf = "DOBBY! Freeplay"
 
 # Hub Regions
 diag = "Diagon Alley"

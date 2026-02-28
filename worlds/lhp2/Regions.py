@@ -92,6 +92,7 @@ freeplay_regions = [
     RegionName.mimf,
     RegionName.igdf,
     RegionName.llf,
+    RegionName.dobf,
 ]
 
 
@@ -171,6 +172,7 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.mim, RegionName.mimf)
     connect_regions(world, player, RegionName.igd, RegionName.igdf)
     connect_regions(world, player, RegionName.ll, RegionName.llf)
+    connect_regions(world, player, RegionName.dob, RegionName.dobf)
 
     tfitp_region = world.get_region(RegionName.tfitp, player)
     create_events(world, player)
