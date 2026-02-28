@@ -38,6 +38,7 @@ llf = "Lovegood's Lunacy Freeplay"
 dobf = "DOBBY! Freeplay"
 ttdf = "The Thief's Downfall Freeplay"
 btsf = "Back to School Freeplay"
+bbf = "Burning Bridges Freeplay"
 
 # Hub Regions
 diag = "Diagon Alley"
