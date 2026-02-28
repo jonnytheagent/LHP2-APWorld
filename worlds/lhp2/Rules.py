@@ -217,6 +217,16 @@ can_get_bogrod = can_use_dark_magic
 can_get_griphook = can_use_dark_magic & Has(ItemName.www_box_unlock)
 can_get_herm_gringotts = can_use_dark_magic
 
+# Back To School Logic
+can_access_bts_free = HasAll(ItemName.agua_unlock, ItemName.delum_unlock,
+                             ItemName.www_box_unlock, ItemName.diffindo_unlock)
+can_get_bts_sc = Has(ItemName.reducto_unlock)
+can_get_bts_hc = HasAll(ItemName.agua_unlock, ItemName.delum_unlock) & can_use_key
+can_get_bts_sip = HasAll(ItemName.agua_unlock, ItemName.delum_unlock)
+can_get_aberforth = HasAll(ItemName.agua_unlock, ItemName.delum_unlock) & char_is_strong
+can_get_alecto = can_use_dark_magic
+can_get_amycus = can_use_dark_magic
+
 # Shop Logic
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
                   HasAll(ItemName.score_x2_unlock, ItemName.score_x4_unlock))
@@ -279,8 +289,9 @@ def set_rules(world: "LHP2World"):
     set_sal_logic(world)
     set_ll_logic(world)
     set_dob_logic(world)
-    #Y8
+    # Y8
     set_ttd_logic(world)
+    set_bts_logic(world)
     # Shop Logic
     set_shop_rules(world)
 
@@ -306,7 +317,8 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ll), Has(ItemName.ll_unlock))
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.dob), Has(ItemName.dob_unlock))
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.ttd), Has(ItemName.ttd_unlock))
-    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.bts), Has(ItemName.bts_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.bts),
+                   HasAll(ItemName.bts_unlock, ItemName.herm_bag_unlock))
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.bb), Has(ItemName.bb_unlock))
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.fiend), Has(ItemName.fiend_unlock))
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.st), Has(ItemName.st_unlock))
@@ -324,6 +336,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.ll + " -> " + RegionName.llf), can_access_ll_free)
     world.set_rule(world.get_entrance(RegionName.dob + " -> " + RegionName.dobf), can_access_dob_free)
     world.set_rule(world.get_entrance(RegionName.ttd + " -> " + RegionName.ttdf), can_access_ttd_free)
+    world.set_rule(world.get_entrance(RegionName.bts + " -> " + RegionName.btsf), can_access_bts_free)
 
 
 def set_event_logic(world):
@@ -523,6 +536,15 @@ def set_ttd_logic(world):
     world.set_rule(world.get_location(LocationName.bogrod_token), can_get_bogrod)
     world.set_rule(world.get_location(LocationName.griphook_token), can_get_griphook)
     world.set_rule(world.get_location(LocationName.herm_gringotts_token), can_get_herm_gringotts)
+
+
+def set_bts_logic(world):
+    world.set_rule(world.get_location(LocationName.bts_sc), can_get_bts_sc)
+    world.set_rule(world.get_location(LocationName.bts_hc), can_get_bts_hc)
+    world.set_rule(world.get_location(LocationName.bts_sip), can_get_bts_sip)
+    world.set_rule(world.get_location(LocationName.aberforth_token), can_get_aberforth)
+    world.set_rule(world.get_location(LocationName.alecto_token), can_get_alecto)
+    world.set_rule(world.get_location(LocationName.amycus_token), can_get_amycus)
 
 
 def set_shop_rules(world):
