@@ -188,7 +188,7 @@ can_get_herm_gray_coat = HasAll(ItemName.herm_bag_unlock, ItemName.specs_unlock)
 
 # Lovegood's Lunacy Logic
 can_access_ll_free = HasAll(ItemName.agua_unlock, ItemName.herm_bag_unlock)
-can_access_lunas_room = Or(Has(ItemName.super_strength_unlock), char_is_strong,
+can_access_lunas_room = Or(char_is_strong,
                            HasAll(ItemName.specs_unlock, ItemName.diffindo_unlock, ItemName.reducto_unlock))
 can_beat_ll = can_access_lunas_room & Has(ItemName.reducto_unlock)
 can_get_ll_rc = can_access_lunas_room & Has(ItemName.delum_unlock)
@@ -203,6 +203,19 @@ can_get_dob_rc = can_use_dark_magic
 can_get_dob_sip = Has(ItemName.reducto_unlock)
 can_get_dobby = can_use_dark_magic
 can_get_wormtail = can_use_dark_magic
+
+# The Thief's Downfall Logic
+can_access_ttd_free = Has(ItemName.herm_bag_unlock)
+can_beat_ttd = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock, ItemName.delum_unlock)
+can_get_ttd_gc = Has(ItemName.diffindo_unlock)
+can_get_ttd_sc = can_use_dark_magic
+can_get_ttd_rc = Has(ItemName.specs_unlock) & char_is_strong
+can_get_ttd_hc = (HasAll(ItemName.reducto_unlock, ItemName.agua_unlock, ItemName.delum_unlock, ItemName.specs_unlock)
+                  & char_is_strong)
+can_get_ttd_sip = can_use_dark_magic
+can_get_bogrod = can_use_dark_magic
+can_get_griphook = can_use_dark_magic & Has(ItemName.www_box_unlock)
+can_get_herm_gringotts = can_use_dark_magic
 
 # Shop Logic
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
@@ -267,7 +280,7 @@ def set_rules(world: "LHP2World"):
     set_ll_logic(world)
     set_dob_logic(world)
     #Y8
-
+    set_ttd_logic(world)
     # Shop Logic
     set_shop_rules(world)
 
@@ -310,6 +323,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.igd + " -> " + RegionName.igdf), can_access_igd_free)
     world.set_rule(world.get_entrance(RegionName.ll + " -> " + RegionName.llf), can_access_ll_free)
     world.set_rule(world.get_entrance(RegionName.dob + " -> " + RegionName.dobf), can_access_dob_free)
+    world.set_rule(world.get_entrance(RegionName.ttd + " -> " + RegionName.ttdf), can_access_ttd_free)
 
 
 def set_event_logic(world):
@@ -496,6 +510,19 @@ def set_dob_logic(world):
     world.set_rule(world.get_location(LocationName.dob_sip), can_get_dob_sip)
     world.set_rule(world.get_location(LocationName.dobby_token), can_get_dobby)
     world.set_rule(world.get_location(LocationName.wormtail_token), can_get_wormtail)
+
+
+def set_ttd_logic(world):
+    world.set_rule(world.get_location(LocationName.ttd_beat), can_beat_ttd)
+    world.set_rule(world.get_location(LocationName.ttd_tw), can_beat_ttd)
+    world.set_rule(world.get_location(LocationName.ttd_gc), can_get_ttd_gc)
+    world.set_rule(world.get_location(LocationName.ttd_sc), can_get_ttd_sc)
+    world.set_rule(world.get_location(LocationName.ttd_rc), can_get_ttd_rc)
+    world.set_rule(world.get_location(LocationName.ttd_hc), can_get_ttd_hc)
+    world.set_rule(world.get_location(LocationName.ttd_sip), can_get_ttd_sip)
+    world.set_rule(world.get_location(LocationName.bogrod_token), can_get_bogrod)
+    world.set_rule(world.get_location(LocationName.griphook_token), can_get_griphook)
+    world.set_rule(world.get_location(LocationName.herm_gringotts_token), can_get_herm_gringotts)
 
 
 def set_shop_rules(world):
