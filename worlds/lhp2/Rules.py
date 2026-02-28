@@ -166,7 +166,7 @@ can_get_mim_hc = can_use_dark_magic
 can_get_mim_sip = can_use_dark_magic
 can_get_ron_reg = HasAll(ItemName.reducto_unlock, ItemName.diffindo_unlock)
 
-# In Grave Danger
+# In Grave Danger Logic
 can_access_igd_free = HasAll(ItemName.diffindo_unlock, ItemName.reducto_unlock, ItemName.herm_bag_unlock)
 can_beat_igd = Has(ItemName.agua_unlock)
 can_get_igd_gc = HasAll(ItemName.www_box_unlock, ItemName.specs_unlock)
@@ -176,6 +176,14 @@ can_get_igd_sip = can_use_dark_magic
 can_get_bathilda_snake = can_use_dark_magic
 can_get_harry_god_hollow = Has(ItemName.agua_unlock) & can_use_dark_magic
 can_get_lily = Has(ItemName.www_box_unlock)
+
+# Sword and Locket Logic
+can_beat_sal = HasAll(ItemName.apparition_unlock, ItemName.diffindo_unlock)
+can_get_sal_gc = can_use_dark_magic
+can_get_sal_sc = Has(ItemName.herm_bag_unlock)
+can_get_sal_rc = Has(ItemName.www_box_unlock)
+can_get_sal_sip = Has(ItemName.herm_bag_unlock) & can_use_dark_magic
+can_get_herm_gray_coat = HasAll(ItemName.herm_bag_unlock, ItemName.specs_unlock)
 
 
 # Shop Logic
@@ -238,6 +246,7 @@ def set_rules(world: "LHP2World"):
     set_tsh_logic(world)
     set_mim_logic(world)
     set_igd_logic(world)
+    set_sal_logic(world)
 
     # Shop Logic
     set_shop_rules(world)
@@ -281,15 +290,15 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.igd + " -> " + RegionName.igdf), can_access_igd_free)
 
 
+def set_event_logic(world):
+    world.set_rule(world.get_location("Defeat Voldemort"), has_all_horcruxes)
+
+
 def set_win_con(world):
     if world.options.EndGoal == EndGoal.option_defeat_voldemort:
         world.set_completion_rule(defeat_voldemort)
     # if options.EndGoal == EndGoal.option_the_collector:
     #     world.completion_condition[player] =
-
-
-def set_event_logic(world):
-    world.set_rule(world.get_location("Defeat Voldemort"), has_all_horcruxes)
 
 
 def set_dt_logic(world):
@@ -438,6 +447,16 @@ def set_igd_logic(world):
     world.set_rule(world.get_location(LocationName.bathilda_snake_token), can_get_bathilda_snake)
     world.set_rule(world.get_location(LocationName.harry_godric_token), can_get_harry_god_hollow)
     world.set_rule(world.get_location(LocationName.lily_token), can_get_lily)
+
+
+def set_sal_logic(world):
+    world.set_rule(world.get_location(LocationName.sal_beat), can_beat_sal)
+    world.set_rule(world.get_location(LocationName.sal_tw), can_beat_sal)
+    world.set_rule(world.get_location(LocationName.sal_gc), can_get_sal_gc)
+    world.set_rule(world.get_location(LocationName.sal_sc), can_get_sal_sc)
+    world.set_rule(world.get_location(LocationName.sal_rc), can_get_sal_rc)
+    world.set_rule(world.get_location(LocationName.sal_sip), can_get_sal_sip)
+    world.set_rule(world.get_location(LocationName.herm_grey_coat_token), can_get_herm_gray_coat)
 
 
 def set_shop_rules(world):
