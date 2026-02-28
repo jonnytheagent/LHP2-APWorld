@@ -41,6 +41,7 @@ btsf = "Back to School Freeplay"
 bbf = "Burning Bridges Freeplay"
 fiendf = "Fiendfyre Frenzy Freeplay"
 stf = "Snape's Tears Freeplay"
+tfitpf = "The Flaw in the Plan Freeplay"
 
 # Hub Regions
 diag = "Diagon Alley"

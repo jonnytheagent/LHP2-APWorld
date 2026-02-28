@@ -256,7 +256,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.grey_lady_token: LocationData(base_location_id + 231, RegionName.bbf),
     LocationName.fat_lady_token: LocationData(base_location_id + 232, RegionName.house),
     LocationName.herm_ball_token: LocationData(base_location_id + 233, RegionName.gryf),
-    LocationName.bellatrix_token: LocationData(base_location_id + 234, RegionName.tfitp),
+    LocationName.bellatrix_token: LocationData(base_location_id + 234, RegionName.tfitpf),
     LocationName.emmeline_token: LocationData(base_location_id + 235, RegionName.agv),
     LocationName.narcissa_token: LocationData(base_location_id + 236, RegionName.knock),
     LocationName.mcgon_pyjamas_token: LocationData(base_location_id + 237, RegionName.gryf),
@@ -301,7 +301,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.madeye_token: LocationData(base_location_id + 276, RegionName.tsh),
     LocationName.hannah_token: LocationData(base_location_id + 277, RegionName.y5c),
     # LocationName.custom_f_token: LocationData(base_location_id + 278, RegionName.mm),
-    LocationName.kingsley_token: LocationData(base_location_id + 279, RegionName.tfitp),
+    LocationName.kingsley_token: LocationData(base_location_id + 279, RegionName.tfitpf),
     LocationName.aberforth_token: LocationData(base_location_id + 280, RegionName.bts),
     LocationName.runcorn_token: LocationData(base_location_id + 281, RegionName.wild),
     LocationName.alecto_token: LocationData(base_location_id + 282, RegionName.bts),
@@ -418,7 +418,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.yaxley_token: LocationData(base_location_id + 393, RegionName.wild),
     LocationName.zacharias_token: LocationData(base_location_id + 394, RegionName.low_stair),
     LocationName.waitress_treats_token: LocationData(base_location_id + 395, RegionName.kcs),
-    LocationName.lord_voldemort_token: LocationData(base_location_id + 396, RegionName.tfitp),
+    LocationName.lord_voldemort_token: LocationData(base_location_id + 396, RegionName.tfitpf),
     LocationName.ron_blue_pyjamas_token: LocationData(base_location_id + 397, RegionName.house),
     LocationName.neville_cardigan_token: LocationData(base_location_id + 398, RegionName.bbf),
     LocationName.neville_pyjamas_token: LocationData(base_location_id + 399, RegionName.div),
@@ -476,7 +476,7 @@ level_beaten_loc_table: Dict[str, LocationData] = {
     LocationName.bb_beat: LocationData(base_location_id + 470, RegionName.bbf),
     LocationName.fiend_beat: LocationData(base_location_id + 471, RegionName.fiendf),
     LocationName.st_beat: LocationData(base_location_id + 472, RegionName.stf),
-    LocationName.tfitp_beat: LocationData(base_location_id + 473, RegionName.tfitp),
+    LocationName.tfitp_beat: LocationData(base_location_id + 473, RegionName.tfitpf),
 }
 
 # 475 - 498
@@ -577,7 +577,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     LocationName.bb_gc: LocationData(base_location_id + 570, RegionName.bbf),
     LocationName.fiend_gc: LocationData(base_location_id + 571, RegionName.fiendf),
     LocationName.st_gc: LocationData(base_location_id + 572, RegionName.stf),
-    LocationName.tfitp_gc: LocationData(base_location_id + 573, RegionName.tfitp),
+    LocationName.tfitp_gc: LocationData(base_location_id + 573, RegionName.tfitpf),
     # Slyth Crests
     LocationName.dt_sc: LocationData(base_location_id + 574, RegionName.dt),
     LocationName.da_sc: LocationData(base_location_id + 575, RegionName.da),
@@ -602,7 +602,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     LocationName.bb_sc: LocationData(base_location_id + 594, RegionName.bb),
     LocationName.fiend_sc: LocationData(base_location_id + 595, RegionName.fiendf),
     LocationName.st_sc: LocationData(base_location_id + 596, RegionName.st),
-    LocationName.tfitp_sc: LocationData(base_location_id + 597, RegionName.tfitp),
+    LocationName.tfitp_sc: LocationData(base_location_id + 597, RegionName.tfitpf),
     # Raven Crests
     LocationName.dt_rc: LocationData(base_location_id + 598, RegionName.dt),
     LocationName.da_rc: LocationData(base_location_id + 599, RegionName.da),
@@ -627,7 +627,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     LocationName.bb_rc: LocationData(base_location_id + 618, RegionName.bbf),
     LocationName.fiend_rc: LocationData(base_location_id + 619, RegionName.fiend),
     LocationName.st_rc: LocationData(base_location_id + 620, RegionName.stf),
-    LocationName.tfitp_rc: LocationData(base_location_id + 621, RegionName.tfitp),
+    LocationName.tfitp_rc: LocationData(base_location_id + 621, RegionName.tfitpf),
     # Huffle Crests
     LocationName.dt_hc: LocationData(base_location_id + 622, RegionName.dt),
     LocationName.da_hc: LocationData(base_location_id + 623, RegionName.da),

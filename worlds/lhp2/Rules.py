@@ -266,6 +266,14 @@ can_get_death_eater = can_use_key
 can_get_fenrir = can_use_dark_magic
 can_get_prof_snape = Has(ItemName.diffindo_unlock) & can_use_dark_magic
 
+# The Flaw in the Plan Logic
+can_access_tfitp_free = HasAll(ItemName.reducto_unlock, ItemName.agua_unlock,
+                               ItemName.diffindo_unlock, ItemName.www_box_unlock)
+can_beat_tfitp = Has(ItemName.expecto_unlock)
+can_get_tfitp_sc = can_use_dark_magic
+can_get_tfitp_rc = Has(ItemName.specs_unlock) & char_is_strong
+can_get_tfitp_sip = can_use_key
+
 # Shop Logic
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
                   HasAll(ItemName.score_x2_unlock, ItemName.score_x4_unlock))
@@ -334,6 +342,7 @@ def set_rules(world: "LHP2World"):
     set_bb_logic(world)
     set_fiend_logic(world)
     set_st_logic(world)
+    set_tfitp_logic(world)
     # Shop Logic
     set_shop_rules(world)
 
@@ -381,6 +390,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.bb + " -> " + RegionName.bbf), can_access_bb_free)
     world.set_rule(world.get_entrance(RegionName.fiend + " -> " + RegionName.fiendf), can_access_fiend_free)
     world.set_rule(world.get_entrance(RegionName.st + " -> " + RegionName.stf), can_access_st_free)
+    world.set_rule(world.get_entrance(RegionName.tfitp + " -> " + RegionName.tfitpf), can_access_tfitp_free)
 
 
 def set_event_logic(world):
@@ -626,6 +636,14 @@ def set_st_logic(world):
     world.set_rule(world.get_location(LocationName.death_eater_token), can_get_death_eater)
     world.set_rule(world.get_location(LocationName.fenrir_token), can_get_fenrir)
     world.set_rule(world.get_location(LocationName.prof_snape_token), can_get_prof_snape)
+
+
+def set_tfitp_logic(world):
+    world.set_rule(world.get_location(LocationName.tfitp_beat), can_beat_tfitp)
+    world.set_rule(world.get_location(LocationName.tfitp_tw), can_beat_tfitp)
+    world.set_rule(world.get_location(LocationName.tfitp_sc), can_get_tfitp_sc)
+    world.set_rule(world.get_location(LocationName.tfitp_rc), can_get_tfitp_rc)
+    world.set_rule(world.get_location(LocationName.tfitp_sip), can_get_tfitp_sip)
 
 
 def set_shop_rules(world):
