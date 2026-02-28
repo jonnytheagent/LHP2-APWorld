@@ -97,6 +97,7 @@ freeplay_regions = [
     RegionName.btsf,
     RegionName.bbf,
     RegionName.fiendf,
+    RegionName.stf,
 ]
 
 
@@ -181,6 +182,7 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.bts, RegionName.btsf)
     connect_regions(world, player, RegionName.bb, RegionName.bbf)
     connect_regions(world, player, RegionName.fiend, RegionName.fiendf)
+    connect_regions(world, player, RegionName.st, RegionName.stf)
 
     tfitp_region = world.get_region(RegionName.tfitp, player)
     create_events(world, player)

@@ -265,7 +265,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.herm_gringotts_token: LocationData(base_location_id + 240, RegionName.ttdf),
     LocationName.prof_grubbly_token: LocationData(base_location_id + 241, RegionName.ground),
     LocationName.bellatrix_azka_token: LocationData(base_location_id + 242, RegionName.ground),
-    LocationName.death_eater_token: LocationData(base_location_id + 243, RegionName.st),
+    LocationName.death_eater_token: LocationData(base_location_id + 243, RegionName.stf),
     LocationName.dudley_grey_token: LocationData(base_location_id + 244, RegionName.dt),
     LocationName.prof_dumble_token: LocationData(base_location_id + 245, RegionName.thath),
     # LocationName.harry_token: LocationData(base_location_id + 246, RegionName.mm),
@@ -393,7 +393,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.arthur_suit_token: LocationData(base_location_id + 368, RegionName.dt),
     LocationName.harry_christmas_token: LocationData(base_location_id + 369, RegionName.jd),
     LocationName.ernie_token: LocationData(base_location_id + 370, RegionName.low_stair),
-    LocationName.prof_snape_token: LocationData(base_location_id + 371, RegionName.st),
+    LocationName.prof_snape_token: LocationData(base_location_id + 371, RegionName.stf),
     LocationName.neville_token: LocationData(base_location_id + 372, RegionName.agv),
     # LocationName.ron_token: LocationData(base_location_id + 373, RegionName.mm),
     LocationName.ron_quidditch_token: LocationData(base_location_id + 374, RegionName.qp),
@@ -475,7 +475,7 @@ level_beaten_loc_table: Dict[str, LocationData] = {
     LocationName.bts_beat: LocationData(base_location_id + 469, RegionName.btsf),
     LocationName.bb_beat: LocationData(base_location_id + 470, RegionName.bbf),
     LocationName.fiend_beat: LocationData(base_location_id + 471, RegionName.fiendf),
-    LocationName.st_beat: LocationData(base_location_id + 472, RegionName.st),
+    LocationName.st_beat: LocationData(base_location_id + 472, RegionName.stf),
     LocationName.tfitp_beat: LocationData(base_location_id + 473, RegionName.tfitp),
 }
 
@@ -503,7 +503,7 @@ leve_sip_loc_table: Dict[str, LocationData] = {
     LocationName.bts_sip: LocationData(base_location_id + 494, RegionName.bts),
     LocationName.bb_sip: LocationData(base_location_id + 495, RegionName.bbf),
     LocationName.fiend_sip: LocationData(base_location_id + 496, RegionName.fiend),
-    LocationName.st_sip: LocationData(base_location_id + 497, RegionName.st),
+    LocationName.st_sip: LocationData(base_location_id + 497, RegionName.stf),
     LocationName.tfitp_sip: LocationData(base_location_id + 498, RegionName.tfitp),
 }
 
@@ -576,7 +576,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     LocationName.bts_gc: LocationData(base_location_id + 569, RegionName.bts),
     LocationName.bb_gc: LocationData(base_location_id + 570, RegionName.bbf),
     LocationName.fiend_gc: LocationData(base_location_id + 571, RegionName.fiendf),
-    LocationName.st_gc: LocationData(base_location_id + 572, RegionName.st),
+    LocationName.st_gc: LocationData(base_location_id + 572, RegionName.stf),
     LocationName.tfitp_gc: LocationData(base_location_id + 573, RegionName.tfitp),
     # Slyth Crests
     LocationName.dt_sc: LocationData(base_location_id + 574, RegionName.dt),
@@ -626,7 +626,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     LocationName.bts_rc: LocationData(base_location_id + 617, RegionName.btsf),
     LocationName.bb_rc: LocationData(base_location_id + 618, RegionName.bbf),
     LocationName.fiend_rc: LocationData(base_location_id + 619, RegionName.fiend),
-    LocationName.st_rc: LocationData(base_location_id + 620, RegionName.st),
+    LocationName.st_rc: LocationData(base_location_id + 620, RegionName.stf),
     LocationName.tfitp_rc: LocationData(base_location_id + 621, RegionName.tfitp),
     # Huffle Crests
     LocationName.dt_hc: LocationData(base_location_id + 622, RegionName.dt),
@@ -651,7 +651,7 @@ house_crest_loc_table: Dict[str, LocationData] = {
     LocationName.bts_hc: LocationData(base_location_id + 641, RegionName.bts),
     LocationName.bb_hc: LocationData(base_location_id + 642, RegionName.bbf),
     LocationName.fiend_hc: LocationData(base_location_id + 643, RegionName.fiendf),
-    LocationName.st_hc: LocationData(base_location_id + 644, RegionName.st),
+    LocationName.st_hc: LocationData(base_location_id + 644, RegionName.stf),
     LocationName.tfitp_hc: LocationData(base_location_id + 645, RegionName.tfitp),
 }
 
@@ -682,7 +682,7 @@ true_wizard_loc_table: Dict[str, LocationData] = {
     LocationName.bts_tw: LocationData(base_location_id + 694, RegionName.btsf),
     LocationName.bb_tw: LocationData(base_location_id + 695, RegionName.bbf),
     LocationName.fiend_tw: LocationData(base_location_id + 696, RegionName.fiendf),
-    LocationName.st_tw: LocationData(base_location_id + 697, RegionName.st),
+    LocationName.st_tw: LocationData(base_location_id + 697, RegionName.stf),
     LocationName.tfitp_tw: LocationData(base_location_id + 698, RegionName.tfitp),
 }
 
