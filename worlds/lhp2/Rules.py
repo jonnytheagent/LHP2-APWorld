@@ -238,6 +238,19 @@ can_get_bb_sip = can_use_dark_magic
 can_get_neville_cardigan = HasAll(ItemName.diffindo_unlock, ItemName.herm_bag_unlock) & can_use_dark_magic
 can_get_seamus = HasAll(ItemName.delum_unlock, ItemName.www_box_unlock)
 
+# Fiendfyre Frenzy Logic
+can_access_fiend = HasAll(ItemName.www_box_unlock, ItemName.reducto_unlock,
+                          ItemName.herm_bag_unlock, ItemName.ff_unlock)
+can_access_fiend_free = HasAll(ItemName.specs_unlock, ItemName.delum_unlock)
+can_beat_fiend = HasAll(ItemName.agua_unlock, ItemName.diffindo_unlock)
+can_get_fiend_gc = char_is_strong
+can_get_fiend_sc = can_use_dark_magic
+can_get_fiend_rc = Has(ItemName.agua_unlock) & can_use_dark_magic
+can_get_fiend_hc = char_is_strong
+can_get_fiend_sip = Has(ItemName.specs_unlock)
+can_get_goyle = Has(ItemName.agua_unlock) & can_use_key
+can_get_harry_brown_jacket = HasAll(ItemName.agua_unlock, ItemName.diffindo_unlock) & can_use_spanner
+can_get_tom_riddle = HasAll(ItemName.agua_unlock, ItemName.diffindo_unlock)
 
 # Shop Logic
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
@@ -305,6 +318,7 @@ def set_rules(world: "LHP2World"):
     set_ttd_logic(world)
     set_bts_logic(world)
     set_bb_logic(world)
+    set_fiend_logic(world)
     # Shop Logic
     set_shop_rules(world)
 
@@ -334,7 +348,7 @@ def set_entrance_rules(world):
                    HasAll(ItemName.bts_unlock, ItemName.herm_bag_unlock))
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.bb),
                    HasAll(ItemName.bb_unlock, ItemName.agua_unlock))
-    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.fiend), Has(ItemName.fiend_unlock))
+    world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.fiend), can_access_fiend)
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.st), Has(ItemName.st_unlock))
     world.set_rule(world.get_entrance(RegionName.leaky + " -> " + RegionName.tfitp), Has(ItemName.tfitp_unlock))
     # Freeplay Entrance Rules
@@ -352,6 +366,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.ttd + " -> " + RegionName.ttdf), can_access_ttd_free)
     world.set_rule(world.get_entrance(RegionName.bts + " -> " + RegionName.btsf), can_access_bts_free)
     world.set_rule(world.get_entrance(RegionName.bb + " -> " + RegionName.bbf), can_access_bb_free)
+    world.set_rule(world.get_entrance(RegionName.fiend + " -> " + RegionName.fiendf), can_access_fiend_free)
 
 
 def set_event_logic(world):
@@ -572,6 +587,19 @@ def set_bb_logic(world):
     world.set_rule(world.get_location(LocationName.bb_sip), can_get_bb_sip)
     world.set_rule(world.get_location(LocationName.neville_cardigan_token), can_get_neville_cardigan)
     world.set_rule(world.get_location(LocationName.seamus_token), can_get_seamus)
+
+
+def set_fiend_logic(world):
+    world.set_rule(world.get_location(LocationName.fiend_beat), can_beat_fiend)
+    world.set_rule(world.get_location(LocationName.fiend_tw), can_beat_fiend)
+    world.set_rule(world.get_location(LocationName.fiend_gc), can_get_fiend_gc)
+    world.set_rule(world.get_location(LocationName.fiend_sc), can_get_fiend_sc)
+    world.set_rule(world.get_location(LocationName.fiend_rc), can_get_fiend_rc)
+    world.set_rule(world.get_location(LocationName.fiend_hc), can_get_fiend_hc)
+    world.set_rule(world.get_location(LocationName.fiend_sip), can_get_fiend_sip)
+    world.set_rule(world.get_location(LocationName.goyle_token), can_get_goyle)
+    world.set_rule(world.get_location(LocationName.harry_brown_jacket_token), can_get_harry_brown_jacket)
+    world.set_rule(world.get_location(LocationName.tom_riddle_token), can_get_tom_riddle)
 
 
 def set_shop_rules(world):
