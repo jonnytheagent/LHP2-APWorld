@@ -190,8 +190,7 @@ def from_option(option: type[Option], value: Any, operator: Operator = "eq") -> 
 
 
 def has_multi_for_shop(location_name: str) -> Rule:
-    return Or(from_option(HardPurchases, "true"), HasMultiplier(location_name))
-# TODO: Hard purchases is not working
+    return Or(from_option(HardPurchases, 1), HasMultiplier(location_name))
 
 
 @dataclasses.dataclass
