@@ -33,10 +33,6 @@ char_is_strong = (Has(ItemName.dudley_play) | Has(ItemName.dudley_grey_play) | H
                   Has(ItemName.hagrid_wed_play) | Has(ItemName.remus_lupin_play) | Has(ItemName.sirius_black_play) |
                   Has(ItemName.sirius_azkaban_play) | Has(ItemName.super_strength_unlock))
 
-has_all_horcruxes = HasAll(ItemName.tr_diary, ItemName.gaunt_ring, ItemName.locket, ItemName.cup,
-                           ItemName.diadem, ItemName.nagini)
-defeat_voldemort = Has("Voldemort Defeated")
-
 # Dark Times Logic
 can_get_dt_sc = Has(ItemName.diffindo_unlock)
 can_get_dt_hc = Has(ItemName.www_box_unlock)
@@ -273,6 +269,9 @@ can_beat_tfitp = Has(ItemName.expecto_unlock)
 can_get_tfitp_sc = can_use_dark_magic
 can_get_tfitp_rc = Has(ItemName.specs_unlock) & char_is_strong
 can_get_tfitp_sip = can_use_key
+has_all_horcruxes = HasAll(ItemName.tr_diary, ItemName.gaunt_ring, ItemName.locket, ItemName.cup,
+                           ItemName.diadem, ItemName.nagini)
+defeat_voldemort = Has("Voldemort Defeated")
 
 # Shop Logic
 has_high_multi = (Has(ItemName.score_x6_unlock) | Has(ItemName.score_x8_unlock) | Has(ItemName.score_x10_unlock) |
@@ -394,7 +393,7 @@ def set_entrance_rules(world):
 
 
 def set_event_logic(world):
-    world.set_rule(world.get_location("Defeat Voldemort"), has_all_horcruxes)
+    world.set_rule(world.get_location("Defeat Voldemort"), has_all_horcruxes & can_beat_tfitp)
 
 
 def set_win_con(world):
