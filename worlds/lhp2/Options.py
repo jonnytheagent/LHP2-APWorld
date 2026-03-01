@@ -40,14 +40,15 @@ class CollectibleQuantity(OptionDict):
     default = {ItemName.gb: 100, ItemName.sip: 30, ItemName.tw: 12, ItemName.ct: 100, ItemName.hcgb: 12}
 
 
-class FlawInThePlanCondition(Choice):
-    """
-    Determine the Level Unlock Condition for The Flaw in The Plan. Does nothing if Voldemort is not the goal.
-    """
-    display_name = "Flaw In The Plan Unlock Condition"
-    option_horcruxes = 0
-    option_level_shuffled = 1
-    default = 0
+# class FlawInThePlanCondition(Choice):
+#     """
+#     Determine the Level Unlock Condition for The Flaw in The Plan. Does nothing if Voldemort is not the goal.
+#     """
+#     display_name = "Flaw In The Plan Unlock Condition"
+#     option_horcruxes = 0
+#     option_level_shuffled = 1
+#     default = 0
+
 
 class NumStartLevels(Range):
     """
@@ -179,7 +180,7 @@ class HighMultiplierMinimum(Range):
 class LHP2Options(PerGameCommonOptions):
     EndGoal: EndGoal
     CollectibleQuantity: CollectibleQuantity
-    FlawInThePlanCondition: FlawInThePlanCondition
+    # FlawInThePlanCondition: FlawInThePlanCondition
     NumStartLevels: NumStartLevels
     StartingLevelOptions: StartingLevelOptions
     HardPurchases: HardPurchases
