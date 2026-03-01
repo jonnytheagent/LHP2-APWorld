@@ -4,14 +4,14 @@ import dataclasses
 
 from Options import Option
 from rule_builder.options import OptionFilter, Operator
-from rule_builder.rules import Rule, Has, HasAll, True_, False_, And, Or, CanReachRegion, CanReachLocation
+from rule_builder.rules import Rule, Has, HasAll, True_, And, Or, CanReachLocation
 
 if TYPE_CHECKING:
     from . import LHP2World
 
 from .Names import LocationName, ItemName, RegionName
 from .Options import LHP2Options, EndGoal, HardPurchases
-from .Locations import character_location_table, red_brick_purch_table, bb_gb_loc_table
+from .Locations import all_location_table
 
 # Helper Rules
 can_use_dark_magic = (Has(ItemName.alecto_play) | Has(ItemName.amycus_play) | Has(ItemName.dolohov_play) |
@@ -306,7 +306,17 @@ def from_option(option: type[Option], value: Any, operator: Operator = "eq") -> 
     return True_(options=[OptionFilter(option, value, operator)])
 
 
-def has_multi_for_shop(location_name: str) -> Rule:
+def can_purchase_red_brick(location_name: str) -> Rule:
+    red_brick = location_name.replace("sed", "sable")
+    return And(Has(red_brick), has_needed_multi(location_name))
+
+
+def can_purchase_char(location_name: str) -> Rule:
+    token = location_name.replace(" Purchased", " Token")
+    return And(Has(token), has_needed_multi(location_name))
+
+
+def has_needed_multi(location_name: str) -> Rule:
     return Or(from_option(HardPurchases, 1), HasMultiplier(location_name))
 
 
@@ -317,7 +327,7 @@ class HasMultiplier(Rule, game="Lego Harry Potter 5-7"):
     @override
     def _instantiate(self, world: "LHP2World") -> Rule.Resolved:
         # Look up the price
-        data = character_location_table[self.location_name]
+        data = all_location_table[self.location_name]
         price = data.price
 
         # Get Multiplier Requirements
@@ -367,7 +377,10 @@ def set_rules(world: "LHP2World"):
     set_st_logic(world)
     set_tfitp_logic(world)
     # Shop Logic
-    set_shop_rules(world)
+    set_char_purch_logic(world)
+    set_joke_purch_logic(world)
+    set_gold_brick_purch_logic(world)
+    set_red_brick_purch_logic(world)
 
 
 def set_entrance_rules(world):
@@ -428,8 +441,10 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.ghl + " -> " + RegionName.wc), can_access_weasley_courtyard)
     world.set_rule(world.get_entrance(RegionName.low_stair + " -> " + RegionName.mid_stair), can_access_mid_grand_stair)
     world.set_rule(world.get_entrance(RegionName.mid_stair + " -> " + RegionName.dumble_office), can_access_dumb_office)
-    world.set_rule(world.get_entrance(RegionName.dumble_office + " -> " + RegionName.upper_stair), can_access_upper_grand_stair)
-    world.set_rule(world.get_entrance(RegionName.upper_stair + " -> " + RegionName.dumble_office), can_access_upper_grand_stair)
+    world.set_rule(world.get_entrance(RegionName.dumble_office + " -> " + RegionName.upper_stair),
+                   can_access_upper_grand_stair)
+    world.set_rule(world.get_entrance(RegionName.upper_stair + " -> " + RegionName.dumble_office),
+                   can_access_upper_grand_stair)
     world.set_rule(world.get_entrance(RegionName.house + " -> " + RegionName.slyth), can_access_slytherin_common)
     world.set_rule(world.get_entrance(RegionName.house + " -> " + RegionName.huff), can_access_hufflepuff_common)
     world.set_rule(world.get_entrance(RegionName.house + " -> " + RegionName.raven), can_access_ravenclaw_tower)
@@ -440,19 +455,26 @@ def set_lesson_logic(world):
     world.set_rule(world.get_location(LocationName.dada_lesson), Has(ItemName.y5_hogwarts_e_item))
     world.set_rule(world.get_location(LocationName.thestral_lesson), Has(ItemName.dada_lesson_e_item))
     world.set_rule(world.get_location(LocationName.dueling_lesson), Has(ItemName.thestral_lesson_e_item))
-    world.set_rule(world.get_location(LocationName.diffindo_lesson), HasAll(ItemName.diffindo_unlock, ItemName.dueling_lesson_e_item))
-    world.set_rule(world.get_location(LocationName.patroneous_lesson), HasAll(ItemName.expecto_unlock, ItemName.diffindo_lesson_e_item))
+    world.set_rule(world.get_location(LocationName.diffindo_lesson), HasAll(ItemName.diffindo_unlock,
+                                                                            ItemName.dueling_lesson_e_item))
+    world.set_rule(world.get_location(LocationName.patroneous_lesson), HasAll(ItemName.expecto_unlock,
+                                                                              ItemName.diffindo_lesson_e_item))
     world.set_rule(world.get_location(LocationName.grawp_lesson), Has(ItemName.patroneous_lesson_e_item))
     world.set_rule(world.get_location(LocationName.focus_lesson), Has(ItemName.grawp_lesson_e_item))
-    world.set_rule(world.get_location(LocationName.owls_lesson), HasAll(ItemName.focus_lesson_e_item, ItemName.www_box_unlock))
+    world.set_rule(world.get_location(LocationName.owls_lesson), HasAll(ItemName.focus_lesson_e_item,
+                                                                        ItemName.www_box_unlock))
     world.set_rule(world.get_location(LocationName.y5_story_complete), Has(ItemName.owls_lesson_e_item))
-    world.set_rule(world.get_location(LocationName.specs_lesson), HasAll(ItemName.y5_story_complete_e_item, ItemName.specs_unlock))
+    world.set_rule(world.get_location(LocationName.specs_lesson), HasAll(ItemName.y5_story_complete_e_item,
+                                                                         ItemName.specs_unlock))
     world.set_rule(world.get_location(LocationName.y6_hogwarts), Has(ItemName.specs_lesson_e_item))
     world.set_rule(world.get_location(LocationName.draught_lesson), Has(ItemName.y6_hogwarts_e_item))
     world.set_rule(world.get_location(LocationName.vial_lesson), Has(ItemName.draught_lesson_e_item))
-    world.set_rule(world.get_location(LocationName.agua_lesson), HasAll(ItemName.vial_lesson_e_item, ItemName.agua_unlock))
-    world.set_rule(world.get_location(LocationName.reducto_lesson), HasAll(ItemName.agua_lesson_e_item, ItemName.reducto_unlock))
-    world.set_rule(world.get_location(LocationName.dumble_lesson), HasAll(ItemName.reducto_lesson_e_item, ItemName.reducto_unlock))
+    world.set_rule(world.get_location(LocationName.agua_lesson), HasAll(ItemName.vial_lesson_e_item,
+                                                                        ItemName.agua_unlock))
+    world.set_rule(world.get_location(LocationName.reducto_lesson), HasAll(ItemName.agua_lesson_e_item,
+                                                                           ItemName.reducto_unlock))
+    world.set_rule(world.get_location(LocationName.dumble_lesson), HasAll(ItemName.reducto_lesson_e_item,
+                                                                          ItemName.reducto_unlock))
     world.set_rule(world.get_location(LocationName.y6_story_complete), Has(ItemName.dumble_lesson_e_item))
     world.set_rule(world.get_location(LocationName.cafe_lesson), Has(ItemName.y6_story_complete_e_item))
 
@@ -460,14 +482,18 @@ def set_lesson_logic(world):
 def set_event_logic(world):
     world.set_rule(world.get_location(LocationName.y5_hogwarts_event), CanReachLocation(LocationName.y5_hogwarts))
     world.set_rule(world.get_location(LocationName.dada_lesson_event), CanReachLocation(LocationName.dada_lesson))
-    world.set_rule(world.get_location(LocationName.thestral_lesson_event), CanReachLocation(LocationName.thestral_lesson))
+    world.set_rule(world.get_location(LocationName.thestral_lesson_event),
+                   CanReachLocation(LocationName.thestral_lesson))
     world.set_rule(world.get_location(LocationName.dueling_lesson_event), CanReachLocation(LocationName.dueling_lesson))
-    world.set_rule(world.get_location(LocationName.diffindo_lesson_event), CanReachLocation(LocationName.diffindo_lesson))
-    world.set_rule(world.get_location(LocationName.patroneous_lesson_event), CanReachLocation(LocationName.patroneous_lesson))
+    world.set_rule(world.get_location(LocationName.diffindo_lesson_event),
+                   CanReachLocation(LocationName.diffindo_lesson))
+    world.set_rule(world.get_location(LocationName.patroneous_lesson_event),
+                   CanReachLocation(LocationName.patroneous_lesson))
     world.set_rule(world.get_location(LocationName.grawp_lesson_event), CanReachLocation(LocationName.grawp_lesson))
     world.set_rule(world.get_location(LocationName.focus_lesson_event), CanReachLocation(LocationName.focus_lesson))
     world.set_rule(world.get_location(LocationName.owls_lesson_event), CanReachLocation(LocationName.owls_lesson))
-    world.set_rule(world.get_location(LocationName.y5_story_complete_event), CanReachLocation(LocationName.y5_story_complete))
+    world.set_rule(world.get_location(LocationName.y5_story_complete_event),
+                   CanReachLocation(LocationName.y5_story_complete))
     world.set_rule(world.get_location(LocationName.specs_lesson_event), CanReachLocation(LocationName.specs_lesson))
     world.set_rule(world.get_location(LocationName.y6_hogwarts_event), CanReachLocation(LocationName.y6_hogwarts))
     world.set_rule(world.get_location(LocationName.draught_lesson_event), CanReachLocation(LocationName.draught_lesson))
@@ -475,7 +501,8 @@ def set_event_logic(world):
     world.set_rule(world.get_location(LocationName.agua_lesson_event), CanReachLocation(LocationName.agua_lesson))
     world.set_rule(world.get_location(LocationName.reducto_lesson_event), CanReachLocation(LocationName.reducto_lesson))
     world.set_rule(world.get_location(LocationName.dumble_lesson_event), CanReachLocation(LocationName.dumble_lesson))
-    world.set_rule(world.get_location(LocationName.y6_story_complete_event), CanReachLocation(LocationName.y6_story_complete))
+    world.set_rule(world.get_location(LocationName.y6_story_complete_event),
+                   CanReachLocation(LocationName.y6_story_complete))
     world.set_rule(world.get_location(LocationName.cafe_lesson_event), CanReachLocation(LocationName.cafe_lesson))
     world.set_rule(world.get_location("Defeat Voldemort"), has_all_horcruxes & can_beat_tfitp)
 
@@ -731,305 +758,388 @@ def set_tfitp_logic(world):
     world.set_rule(world.get_location(LocationName.tfitp_sip), can_get_tfitp_sip)
 
 
-def set_shop_rules(world):
-    world.set_rule(world.get_location(LocationName.hagrid_purch), has_multi_for_shop(LocationName.hagrid_purch))
-    world.set_rule(world.get_location(LocationName.fang_purch), has_multi_for_shop(LocationName.fang_purch))
-    world.set_rule(world.get_location(LocationName.hagrid_wed_purch), has_multi_for_shop(LocationName.hagrid_wed_purch))
-    world.set_rule(world.get_location(LocationName.prof_flit_purch), has_multi_for_shop(LocationName.prof_flit_purch))
-    world.set_rule(world.get_location(LocationName.madam_malk_purch), has_multi_for_shop(LocationName.madam_malk_purch))
-    world.set_rule(world.get_location(LocationName.dobby_purch), has_multi_for_shop(LocationName.dobby_purch))
-    world.set_rule(world.get_location(LocationName.kreacher_purch), has_multi_for_shop(LocationName.kreacher_purch))
+def set_char_purch_logic(world):
+    world.set_rule(world.get_location(LocationName.hagrid_purch), can_purchase_char(LocationName.hagrid_purch))
+    world.set_rule(world.get_location(LocationName.fang_purch), can_purchase_char(LocationName.fang_purch))
+    world.set_rule(world.get_location(LocationName.hagrid_wed_purch), can_purchase_char(LocationName.hagrid_wed_purch))
+    world.set_rule(world.get_location(LocationName.prof_flit_purch), can_purchase_char(LocationName.prof_flit_purch))
+    world.set_rule(world.get_location(LocationName.madam_malk_purch), can_purchase_char(LocationName.madam_malk_purch))
+    world.set_rule(world.get_location(LocationName.dobby_purch), can_purchase_char(LocationName.dobby_purch))
+    world.set_rule(world.get_location(LocationName.kreacher_purch), can_purchase_char(LocationName.kreacher_purch))
     world.set_rule(world.get_location(LocationName.tr_orphanage_purch),
-                   has_multi_for_shop(LocationName.tr_orphanage_purch))
-    world.set_rule(world.get_location(LocationName.bogrod_purch), has_multi_for_shop(LocationName.bogrod_purch))
+                   can_purchase_char(LocationName.tr_orphanage_purch))
+    world.set_rule(world.get_location(LocationName.bogrod_purch), can_purchase_char(LocationName.bogrod_purch))
     world.set_rule(world.get_location(LocationName.mund_fletch_purch),
-                   has_multi_for_shop(LocationName.mund_fletch_purch))
-    world.set_rule(world.get_location(LocationName.griphook_purch), has_multi_for_shop(LocationName.griphook_purch))
-    world.set_rule(world.get_location(LocationName.prof_mcgon_purch), has_multi_for_shop(LocationName.prof_mcgon_purch))
+                   can_purchase_char(LocationName.mund_fletch_purch))
+    world.set_rule(world.get_location(LocationName.griphook_purch), can_purchase_char(LocationName.griphook_purch))
+    world.set_rule(world.get_location(LocationName.prof_mcgon_purch), can_purchase_char(LocationName.prof_mcgon_purch))
     world.set_rule(world.get_location(LocationName.madam_pince_purch),
-                   has_multi_for_shop(LocationName.madam_pince_purch))
+                   can_purchase_char(LocationName.madam_pince_purch))
     world.set_rule(world.get_location(LocationName.prof_sprout_purch),
-                   has_multi_for_shop(LocationName.prof_sprout_purch))
+                   can_purchase_char(LocationName.prof_sprout_purch))
     world.set_rule(world.get_location(LocationName.madam_pomfrey_purch),
-                   has_multi_for_shop(LocationName.madam_pomfrey_purch))
+                   can_purchase_char(LocationName.madam_pomfrey_purch))
     world.set_rule(world.get_location(LocationName.prof_trelawney_purch),
-                   has_multi_for_shop(LocationName.prof_trelawney_purch))
+                   can_purchase_char(LocationName.prof_trelawney_purch))
     world.set_rule(world.get_location(LocationName.madam_rosmerta_purch),
-                   has_multi_for_shop(LocationName.madam_rosmerta_purch))
-    world.set_rule(world.get_location(LocationName.fat_friar_purch), has_multi_for_shop(LocationName.fat_friar_purch))
-    world.set_rule(world.get_location(LocationName.grey_lady_purch), has_multi_for_shop(LocationName.grey_lady_purch))
-    world.set_rule(world.get_location(LocationName.fat_lady_purch), has_multi_for_shop(LocationName.fat_lady_purch))
-    world.set_rule(world.get_location(LocationName.herm_ball_purch), has_multi_for_shop(LocationName.herm_ball_purch))
-    world.set_rule(world.get_location(LocationName.bellatrix_purch), has_multi_for_shop(LocationName.bellatrix_purch))
-    world.set_rule(world.get_location(LocationName.emmeline_purch), has_multi_for_shop(LocationName.emmeline_purch))
-    world.set_rule(world.get_location(LocationName.narcissa_purch), has_multi_for_shop(LocationName.narcissa_purch))
+                   can_purchase_char(LocationName.madam_rosmerta_purch))
+    world.set_rule(world.get_location(LocationName.fat_friar_purch), can_purchase_char(LocationName.fat_friar_purch))
+    world.set_rule(world.get_location(LocationName.grey_lady_purch), can_purchase_char(LocationName.grey_lady_purch))
+    world.set_rule(world.get_location(LocationName.fat_lady_purch), can_purchase_char(LocationName.fat_lady_purch))
+    world.set_rule(world.get_location(LocationName.herm_ball_purch), can_purchase_char(LocationName.herm_ball_purch))
+    world.set_rule(world.get_location(LocationName.bellatrix_purch), can_purchase_char(LocationName.bellatrix_purch))
+    world.set_rule(world.get_location(LocationName.emmeline_purch), can_purchase_char(LocationName.emmeline_purch))
+    world.set_rule(world.get_location(LocationName.narcissa_purch), can_purchase_char(LocationName.narcissa_purch))
     world.set_rule(world.get_location(LocationName.mcgon_pyjamas_purch),
-                   has_multi_for_shop(LocationName.mcgon_pyjamas_purch))
+                   can_purchase_char(LocationName.mcgon_pyjamas_purch))
     world.set_rule(world.get_location(LocationName.mary_cattermole_purch),
-                   has_multi_for_shop(LocationName.mary_cattermole_purch))
+                   can_purchase_char(LocationName.mary_cattermole_purch))
     world.set_rule(world.get_location(LocationName.mcgon_black_purch),
-                   has_multi_for_shop(LocationName.mcgon_black_purch))
+                   can_purchase_char(LocationName.mcgon_black_purch))
     world.set_rule(world.get_location(LocationName.herm_gringotts_purch),
-                   has_multi_for_shop(LocationName.herm_gringotts_purch))
+                   can_purchase_char(LocationName.herm_gringotts_purch))
     world.set_rule(world.get_location(LocationName.prof_grubbly_purch),
-                   has_multi_for_shop(LocationName.prof_grubbly_purch))
+                   can_purchase_char(LocationName.prof_grubbly_purch))
     world.set_rule(world.get_location(LocationName.bellatrix_azka_purch),
-                   has_multi_for_shop(LocationName.bellatrix_azka_purch))
+                   can_purchase_char(LocationName.bellatrix_azka_purch))
     world.set_rule(world.get_location(LocationName.death_eater_purch),
-                   has_multi_for_shop(LocationName.death_eater_purch))
+                   can_purchase_char(LocationName.death_eater_purch))
     world.set_rule(world.get_location(LocationName.dudley_grey_purch),
-                   has_multi_for_shop(LocationName.dudley_grey_purch))
+                   can_purchase_char(LocationName.dudley_grey_purch))
     world.set_rule(world.get_location(LocationName.prof_dumble_purch),
-                   has_multi_for_shop(LocationName.prof_dumble_purch))
-    world.set_rule(world.get_location(LocationName.argus_purch), has_multi_for_shop(LocationName.argus_purch))
+                   can_purchase_char(LocationName.prof_dumble_purch))
+    world.set_rule(world.get_location(LocationName.argus_purch), can_purchase_char(LocationName.argus_purch))
     world.set_rule(world.get_location(LocationName.madam_hooch_purch),
-                   has_multi_for_shop(LocationName.madam_hooch_purch))
-    world.set_rule(world.get_location(LocationName.crabbe_purch), has_multi_for_shop(LocationName.crabbe_purch))
-    world.set_rule(world.get_location(LocationName.goyle_purch), has_multi_for_shop(LocationName.goyle_purch))
-    world.set_rule(world.get_location(LocationName.ginny_purch), has_multi_for_shop(LocationName.ginny_purch))
-    world.set_rule(world.get_location(LocationName.arthur_purch), has_multi_for_shop(LocationName.arthur_purch))
-    world.set_rule(world.get_location(LocationName.katie_purch), has_multi_for_shop(LocationName.katie_purch))
-    world.set_rule(world.get_location(LocationName.lily_purch), has_multi_for_shop(LocationName.lily_purch))
+                   can_purchase_char(LocationName.madam_hooch_purch))
+    world.set_rule(world.get_location(LocationName.crabbe_purch), can_purchase_char(LocationName.crabbe_purch))
+    world.set_rule(world.get_location(LocationName.goyle_purch), can_purchase_char(LocationName.goyle_purch))
+    world.set_rule(world.get_location(LocationName.ginny_purch), can_purchase_char(LocationName.ginny_purch))
+    world.set_rule(world.get_location(LocationName.arthur_purch), can_purchase_char(LocationName.arthur_purch))
+    world.set_rule(world.get_location(LocationName.katie_purch), can_purchase_char(LocationName.katie_purch))
+    world.set_rule(world.get_location(LocationName.lily_purch), can_purchase_char(LocationName.lily_purch))
     world.set_rule(world.get_location(LocationName.bloody_baron_purch),
-                   has_multi_for_shop(LocationName.bloody_baron_purch))
-    world.set_rule(world.get_location(LocationName.fudge_purch), has_multi_for_shop(LocationName.fudge_purch))
-    world.set_rule(world.get_location(LocationName.justin_purch), has_multi_for_shop(LocationName.justin_purch))
-    world.set_rule(world.get_location(LocationName.cho_purch), has_multi_for_shop(LocationName.cho_purch))
-    world.set_rule(world.get_location(LocationName.dean_purch), has_multi_for_shop(LocationName.dean_purch))
-    world.set_rule(world.get_location(LocationName.draco_purch), has_multi_for_shop(LocationName.draco_purch))
-    world.set_rule(world.get_location(LocationName.lucius_purch), has_multi_for_shop(LocationName.lucius_purch))
-    world.set_rule(world.get_location(LocationName.draco_suit_purch), has_multi_for_shop(LocationName.draco_suit_purch))
+                   can_purchase_char(LocationName.bloody_baron_purch))
+    world.set_rule(world.get_location(LocationName.fudge_purch), can_purchase_char(LocationName.fudge_purch))
+    world.set_rule(world.get_location(LocationName.justin_purch), can_purchase_char(LocationName.justin_purch))
+    world.set_rule(world.get_location(LocationName.cho_purch), can_purchase_char(LocationName.cho_purch))
+    world.set_rule(world.get_location(LocationName.dean_purch), can_purchase_char(LocationName.dean_purch))
+    world.set_rule(world.get_location(LocationName.draco_purch), can_purchase_char(LocationName.draco_purch))
+    world.set_rule(world.get_location(LocationName.lucius_purch), can_purchase_char(LocationName.lucius_purch))
+    world.set_rule(world.get_location(LocationName.draco_suit_purch), can_purchase_char(LocationName.draco_suit_purch))
     world.set_rule(world.get_location(LocationName.harry_pyjamas_purch),
-                   has_multi_for_shop(LocationName.harry_pyjamas_purch))
-    world.set_rule(world.get_location(LocationName.myrtle_purch), has_multi_for_shop(LocationName.myrtle_purch))
+                   can_purchase_char(LocationName.harry_pyjamas_purch))
+    world.set_rule(world.get_location(LocationName.myrtle_purch), can_purchase_char(LocationName.myrtle_purch))
     world.set_rule(world.get_location(LocationName.james_ghost_purch),
-                   has_multi_for_shop(LocationName.james_ghost_purch))
-    world.set_rule(world.get_location(LocationName.madeye_purch), has_multi_for_shop(LocationName.madeye_purch))
-    world.set_rule(world.get_location(LocationName.hannah_purch), has_multi_for_shop(LocationName.hannah_purch))
-    world.set_rule(world.get_location(LocationName.kingsley_purch), has_multi_for_shop(LocationName.kingsley_purch))
-    world.set_rule(world.get_location(LocationName.aberforth_purch), has_multi_for_shop(LocationName.aberforth_purch))
-    world.set_rule(world.get_location(LocationName.runcorn_purch), has_multi_for_shop(LocationName.runcorn_purch))
-    world.set_rule(world.get_location(LocationName.alecto_purch), has_multi_for_shop(LocationName.alecto_purch))
-    world.set_rule(world.get_location(LocationName.amycus_purch), has_multi_for_shop(LocationName.amycus_purch))
-    world.set_rule(world.get_location(LocationName.anthony_purch), has_multi_for_shop(LocationName.anthony_purch))
+                   can_purchase_char(LocationName.james_ghost_purch))
+    world.set_rule(world.get_location(LocationName.madeye_purch), can_purchase_char(LocationName.madeye_purch))
+    world.set_rule(world.get_location(LocationName.hannah_purch), can_purchase_char(LocationName.hannah_purch))
+    world.set_rule(world.get_location(LocationName.kingsley_purch), can_purchase_char(LocationName.kingsley_purch))
+    world.set_rule(world.get_location(LocationName.aberforth_purch), can_purchase_char(LocationName.aberforth_purch))
+    world.set_rule(world.get_location(LocationName.runcorn_purch), can_purchase_char(LocationName.runcorn_purch))
+    world.set_rule(world.get_location(LocationName.alecto_purch), can_purchase_char(LocationName.alecto_purch))
+    world.set_rule(world.get_location(LocationName.amycus_purch), can_purchase_char(LocationName.amycus_purch))
+    world.set_rule(world.get_location(LocationName.anthony_purch), can_purchase_char(LocationName.anthony_purch))
     world.set_rule(world.get_location(LocationName.bathilda_snake_purch),
-                   has_multi_for_shop(LocationName.bathilda_snake_purch))
-    world.set_rule(world.get_location(LocationName.blaise_purch), has_multi_for_shop(LocationName.blaise_purch))
-    world.set_rule(world.get_location(LocationName.charity_purch), has_multi_for_shop(LocationName.charity_purch))
-    world.set_rule(world.get_location(LocationName.charlie_purch), has_multi_for_shop(LocationName.charlie_purch))
-    world.set_rule(world.get_location(LocationName.cormac_purch), has_multi_for_shop(LocationName.cormac_purch))
-    world.set_rule(world.get_location(LocationName.dedalus_purch), has_multi_for_shop(LocationName.dedalus_purch))
-    world.set_rule(world.get_location(LocationName.dirk_purch), has_multi_for_shop(LocationName.dirk_purch))
-    world.set_rule(world.get_location(LocationName.dolohov_purch), has_multi_for_shop(LocationName.dolohov_purch))
-    world.set_rule(world.get_location(LocationName.dragomir_purch), has_multi_for_shop(LocationName.dragomir_purch))
-    world.set_rule(world.get_location(LocationName.elphias_purch), has_multi_for_shop(LocationName.elphias_purch))
-    world.set_rule(world.get_location(LocationName.fenrir_purch), has_multi_for_shop(LocationName.fenrir_purch))
+                   can_purchase_char(LocationName.bathilda_snake_purch))
+    world.set_rule(world.get_location(LocationName.blaise_purch), can_purchase_char(LocationName.blaise_purch))
+    world.set_rule(world.get_location(LocationName.charity_purch), can_purchase_char(LocationName.charity_purch))
+    world.set_rule(world.get_location(LocationName.charlie_purch), can_purchase_char(LocationName.charlie_purch))
+    world.set_rule(world.get_location(LocationName.cormac_purch), can_purchase_char(LocationName.cormac_purch))
+    world.set_rule(world.get_location(LocationName.dedalus_purch), can_purchase_char(LocationName.dedalus_purch))
+    world.set_rule(world.get_location(LocationName.dirk_purch), can_purchase_char(LocationName.dirk_purch))
+    world.set_rule(world.get_location(LocationName.dolohov_purch), can_purchase_char(LocationName.dolohov_purch))
+    world.set_rule(world.get_location(LocationName.dragomir_purch), can_purchase_char(LocationName.dragomir_purch))
+    world.set_rule(world.get_location(LocationName.elphias_purch), can_purchase_char(LocationName.elphias_purch))
+    world.set_rule(world.get_location(LocationName.fenrir_purch), can_purchase_char(LocationName.fenrir_purch))
     world.set_rule(world.get_location(LocationName.grindel_young_purch),
-                   has_multi_for_shop(LocationName.grindel_young_purch))
+                   can_purchase_char(LocationName.grindel_young_purch))
     world.set_rule(world.get_location(LocationName.grindel_old_purch),
-                   has_multi_for_shop(LocationName.grindel_old_purch))
+                   can_purchase_char(LocationName.grindel_old_purch))
     world.set_rule(world.get_location(LocationName.gregorovitch_purch),
-                   has_multi_for_shop(LocationName.gregorovitch_purch))
-    world.set_rule(world.get_location(LocationName.hestia_purch), has_multi_for_shop(LocationName.hestia_purch))
+                   can_purchase_char(LocationName.gregorovitch_purch))
+    world.set_rule(world.get_location(LocationName.hestia_purch), can_purchase_char(LocationName.hestia_purch))
     world.set_rule(world.get_location(LocationName.prof_slughorn_purch),
-                   has_multi_for_shop(LocationName.prof_slughorn_purch))
+                   can_purchase_char(LocationName.prof_slughorn_purch))
     world.set_rule(world.get_location(LocationName.james_young_purch),
-                   has_multi_for_shop(LocationName.james_young_purch))
-    world.set_rule(world.get_location(LocationName.lavender_purch), has_multi_for_shop(LocationName.lavender_purch))
-    world.set_rule(world.get_location(LocationName.mafalda_purch), has_multi_for_shop(LocationName.mafalda_purch))
-    world.set_rule(world.get_location(LocationName.belby_purch), has_multi_for_shop(LocationName.belby_purch))
+                   can_purchase_char(LocationName.james_young_purch))
+    world.set_rule(world.get_location(LocationName.lavender_purch), can_purchase_char(LocationName.lavender_purch))
+    world.set_rule(world.get_location(LocationName.mafalda_purch), can_purchase_char(LocationName.mafalda_purch))
+    world.set_rule(world.get_location(LocationName.belby_purch), can_purchase_char(LocationName.belby_purch))
     world.set_rule(world.get_location(LocationName.luna_purple_coat_purch),
-                   has_multi_for_shop(LocationName.luna_purple_coat_purch))
+                   can_purchase_char(LocationName.luna_purple_coat_purch))
     world.set_rule(world.get_location(LocationName.herm_grey_coat_purch),
-                   has_multi_for_shop(LocationName.herm_grey_coat_purch))
+                   can_purchase_char(LocationName.herm_grey_coat_purch))
     world.set_rule(world.get_location(LocationName.harry_godric_purch),
-                   has_multi_for_shop(LocationName.harry_godric_purch))
+                   can_purchase_char(LocationName.harry_godric_purch))
     world.set_rule(world.get_location(LocationName.prof_umbridge_purch),
-                   has_multi_for_shop(LocationName.prof_umbridge_purch))
-    world.set_rule(world.get_location(LocationName.fred_purch), has_multi_for_shop(LocationName.fred_purch))
-    world.set_rule(world.get_location(LocationName.george_purch), has_multi_for_shop(LocationName.george_purch))
+                   can_purchase_char(LocationName.prof_umbridge_purch))
+    world.set_rule(world.get_location(LocationName.fred_purch), can_purchase_char(LocationName.fred_purch))
+    world.set_rule(world.get_location(LocationName.george_purch), can_purchase_char(LocationName.george_purch))
     world.set_rule(world.get_location(LocationName.molly_apron_purch),
-                   has_multi_for_shop(LocationName.molly_apron_purch))
+                   can_purchase_char(LocationName.molly_apron_purch))
     world.set_rule(world.get_location(LocationName.crabbe_jumper_purch),
-                   has_multi_for_shop(LocationName.crabbe_jumper_purch))
+                   can_purchase_char(LocationName.crabbe_jumper_purch))
     world.set_rule(world.get_location(LocationName.draco_sweater_purch),
-                   has_multi_for_shop(LocationName.draco_sweater_purch))
+                   can_purchase_char(LocationName.draco_sweater_purch))
     world.set_rule(world.get_location(LocationName.goyle_jumper_purch),
-                   has_multi_for_shop(LocationName.goyle_jumper_purch))
-    world.set_rule(world.get_location(LocationName.milk_man_purch), has_multi_for_shop(LocationName.milk_man_purch))
-    world.set_rule(world.get_location(LocationName.twin_2_purch), has_multi_for_shop(LocationName.twin_2_purch))
+                   can_purchase_char(LocationName.goyle_jumper_purch))
+    world.set_rule(world.get_location(LocationName.milk_man_purch), can_purchase_char(LocationName.milk_man_purch))
+    world.set_rule(world.get_location(LocationName.twin_2_purch), can_purchase_char(LocationName.twin_2_purch))
     world.set_rule(world.get_location(LocationName.herm_mafalda_purch),
-                   has_multi_for_shop(LocationName.herm_mafalda_purch))
+                   can_purchase_char(LocationName.herm_mafalda_purch))
     world.set_rule(world.get_location(LocationName.ministry_guard_purch),
-                   has_multi_for_shop(LocationName.ministry_guard_purch))
+                   can_purchase_char(LocationName.ministry_guard_purch))
     world.set_rule(world.get_location(LocationName.harry_winter_purch),
-                   has_multi_for_shop(LocationName.harry_winter_purch))
+                   can_purchase_char(LocationName.harry_winter_purch))
     world.set_rule(world.get_location(LocationName.arthur_torn_suit_purch),
-                   has_multi_for_shop(LocationName.arthur_torn_suit_purch))
+                   can_purchase_char(LocationName.arthur_torn_suit_purch))
     world.set_rule(world.get_location(LocationName.fred_winter_purch),
-                   has_multi_for_shop(LocationName.fred_winter_purch))
-    world.set_rule(world.get_location(LocationName.cho_winter_purch), has_multi_for_shop(LocationName.cho_winter_purch))
+                   can_purchase_char(LocationName.fred_winter_purch))
+    world.set_rule(world.get_location(LocationName.cho_winter_purch), can_purchase_char(LocationName.cho_winter_purch))
     world.set_rule(world.get_location(LocationName.george_winter_purch),
-                   has_multi_for_shop(LocationName.george_winter_purch))
-    world.set_rule(world.get_location(LocationName.herm_scarf_purch), has_multi_for_shop(LocationName.herm_scarf_purch))
+                   can_purchase_char(LocationName.george_winter_purch))
+    world.set_rule(world.get_location(LocationName.herm_scarf_purch), can_purchase_char(LocationName.herm_scarf_purch))
     world.set_rule(world.get_location(LocationName.luna_blue_jumper_purch),
-                   has_multi_for_shop(LocationName.luna_blue_jumper_purch))
-    world.set_rule(world.get_location(LocationName.fred_owls_purch), has_multi_for_shop(LocationName.fred_owls_purch))
+                   can_purchase_char(LocationName.luna_blue_jumper_purch))
+    world.set_rule(world.get_location(LocationName.fred_owls_purch), can_purchase_char(LocationName.fred_owls_purch))
     world.set_rule(world.get_location(LocationName.fred_pyjamas_purch),
-                   has_multi_for_shop(LocationName.fred_pyjamas_purch))
+                   can_purchase_char(LocationName.fred_pyjamas_purch))
     world.set_rule(world.get_location(LocationName.george_owls_purch),
-                   has_multi_for_shop(LocationName.george_owls_purch))
+                   can_purchase_char(LocationName.george_owls_purch))
     world.set_rule(world.get_location(LocationName.george_pyjamas_purch),
-                   has_multi_for_shop(LocationName.george_pyjamas_purch))
+                   can_purchase_char(LocationName.george_pyjamas_purch))
     world.set_rule(world.get_location(LocationName.herm_jumper_purch),
-                   has_multi_for_shop(LocationName.herm_jumper_purch))
+                   can_purchase_char(LocationName.herm_jumper_purch))
     world.set_rule(world.get_location(LocationName.fudge_wizengamot_purch),
-                   has_multi_for_shop(LocationName.fudge_wizengamot_purch))
-    world.set_rule(world.get_location(LocationName.dudley_purch), has_multi_for_shop(LocationName.dudley_purch))
-    world.set_rule(world.get_location(LocationName.gang_mem_purch), has_multi_for_shop(LocationName.gang_mem_purch))
+                   can_purchase_char(LocationName.fudge_wizengamot_purch))
+    world.set_rule(world.get_location(LocationName.dudley_purch), can_purchase_char(LocationName.dudley_purch))
+    world.set_rule(world.get_location(LocationName.gang_mem_purch), can_purchase_char(LocationName.gang_mem_purch))
     world.set_rule(world.get_location(LocationName.harry_albert_runcorn_purch),
-                   has_multi_for_shop(LocationName.harry_albert_runcorn_purch))
+                   can_purchase_char(LocationName.harry_albert_runcorn_purch))
     world.set_rule(world.get_location(LocationName.harry_brown_jacket_purch),
-                   has_multi_for_shop(LocationName.harry_brown_jacket_purch))
+                   can_purchase_char(LocationName.harry_brown_jacket_purch))
     world.set_rule(world.get_location(LocationName.dumble_cursed_purch),
-                   has_multi_for_shop(LocationName.dumble_cursed_purch))
+                   can_purchase_char(LocationName.dumble_cursed_purch))
     world.set_rule(world.get_location(LocationName.lucius_death_eater_purch),
-                   has_multi_for_shop(LocationName.lucius_death_eater_purch))
-    world.set_rule(world.get_location(LocationName.luna_purch), has_multi_for_shop(LocationName.luna_purch))
+                   can_purchase_char(LocationName.lucius_death_eater_purch))
+    world.set_rule(world.get_location(LocationName.luna_purch), can_purchase_char(LocationName.luna_purch))
     world.set_rule(world.get_location(LocationName.umbridge_wizengamot_purch),
-                   has_multi_for_shop(LocationName.umbridge_wizengamot_purch))
+                   can_purchase_char(LocationName.umbridge_wizengamot_purch))
     world.set_rule(world.get_location(LocationName.dolohov_workman_purch),
-                   has_multi_for_shop(LocationName.dolohov_workman_purch))
-    world.set_rule(world.get_location(LocationName.michael_purch), has_multi_for_shop(LocationName.michael_purch))
+                   can_purchase_char(LocationName.dolohov_workman_purch))
+    world.set_rule(world.get_location(LocationName.michael_purch), can_purchase_char(LocationName.michael_purch))
     world.set_rule(world.get_location(LocationName.dean_winter_purch),
-                   has_multi_for_shop(LocationName.dean_winter_purch))
+                   can_purchase_char(LocationName.dean_winter_purch))
     world.set_rule(world.get_location(LocationName.arthur_cardigan_purch),
-                   has_multi_for_shop(LocationName.arthur_cardigan_purch))
+                   can_purchase_char(LocationName.arthur_cardigan_purch))
     world.set_rule(world.get_location(LocationName.luna_pink_dress_purch),
-                   has_multi_for_shop(LocationName.luna_pink_dress_purch))
-    world.set_rule(world.get_location(LocationName.marietta_purch), has_multi_for_shop(LocationName.marietta_purch))
+                   can_purchase_char(LocationName.luna_pink_dress_purch))
+    world.set_rule(world.get_location(LocationName.marietta_purch), can_purchase_char(LocationName.marietta_purch))
     world.set_rule(world.get_location(LocationName.dumble_young_purch),
-                   has_multi_for_shop(LocationName.dumble_young_purch))
+                   can_purchase_char(LocationName.dumble_young_purch))
     world.set_rule(world.get_location(LocationName.slughorn_young_purch),
-                   has_multi_for_shop(LocationName.slughorn_young_purch))
+                   can_purchase_char(LocationName.slughorn_young_purch))
     world.set_rule(world.get_location(LocationName.slughorn_pajamas_purch),
-                   has_multi_for_shop(LocationName.slughorn_pajamas_purch))
+                   can_purchase_char(LocationName.slughorn_pajamas_purch))
     world.set_rule(world.get_location(LocationName.lily_young_casual_purch),
-                   has_multi_for_shop(LocationName.lily_young_casual_purch))
+                   can_purchase_char(LocationName.lily_young_casual_purch))
     world.set_rule(world.get_location(LocationName.ginny_dress_purch),
-                   has_multi_for_shop(LocationName.ginny_dress_purch))
+                   can_purchase_char(LocationName.ginny_dress_purch))
     world.set_rule(world.get_location(LocationName.ginny_pyjamas_purch),
-                   has_multi_for_shop(LocationName.ginny_pyjamas_purch))
+                   can_purchase_char(LocationName.ginny_pyjamas_purch))
     world.set_rule(world.get_location(LocationName.blaise_black_shirt_purch),
-                   has_multi_for_shop(LocationName.blaise_black_shirt_purch))
+                   can_purchase_char(LocationName.blaise_black_shirt_purch))
     world.set_rule(world.get_location(LocationName.cormac_suit_purch),
-                   has_multi_for_shop(LocationName.cormac_suit_purch))
+                   can_purchase_char(LocationName.cormac_suit_purch))
     world.set_rule(world.get_location(LocationName.muggle_orphan_purch),
-                   has_multi_for_shop(LocationName.muggle_orphan_purch))
+                   can_purchase_char(LocationName.muggle_orphan_purch))
     world.set_rule(world.get_location(LocationName.luna_overalls_purch),
-                   has_multi_for_shop(LocationName.luna_overalls_purch))
-    world.set_rule(world.get_location(LocationName.molly_purch), has_multi_for_shop(LocationName.molly_purch))
+                   can_purchase_char(LocationName.luna_overalls_purch))
+    world.set_rule(world.get_location(LocationName.molly_purch), can_purchase_char(LocationName.molly_purch))
     world.set_rule(world.get_location(LocationName.herm_cardigan_purch),
-                   has_multi_for_shop(LocationName.herm_cardigan_purch))
+                   can_purchase_char(LocationName.herm_cardigan_purch))
     world.set_rule(world.get_location(LocationName.luna_yellow_dress_purch),
-                   has_multi_for_shop(LocationName.luna_yellow_dress_purch))
+                   can_purchase_char(LocationName.luna_yellow_dress_purch))
     world.set_rule(world.get_location(LocationName.dudley_shirt_purch),
-                   has_multi_for_shop(LocationName.dudley_shirt_purch))
+                   can_purchase_char(LocationName.dudley_shirt_purch))
     world.set_rule(world.get_location(LocationName.bill_wedding_purch),
-                   has_multi_for_shop(LocationName.bill_wedding_purch))
-    world.set_rule(world.get_location(LocationName.fleur_purch), has_multi_for_shop(LocationName.fleur_purch))
+                   can_purchase_char(LocationName.bill_wedding_purch))
+    world.set_rule(world.get_location(LocationName.fleur_purch), can_purchase_char(LocationName.fleur_purch))
     world.set_rule(world.get_location(LocationName.herm_red_dress_purch),
-                   has_multi_for_shop(LocationName.herm_red_dress_purch))
-    world.set_rule(world.get_location(LocationName.figg_purch), has_multi_for_shop(LocationName.figg_purch))
+                   can_purchase_char(LocationName.herm_red_dress_purch))
+    world.set_rule(world.get_location(LocationName.figg_purch), can_purchase_char(LocationName.figg_purch))
     world.set_rule(world.get_location(LocationName.harry_locket_purch),
-                   has_multi_for_shop(LocationName.harry_locket_purch))
-    world.set_rule(world.get_location(LocationName.twin_1_purch), has_multi_for_shop(LocationName.twin_1_purch))
-    world.set_rule(world.get_location(LocationName.cole_purch), has_multi_for_shop(LocationName.cole_purch))
+                   can_purchase_char(LocationName.harry_locket_purch))
+    world.set_rule(world.get_location(LocationName.twin_1_purch), can_purchase_char(LocationName.twin_1_purch))
+    world.set_rule(world.get_location(LocationName.cole_purch), can_purchase_char(LocationName.cole_purch))
     world.set_rule(world.get_location(LocationName.herm_ministry_purch),
-                   has_multi_for_shop(LocationName.herm_ministry_purch))
+                   can_purchase_char(LocationName.herm_ministry_purch))
     world.set_rule(world.get_location(LocationName.arthur_suit_purch),
-                   has_multi_for_shop(LocationName.arthur_suit_purch))
+                   can_purchase_char(LocationName.arthur_suit_purch))
     world.set_rule(world.get_location(LocationName.harry_christmas_purch),
-                   has_multi_for_shop(LocationName.harry_christmas_purch))
-    world.set_rule(world.get_location(LocationName.ernie_purch), has_multi_for_shop(LocationName.ernie_purch))
-    world.set_rule(world.get_location(LocationName.prof_snape_purch), has_multi_for_shop(LocationName.prof_snape_purch))
-    world.set_rule(world.get_location(LocationName.neville_purch), has_multi_for_shop(LocationName.neville_purch))
+                   can_purchase_char(LocationName.harry_christmas_purch))
+    world.set_rule(world.get_location(LocationName.ernie_purch), can_purchase_char(LocationName.ernie_purch))
+    world.set_rule(world.get_location(LocationName.prof_snape_purch), can_purchase_char(LocationName.prof_snape_purch))
+    world.set_rule(world.get_location(LocationName.neville_purch), can_purchase_char(LocationName.neville_purch))
     world.set_rule(world.get_location(LocationName.ron_quidditch_purch),
-                   has_multi_for_shop(LocationName.ron_quidditch_purch))
-    world.set_rule(world.get_location(LocationName.vernon_purch), has_multi_for_shop(LocationName.vernon_purch))
-    world.set_rule(world.get_location(LocationName.tom_riddle_purch), has_multi_for_shop(LocationName.tom_riddle_purch))
+                   can_purchase_char(LocationName.ron_quidditch_purch))
+    world.set_rule(world.get_location(LocationName.vernon_purch), can_purchase_char(LocationName.vernon_purch))
+    world.set_rule(world.get_location(LocationName.tom_riddle_purch), can_purchase_char(LocationName.tom_riddle_purch))
     world.set_rule(world.get_location(LocationName.sirius_black_purch),
-                   has_multi_for_shop(LocationName.sirius_black_purch))
+                   can_purchase_char(LocationName.sirius_black_purch))
     world.set_rule(world.get_location(LocationName.remus_lupin_purch),
-                   has_multi_for_shop(LocationName.remus_lupin_purch))
-    world.set_rule(world.get_location(LocationName.wormtail_purch), has_multi_for_shop(LocationName.wormtail_purch))
+                   can_purchase_char(LocationName.remus_lupin_purch))
+    world.set_rule(world.get_location(LocationName.wormtail_purch), can_purchase_char(LocationName.wormtail_purch))
     world.set_rule(world.get_location(LocationName.rita_skeeter_purch),
-                   has_multi_for_shop(LocationName.rita_skeeter_purch))
+                   can_purchase_char(LocationName.rita_skeeter_purch))
     world.set_rule(world.get_location(LocationName.padma_patil_purch),
-                   has_multi_for_shop(LocationName.padma_patil_purch))
+                   can_purchase_char(LocationName.padma_patil_purch))
     world.set_rule(world.get_location(LocationName.station_guard_purch),
-                   has_multi_for_shop(LocationName.station_guard_purch))
-    world.set_rule(world.get_location(LocationName.prof_binns_purch), has_multi_for_shop(LocationName.prof_binns_purch))
-    world.set_rule(world.get_location(LocationName.penelope_purch), has_multi_for_shop(LocationName.penelope_purch))
-    world.set_rule(world.get_location(LocationName.susan_purch), has_multi_for_shop(LocationName.susan_purch))
-    world.set_rule(world.get_location(LocationName.tonks_purch), has_multi_for_shop(LocationName.tonks_purch))
-    world.set_rule(world.get_location(LocationName.pius_purch), has_multi_for_shop(LocationName.pius_purch))
-    world.set_rule(world.get_location(LocationName.reg_purch), has_multi_for_shop(LocationName.reg_purch))
-    world.set_rule(world.get_location(LocationName.regulus_purch), has_multi_for_shop(LocationName.regulus_purch))
-    world.set_rule(world.get_location(LocationName.scrimgeour_purch), has_multi_for_shop(LocationName.scrimgeour_purch))
-    world.set_rule(world.get_location(LocationName.scabior_purch), has_multi_for_shop(LocationName.scabior_purch))
-    world.set_rule(world.get_location(LocationName.xeno_purch), has_multi_for_shop(LocationName.xeno_purch))
-    world.set_rule(world.get_location(LocationName.yaxley_purch), has_multi_for_shop(LocationName.yaxley_purch))
-    world.set_rule(world.get_location(LocationName.zacharias_purch), has_multi_for_shop(LocationName.zacharias_purch))
+                   can_purchase_char(LocationName.station_guard_purch))
+    world.set_rule(world.get_location(LocationName.prof_binns_purch), can_purchase_char(LocationName.prof_binns_purch))
+    world.set_rule(world.get_location(LocationName.penelope_purch), can_purchase_char(LocationName.penelope_purch))
+    world.set_rule(world.get_location(LocationName.susan_purch), can_purchase_char(LocationName.susan_purch))
+    world.set_rule(world.get_location(LocationName.tonks_purch), can_purchase_char(LocationName.tonks_purch))
+    world.set_rule(world.get_location(LocationName.pius_purch), can_purchase_char(LocationName.pius_purch))
+    world.set_rule(world.get_location(LocationName.reg_purch), can_purchase_char(LocationName.reg_purch))
+    world.set_rule(world.get_location(LocationName.regulus_purch), can_purchase_char(LocationName.regulus_purch))
+    world.set_rule(world.get_location(LocationName.scrimgeour_purch), can_purchase_char(LocationName.scrimgeour_purch))
+    world.set_rule(world.get_location(LocationName.scabior_purch), can_purchase_char(LocationName.scabior_purch))
+    world.set_rule(world.get_location(LocationName.xeno_purch), can_purchase_char(LocationName.xeno_purch))
+    world.set_rule(world.get_location(LocationName.yaxley_purch), can_purchase_char(LocationName.yaxley_purch))
+    world.set_rule(world.get_location(LocationName.zacharias_purch), can_purchase_char(LocationName.zacharias_purch))
     world.set_rule(world.get_location(LocationName.waitress_treats_purch),
-                   has_multi_for_shop(LocationName.waitress_treats_purch))
+                   can_purchase_char(LocationName.waitress_treats_purch))
     world.set_rule(world.get_location(LocationName.lord_voldemort_purch),
-                   has_multi_for_shop(LocationName.lord_voldemort_purch))
+                   can_purchase_char(LocationName.lord_voldemort_purch))
     world.set_rule(world.get_location(LocationName.ron_blue_pyjamas_purch),
-                   has_multi_for_shop(LocationName.ron_blue_pyjamas_purch))
+                   can_purchase_char(LocationName.ron_blue_pyjamas_purch))
     world.set_rule(world.get_location(LocationName.neville_cardigan_purch),
-                   has_multi_for_shop(LocationName.neville_cardigan_purch))
+                   can_purchase_char(LocationName.neville_cardigan_purch))
     world.set_rule(world.get_location(LocationName.neville_pyjamas_purch),
-                   has_multi_for_shop(LocationName.neville_pyjamas_purch))
-    world.set_rule(world.get_location(LocationName.percy_purch), has_multi_for_shop(LocationName.percy_purch))
+                   can_purchase_char(LocationName.neville_pyjamas_purch))
+    world.set_rule(world.get_location(LocationName.percy_purch), can_purchase_char(LocationName.percy_purch))
     world.set_rule(world.get_location(LocationName.sirius_azkaban_purch),
-                   has_multi_for_shop(LocationName.sirius_azkaban_purch))
-    world.set_rule(world.get_location(LocationName.black_purch), has_multi_for_shop(LocationName.black_purch))
-    world.set_rule(world.get_location(LocationName.xeno_luna_purch), has_multi_for_shop(LocationName.xeno_luna_purch))
+                   can_purchase_char(LocationName.sirius_azkaban_purch))
+    world.set_rule(world.get_location(LocationName.black_purch), can_purchase_char(LocationName.black_purch))
+    world.set_rule(world.get_location(LocationName.xeno_luna_purch), can_purchase_char(LocationName.xeno_luna_purch))
     world.set_rule(world.get_location(LocationName.ron_reg_cattermole_purch),
-                   has_multi_for_shop(LocationName.ron_reg_cattermole_purch))
+                   can_purchase_char(LocationName.ron_reg_cattermole_purch))
     world.set_rule(world.get_location(LocationName.tonks_pink_coat_purch),
-                   has_multi_for_shop(LocationName.tonks_pink_coat_purch))
+                   can_purchase_char(LocationName.tonks_pink_coat_purch))
     world.set_rule(world.get_location(LocationName.ron_winter_clothes_purch),
-                   has_multi_for_shop(LocationName.ron_winter_clothes_purch))
+                   can_purchase_char(LocationName.ron_winter_clothes_purch))
     world.set_rule(world.get_location(LocationName.snape_underwear_purch),
-                   has_multi_for_shop(LocationName.snape_underwear_purch))
-    world.set_rule(world.get_location(LocationName.rowle_purch), has_multi_for_shop(LocationName.rowle_purch))
-    world.set_rule(world.get_location(LocationName.petunia_purch), has_multi_for_shop(LocationName.petunia_purch))
+                   can_purchase_char(LocationName.snape_underwear_purch))
+    world.set_rule(world.get_location(LocationName.rowle_purch), can_purchase_char(LocationName.rowle_purch))
+    world.set_rule(world.get_location(LocationName.petunia_purch), can_purchase_char(LocationName.petunia_purch))
     world.set_rule(world.get_location(LocationName.neville_tank_top_purch),
-                   has_multi_for_shop(LocationName.neville_tank_top_purch))
+                   can_purchase_char(LocationName.neville_tank_top_purch))
     world.set_rule(world.get_location(LocationName.neville_winter_purch),
-                   has_multi_for_shop(LocationName.neville_winter_purch))
-    world.set_rule(world.get_location(LocationName.parvati_purch), has_multi_for_shop(LocationName.parvati_purch))
+                   can_purchase_char(LocationName.neville_winter_purch))
+    world.set_rule(world.get_location(LocationName.parvati_purch), can_purchase_char(LocationName.parvati_purch))
     world.set_rule(world.get_location(LocationName.ron_red_sweater_purch),
-                   has_multi_for_shop(LocationName.ron_red_sweater_purch))
-    world.set_rule(world.get_location(LocationName.olivander_purch), has_multi_for_shop(LocationName.olivander_purch))
+                   can_purchase_char(LocationName.ron_red_sweater_purch))
+    world.set_rule(world.get_location(LocationName.olivander_purch), can_purchase_char(LocationName.olivander_purch))
     world.set_rule(world.get_location(LocationName.seamus_winter_purch),
-                   has_multi_for_shop(LocationName.seamus_winter_purch))
+                   can_purchase_char(LocationName.seamus_winter_purch))
     world.set_rule(world.get_location(LocationName.ron_underwear_purch),
-                   has_multi_for_shop(LocationName.ron_underwear_purch))
+                   can_purchase_char(LocationName.ron_underwear_purch))
     world.set_rule(world.get_location(LocationName.ron_wedding_purch),
-                   has_multi_for_shop(LocationName.ron_wedding_purch))
+                   can_purchase_char(LocationName.ron_wedding_purch))
     world.set_rule(world.get_location(LocationName.waitress_luchino_purch),
-                   has_multi_for_shop(LocationName.waitress_luchino_purch))
+                   can_purchase_char(LocationName.waitress_luchino_purch))
     world.set_rule(world.get_location(LocationName.petunia_green_coat_purch),
-                   has_multi_for_shop(LocationName.petunia_green_coat_purch))
-    world.set_rule(world.get_location(LocationName.seamus_purch), has_multi_for_shop(LocationName.seamus_purch))
-    world.set_rule(world.get_location(LocationName.snatcher_purch), has_multi_for_shop(LocationName.snatcher_purch))
+                   can_purchase_char(LocationName.petunia_green_coat_purch))
+    world.set_rule(world.get_location(LocationName.seamus_purch), can_purchase_char(LocationName.seamus_purch))
+    world.set_rule(world.get_location(LocationName.snatcher_purch), can_purchase_char(LocationName.snatcher_purch))
     world.set_rule(world.get_location(LocationName.ron_green_shirt_purch),
-                   has_multi_for_shop(LocationName.ron_green_shirt_purch))
+                   can_purchase_char(LocationName.ron_green_shirt_purch))
     world.set_rule(world.get_location(LocationName.neville_waiter_purch),
-                   has_multi_for_shop(LocationName.neville_waiter_purch))
+                   can_purchase_char(LocationName.neville_waiter_purch))
     world.set_rule(world.get_location(LocationName.xeno_wedding_purch),
-                   has_multi_for_shop(LocationName.xeno_wedding_purch))
-    world.set_rule(world.get_location(LocationName.skeleton_purch), has_multi_for_shop(LocationName.skeleton_purch))
+                   can_purchase_char(LocationName.xeno_wedding_purch))
+    world.set_rule(world.get_location(LocationName.skeleton_purch), can_purchase_char(LocationName.skeleton_purch))
+
+
+def set_joke_purch_logic(world):
+    world.set_rule(world.get_location(LocationName.slug_purch), has_needed_multi(LocationName.slug_purch))
+    world.set_rule(world.get_location(LocationName.rictu_purch), has_needed_multi(LocationName.rictu_purch))
+    world.set_rule(world.get_location(LocationName.entomo_purch), has_needed_multi(LocationName.entomo_purch))
+    world.set_rule(world.get_location(LocationName.taranta_purch), has_needed_multi(LocationName.taranta_purch))
+    world.set_rule(world.get_location(LocationName.loco_purch), has_needed_multi(LocationName.loco_purch))
+    world.set_rule(world.get_location(LocationName.redact_purch), has_needed_multi(LocationName.redact_purch))
+    world.set_rule(world.get_location(LocationName.colo_purch), has_needed_multi(LocationName.colo_purch))
+    world.set_rule(world.get_location(LocationName.calvo_purch), has_needed_multi(LocationName.calvo_purch))
+    world.set_rule(world.get_location(LocationName.anteo_purch), has_needed_multi(LocationName.anteo_purch))
+    world.set_rule(world.get_location(LocationName.herbi_purch), has_needed_multi(LocationName.herbi_purch))
+    world.set_rule(world.get_location(LocationName.glaci_purch), has_needed_multi(LocationName.glaci_purch))
+    world.set_rule(world.get_location(LocationName.incarc_purch), has_needed_multi(LocationName.incarc_purch))
+    world.set_rule(world.get_location(LocationName.expel_purch), has_needed_multi(LocationName.expel_purch))
+    world.set_rule(world.get_location(LocationName.flip_purch), has_needed_multi(LocationName.flip_purch))
+    world.set_rule(world.get_location(LocationName.trip_purch), has_needed_multi(LocationName.trip_purch))
+    world.set_rule(world.get_location(LocationName.stup_purch), has_needed_multi(LocationName.stup_purch))
+    world.set_rule(world.get_location(LocationName.transfig_purch), has_needed_multi(LocationName.transfig_purch))
+    world.set_rule(world.get_location(LocationName.engorg_purch), has_needed_multi(LocationName.engorg_purch))
+    world.set_rule(world.get_location(LocationName.immob_purch), has_needed_multi(LocationName.immob_purch))
+
+
+def set_gold_brick_purch_logic(world):
+    world.set_rule(world.get_location(LocationName.bb_gb2), has_needed_multi(LocationName.bb_gb2))
+    world.set_rule(world.get_location(LocationName.bb_gb3), has_needed_multi(LocationName.bb_gb3))
+    world.set_rule(world.get_location(LocationName.bb_gb4), has_needed_multi(LocationName.bb_gb4))
+    world.set_rule(world.get_location(LocationName.bb_gb5), has_needed_multi(LocationName.bb_gb5))
+    world.set_rule(world.get_location(LocationName.bb_gb6), has_needed_multi(LocationName.bb_gb6))
+    world.set_rule(world.get_location(LocationName.bb_gb7), has_needed_multi(LocationName.bb_gb7))
+    world.set_rule(world.get_location(LocationName.bb_gb8), has_needed_multi(LocationName.bb_gb8))
+    world.set_rule(world.get_location(LocationName.bb_gb9), has_needed_multi(LocationName.bb_gb9))
+    world.set_rule(world.get_location(LocationName.bb_gb10), has_needed_multi(LocationName.bb_gb10))
+    world.set_rule(world.get_location(LocationName.bb_gb11), has_needed_multi(LocationName.bb_gb11))
+    world.set_rule(world.get_location(LocationName.bb_gb12), has_needed_multi(LocationName.bb_gb12))
+    world.set_rule(world.get_location(LocationName.bb_gb13), has_needed_multi(LocationName.bb_gb13))
+    world.set_rule(world.get_location(LocationName.bb_gb14), has_needed_multi(LocationName.bb_gb14))
+    world.set_rule(world.get_location(LocationName.bb_gb15), has_needed_multi(LocationName.bb_gb15))
+    world.set_rule(world.get_location(LocationName.bb_gb16), has_needed_multi(LocationName.bb_gb16))
+
+
+def set_red_brick_purch_logic(world):
+    world.set_rule(world.get_location(LocationName.com_spec_purch), HasMultiplier(LocationName.com_spec_purch))
+    world.set_rule(world.get_location(LocationName.adv_guide_purch),
+                   HasMultiplier(LocationName.adv_guide_purch))
+    world.set_rule(world.get_location(LocationName.disguise_purch), HasMultiplier(LocationName.disguise_purch))
+    world.set_rule(world.get_location(LocationName.carrot_wand_purch),
+                   HasMultiplier(LocationName.carrot_wand_purch))
+    world.set_rule(world.get_location(LocationName.super_strength_purch),
+                   can_purchase_red_brick(LocationName.super_strength_purch))
+    world.set_rule(world.get_location(LocationName.char_token_detect_purch),
+                   can_purchase_red_brick(LocationName.char_token_detect_purch))
+    world.set_rule(world.get_location(LocationName.fall_rescue_purch),
+                   can_purchase_red_brick(LocationName.fall_rescue_purch))
+    world.set_rule(world.get_location(LocationName.char_studs_purch),
+                   can_purchase_red_brick(LocationName.char_studs_purch))
+    world.set_rule(world.get_location(LocationName.score_x2_purch), can_purchase_red_brick(LocationName.score_x2_purch))
+    world.set_rule(world.get_location(LocationName.score_x4_purch), can_purchase_red_brick(LocationName.score_x4_purch))
+    world.set_rule(world.get_location(LocationName.score_x6_purch), can_purchase_red_brick(LocationName.score_x6_purch))
+    world.set_rule(world.get_location(LocationName.score_x8_purch), can_purchase_red_brick(LocationName.score_x8_purch))
+    world.set_rule(world.get_location(LocationName.score_x10_purch),
+                   can_purchase_red_brick(LocationName.score_x10_purch))
+    world.set_rule(world.get_location(LocationName.stud_mag_purch), can_purchase_red_brick(LocationName.stud_mag_purch))
+    world.set_rule(world.get_location(LocationName.regen_hearts_purch),
+                   can_purchase_red_brick(LocationName.regen_hearts_purch))
+    world.set_rule(world.get_location(LocationName.extra_hears_purch),
+                   can_purchase_red_brick(LocationName.extra_hears_purch))
+    world.set_rule(world.get_location(LocationName.invincibility_purch),
+                   can_purchase_red_brick(LocationName.invincibility_purch))
+    world.set_rule(world.get_location(LocationName.red_brick_detect_purch),
+                   can_purchase_red_brick(LocationName.red_brick_detect_purch))
+    world.set_rule(world.get_location(LocationName.crest_detect_purch),
+                   can_purchase_red_brick(LocationName.crest_detect_purch))
+    world.set_rule(world.get_location(LocationName.gb_detect_purch),
+                   can_purchase_red_brick(LocationName.gb_detect_purch))
+    world.set_rule(world.get_location(LocationName.christmas_purch),
+                   can_purchase_red_brick(LocationName.christmas_purch))
+    world.set_rule(world.get_location(LocationName.ghost_studs_purch),
+                   can_purchase_red_brick(LocationName.ghost_studs_purch))
+    world.set_rule(world.get_location(LocationName.fast_magic_purch),
+                   can_purchase_red_brick(LocationName.fast_magic_purch))
+    world.set_rule(world.get_location(LocationName.fast_dig_purch), can_purchase_red_brick(LocationName.fast_dig_purch))
