@@ -152,6 +152,8 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.low_stair, RegionName.mid_stair)
     connect_regions(world, player, RegionName.mid_stair, RegionName.dumble_office)
     connect_regions(world, player, RegionName.dumble_office, RegionName.upper_stair)
+    connect_regions(world, player, RegionName.upper_stair, RegionName.dumble_office)
+    connect_regions(world, player, RegionName.upper_stair, RegionName.ror)
     connect_regions(world, player, RegionName.house, RegionName.slyth)
     connect_regions(world, player, RegionName.house, RegionName.huff)
     connect_regions(world, player, RegionName.house, RegionName.gryf)

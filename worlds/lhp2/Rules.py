@@ -429,6 +429,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(RegionName.low_stair + " -> " + RegionName.mid_stair), can_access_mid_grand_stair)
     world.set_rule(world.get_entrance(RegionName.mid_stair + " -> " + RegionName.dumble_office), can_access_dumb_office)
     world.set_rule(world.get_entrance(RegionName.dumble_office + " -> " + RegionName.upper_stair), can_access_upper_grand_stair)
+    world.set_rule(world.get_entrance(RegionName.upper_stair + " -> " + RegionName.dumble_office), can_access_upper_grand_stair)
     world.set_rule(world.get_entrance(RegionName.house + " -> " + RegionName.slyth), can_access_slytherin_common)
     world.set_rule(world.get_entrance(RegionName.house + " -> " + RegionName.huff), can_access_hufflepuff_common)
     world.set_rule(world.get_entrance(RegionName.house + " -> " + RegionName.raven), can_access_ravenclaw_tower)
