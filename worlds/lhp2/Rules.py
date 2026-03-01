@@ -34,11 +34,13 @@ char_is_strong = (Has(ItemName.dudley_play) | Has(ItemName.dudley_grey_play) | H
                   Has(ItemName.sirius_azkaban_play) | Has(ItemName.super_strength_unlock))
 
 # Dark Times Logic
+can_get_dt_gc = Has(ItemName.expecto_unlock)
 can_get_dt_sc = Has(ItemName.diffindo_unlock)
+can_get_dt_rc = Has(ItemName.expecto_unlock)
 can_get_dt_hc = Has(ItemName.www_box_unlock)
 can_get_dt_sip = can_use_dark_magic
-can_get_arthur_suit = can_use_dark_magic
-can_get_elphias = Has(ItemName.agua_unlock)
+can_get_arthur_suit = HasAll(ItemName.reducto_unlock, ItemName.expecto_unlock) & can_use_dark_magic
+can_get_elphias = HasAll(ItemName.agua_unlock, ItemName.expecto_unlock)
 
 # Dumbledore's Army Logic
 can_beat_da = Has(ItemName.expecto_unlock)
@@ -404,7 +406,9 @@ def set_win_con(world):
 
 
 def set_dt_logic(world):
+    world.set_rule(world.get_location(LocationName.dt_gc), can_get_dt_gc)
     world.set_rule(world.get_location(LocationName.dt_sc), can_get_dt_sc)
+    world.set_rule(world.get_location(LocationName.dt_rc), can_get_dt_rc)
     world.set_rule(world.get_location(LocationName.dt_hc), can_get_dt_hc)
     world.set_rule(world.get_location(LocationName.dt_sip), can_get_dt_sip)
     world.set_rule(world.get_location(LocationName.arthur_suit_token), can_get_arthur_suit)
