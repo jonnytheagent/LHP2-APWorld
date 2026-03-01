@@ -901,9 +901,9 @@ event_loc_table: Dict[str, LocationData] = {
     LocationName.reducto_lesson_event: LocationData(0, RegionName.y5c),
     LocationName.dumble_lesson_event: LocationData(0, RegionName.dumble_office),
     LocationName.y6_story_complete_event: LocationData(0, RegionName.dumble_office),
-    LocationName.delum_lesson_event: LocationData(0, RegionName.tshf),
-    LocationName.bag_lesson_event: LocationData(0, RegionName.tshf),
-    LocationName.apparition_lesson_event: LocationData(0, RegionName.tshf),
+    # LocationName.delum_lesson_event: LocationData(0, RegionName.tshf),
+    # LocationName.bag_lesson_event: LocationData(0, RegionName.tshf),
+    # LocationName.apparition_lesson_event: LocationData(0, RegionName.tshf),
     LocationName.cafe_lesson_event: LocationData(0, RegionName.cafe),
 }
 

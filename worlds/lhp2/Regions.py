@@ -118,7 +118,7 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
 
     connect_regions(world, player, "Menu", RegionName.diag)
     connect_regions(world, player, RegionName.diag, RegionName.knock)
-    connect_regions(world, player, RegionName.knock, RegionName.ror)
+    # connect_regions(world, player, RegionName.knock, RegionName.ror)
     connect_regions(world, player, RegionName.diag, RegionName.www)
     connect_regions(world, player, RegionName.diag, RegionName.mm)
     connect_regions(world, player, RegionName.mm, RegionName.cust)
