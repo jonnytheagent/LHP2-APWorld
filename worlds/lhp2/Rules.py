@@ -25,15 +25,23 @@ can_use_dark_mag = (Has(itm.alecto_play) | Has(itm.amycus_play) | Has(itm.doloho
                     Has(itm.black_play) | Has(itm.pius_play) | Has(itm.scabior_play) | Has(itm.snatcher_play) |
                     Has(itm.rowle_play) | Has(itm.tom_riddle_play) | Has(itm.wormtail_play) | Has(itm.yaxley_play))
 
+can_use_dm_in_hub = Has(ItemName.delum_unlock) & can_use_dark_mag
+
 can_use_spanner = (Has(itm.arthur_play) | Has(itm.arthur_suit_play) | Has(itm.arthur_cardigan_play) |
                    Has(itm.arthur_torn_suit_play))
 
 can_use_key = Has(itm.bogrod_play) | Has(itm.cole_play) | Has(itm.griphook_play)
 
-char_is_strong = (Has(itm.dudley_play) | Has(itm.dudley_grey_play) | Has(itm.dudley_shirt_play) | Has(itm.fenrir_play) |
-                  Has(itm.fang_play) | Has(itm.hagrid_play) | Has(itm.hagrid_wed_play) | Has(itm.muggle_orphan_play) |
-                  Has(itm.remus_lupin_play) | Has(itm.sirius_black_play) | Has(itm.sirius_azkaban_play) |
-                  Has(itm.vernon_play) | Has(itm.super_strength_unlock))
+can_use_key_in_hub = can_use_key & Has(itm.delum_unlock)
+
+strong_chars = (Has(itm.dudley_play) | Has(itm.dudley_grey_play) | Has(itm.dudley_shirt_play) | Has(itm.fenrir_play) |
+                Has(itm.fang_play) | Has(itm.hagrid_play) | Has(itm.hagrid_wed_play) | Has(itm.muggle_orphan_play) |
+                Has(itm.remus_lupin_play) | Has(itm.sirius_black_play) | Has(itm.sirius_azkaban_play) |
+                Has(itm.vernon_play))
+
+char_is_strong_level = strong_chars | Has(itm.super_strength_unlock)
+
+char_is_strong_hub = (strong_chars & Has(itm.delum_unlock)) | Has(itm.super_strength_unlock)
 
 # Dark Times Logic
 can_get_dt_gc = Has(itm.expecto_unlock)
@@ -46,12 +54,12 @@ can_get_elphias = HasAll(itm.agua_unlock, itm.expecto_unlock)
 
 # Dumbledore's Army Logic
 can_beat_da = Has(itm.expecto_unlock)
-can_get_da_gc = HasAll(itm.reducto_unlock, itm.specs_unlock) & char_is_strong
+can_get_da_gc = HasAll(itm.reducto_unlock, itm.specs_unlock) & char_is_strong_level
 can_get_da_sc = Has(itm.focus_unlock)
 can_get_da_rc = Has(itm.apparition_unlock)
-can_get_da_hc = HasAll(itm.reducto_unlock, itm.www_box_unlock, itm.specs_unlock) & char_is_strong
+can_get_da_hc = HasAll(itm.reducto_unlock, itm.www_box_unlock, itm.specs_unlock) & char_is_strong_level
 can_get_da_sip = Has(itm.reducto_unlock) & can_use_dark_mag
-can_get_cho_winter = HasAll(itm.reducto_unlock, itm.specs_unlock) & char_is_strong
+can_get_cho_winter = HasAll(itm.reducto_unlock, itm.specs_unlock) & char_is_strong_level
 can_get_herm_scarf = Has(itm.www_box_unlock)
 can_get_neville_winter = Has(itm.specs_unlock)
 
@@ -59,11 +67,11 @@ can_get_neville_winter = Has(itm.specs_unlock)
 can_get_foc_gc = Has(itm.reducto_unlock)
 can_get_foc_hc = can_use_dark_mag
 can_get_foc_sip = Has(itm.agua_unlock)
-can_get_molly_apron = Has(itm.reducto_unlock) & char_is_strong
+can_get_molly_apron = Has(itm.reducto_unlock) & char_is_strong_level
 can_get_snape_under = Has(itm.www_box_unlock)
 
 # Kreacher Discomforts
-can_get_kd_gc = Has(itm.apparition_unlock) & char_is_strong
+can_get_kd_gc = Has(itm.apparition_unlock) & char_is_strong_level
 can_get_kd_sc = HasAll(itm.reducto_unlock, itm.delum_unlock, itm.diffindo_unlock) & can_use_dark_mag
 can_get_kd_hc = HasAll(itm.reducto_unlock, itm.diffindo_unlock)
 can_get_kd_sip = Has(itm.reducto_unlock)
@@ -77,7 +85,7 @@ can_get_agv_rc = Has(itm.agua_unlock)
 can_get_agv_hc = Has(itm.reducto_unlock)
 can_get_agv_sip = Has(itm.www_box_unlock)
 can_get_emmeline = Has(itm.agua_unlock)
-can_get_neville = char_is_strong
+can_get_neville = char_is_strong_level
 can_get_prof_umbridge = can_use_dark_mag
 
 # A Veiled Threat Logic
@@ -101,7 +109,7 @@ can_get_milk_man = Has(itm.herm_bag_unlock)
 can_get_slug_pajamas = HasAll(itm.apparition_unlock) & can_use_dark_mag & can_use_key
 
 # Just Desserts Logic
-can_get_jd_sc = char_is_strong
+can_get_jd_sc = char_is_strong_level
 can_get_jd_rc = HasAll(itm.delum_unlock, itm.herm_bag_unlock) & can_use_dark_mag
 can_get_jd_hc = can_use_dark_mag
 can_get_jd_sip = can_use_dark_mag
@@ -121,11 +129,11 @@ can_beat_lh = HasAll(itm.diffindo_unlock, itm.www_box_unlock)
 can_get_lh_gc = Has(itm.www_box_unlock) & can_use_spanner
 can_get_lh_sc = Has(itm.www_box_unlock) & can_use_dark_mag
 can_get_lh_rc = Has(itm.reducto_unlock) & can_use_key
-can_get_lh_hc = char_is_strong
+can_get_lh_hc = char_is_strong_level
 can_get_lh_sip = can_use_dark_mag
 can_get_draco_suit = Has(itm.delum_unlock) & can_use_dark_mag
 can_get_ginny = Has(itm.agua_unlock)
-can_get_prof_slug = char_is_strong
+can_get_prof_slug = char_is_strong_level
 
 # Felix Felicis Logic
 can_access_ff_free = HasAll(itm.reducto_unlock, itm.agua_unlock)
@@ -140,11 +148,11 @@ can_get_prof_sprout = HasAll(itm.reducto_unlock, itm.specs_unlock)
 # The Horcrux and the Hand Logic
 can_access_thath_free = HasAll(itm.apparition_unlock, itm.diffindo_unlock)
 can_beat_thath = HasAll(itm.reducto_unlock, itm.agua_unlock)
-can_get_thath_sc = char_is_strong
+can_get_thath_sc = char_is_strong_level
 can_get_thath_rc = HasAll(itm.apparition_unlock, itm.herm_bag_unlock)
 can_get_thath_hc = HasAll(itm.reducto_unlock, itm.delum_unlock)
 can_get_thath_sip = HasAll(itm.reducto_unlock, itm.agua_unlock)
-can_get_hagrid_wed = HasAll(itm.reducto_unlock, itm.agua_unlock) & char_is_strong
+can_get_hagrid_wed = HasAll(itm.reducto_unlock, itm.agua_unlock) & char_is_strong_level
 can_get_prof_dumble = can_use_dark_mag
 can_get_tr_orphan = can_use_dark_mag
 
@@ -180,10 +188,9 @@ can_get_sal_rc = Has(itm.www_box_unlock)
 can_get_sal_sip = Has(itm.herm_bag_unlock) & can_use_dark_mag
 can_get_herm_gray_coat = HasAll(itm.herm_bag_unlock, itm.specs_unlock)
 
-
 # Lovegood's Lunacy Logic
 can_access_ll_free = HasAll(itm.agua_unlock, itm.herm_bag_unlock)
-can_access_lunas_room = Or(char_is_strong, HasAll(itm.specs_unlock, itm.diffindo_unlock, itm.reducto_unlock))
+can_access_lunas_room = Or(char_is_strong_level, HasAll(itm.specs_unlock, itm.diffindo_unlock, itm.reducto_unlock))
 can_beat_ll = can_access_lunas_room & Has(itm.reducto_unlock)
 can_get_ll_rc = can_access_lunas_room & Has(itm.delum_unlock)
 can_get_ll_hc = can_use_spanner
@@ -203,8 +210,8 @@ can_access_ttd_free = Has(itm.herm_bag_unlock)
 can_beat_ttd = HasAll(itm.reducto_unlock, itm.agua_unlock, itm.delum_unlock)
 can_get_ttd_gc = Has(itm.diffindo_unlock)
 can_get_ttd_sc = can_use_dark_mag
-can_get_ttd_rc = Has(itm.specs_unlock) & char_is_strong
-can_get_ttd_hc = HasAll(itm.reducto_unlock, itm.agua_unlock, itm.delum_unlock, itm.specs_unlock) & char_is_strong
+can_get_ttd_rc = Has(itm.specs_unlock) & char_is_strong_level
+can_get_ttd_hc = HasAll(itm.reducto_unlock, itm.agua_unlock, itm.delum_unlock, itm.specs_unlock) & char_is_strong_level
 can_get_ttd_sip = can_use_dark_mag
 can_get_bogrod = can_use_dark_mag
 can_get_griphook = can_use_dark_mag & Has(itm.www_box_unlock)
@@ -216,7 +223,7 @@ can_access_bts_free = HasAll(itm.agua_unlock, itm.delum_unlock, itm.www_box_unlo
 can_get_bts_sc = Has(itm.reducto_unlock)
 can_get_bts_hc = HasAll(itm.agua_unlock, itm.delum_unlock) & can_use_key
 can_get_bts_sip = HasAll(itm.agua_unlock, itm.delum_unlock)
-can_get_aberforth = HasAll(itm.agua_unlock, itm.delum_unlock) & char_is_strong
+can_get_aberforth = HasAll(itm.agua_unlock, itm.delum_unlock) & char_is_strong_level
 can_get_alecto = can_use_dark_mag
 can_get_amycus = can_use_dark_mag
 
@@ -236,10 +243,10 @@ can_get_seamus = HasAll(itm.delum_unlock, itm.www_box_unlock)
 can_access_fiend = HasAll(itm.www_box_unlock, itm.reducto_unlock, itm.herm_bag_unlock, itm.ff_unlock)
 can_access_fiend_free = HasAll(itm.specs_unlock, itm.delum_unlock)
 can_beat_fiend = HasAll(itm.agua_unlock, itm.diffindo_unlock)
-can_get_fiend_gc = char_is_strong
+can_get_fiend_gc = char_is_strong_level
 can_get_fiend_sc = can_use_dark_mag
 can_get_fiend_rc = Has(itm.agua_unlock) & can_use_dark_mag
-can_get_fiend_hc = char_is_strong
+can_get_fiend_hc = char_is_strong_level
 can_get_fiend_sip = Has(itm.specs_unlock)
 can_get_goyle = Has(itm.agua_unlock) & can_use_key
 can_get_harry_brown_jacket = HasAll(itm.agua_unlock, itm.diffindo_unlock) & can_use_spanner
@@ -252,7 +259,7 @@ can_beat_st = HasAll(itm.diffindo_unlock, itm.delum_unlock, itm.focus_unlock)
 can_get_st_gc = can_use_dark_mag
 can_get_st_sc = can_use_dark_mag
 can_get_st_rc = Has(itm.diffindo_unlock) & can_use_spanner
-can_get_st_hc = Has(itm.diffindo_unlock) & char_is_strong
+can_get_st_hc = Has(itm.diffindo_unlock) & char_is_strong_level
 can_get_death_eater = can_use_key
 can_get_fenrir = can_use_dark_mag
 can_get_prof_snape = Has(itm.diffindo_unlock) & can_use_dark_mag
@@ -261,12 +268,13 @@ can_get_prof_snape = Has(itm.diffindo_unlock) & can_use_dark_mag
 can_access_tfitp_free = HasAll(itm.reducto_unlock, itm.agua_unlock, itm.diffindo_unlock, itm.www_box_unlock)
 can_beat_tfitp = Has(itm.expecto_unlock)
 can_get_tfitp_sc = can_use_dark_mag
-can_get_tfitp_rc = Has(itm.specs_unlock) & char_is_strong
+can_get_tfitp_rc = Has(itm.specs_unlock) & char_is_strong_level
 can_get_tfitp_sip = can_use_key
 has_all_horcruxes = HasAll(itm.tr_diary, itm.gaunt_ring, itm.locket, itm.cup, itm.diadem, itm.nagini)
 defeat_voldemort = Has("Voldemort Defeated")
 
 # Hub Logic
+# Access Logic
 can_access_knockturn = HasAll(itm.diffindo_unlock, itm.dada_lesson_e_item)
 can_access_tent = HasAll(itm.herm_bag_unlock, itm.apparition_unlock, itm.cafe_lesson_e_item)
 can_access_train_grounds = HasAll(itm.agua_unlock, itm.dada_lesson_e_item)
@@ -285,6 +293,26 @@ can_access_slytherin_common = HasAll(itm.delum_unlock, itm.herm_bag_unlock, itm.
 can_access_hufflepuff_common = HasAll(itm.delum_unlock, itm.y5_hogwarts_e_item) & can_use_dark_mag
 can_access_ravenclaw_tower = HasAll(itm.y6_hogwarts_e_item, itm.agua_unlock)
 can_access_hogsmeade = Has(itm.y6_story_complete_e_item)
+can_access_cafe = Has(itm.y6_story_complete_e_item)
+
+# Collectibles
+can_get_knock_sip = can_use_dm_in_hub
+can_get_www_gb = Has(itm.y5_story_complete_e_item) & can_use_dm_in_hub
+can_get_cafe_gb = char_is_strong_hub
+can_get_tent_gb = can_use_dm_in_hub
+can_get_tent_sip = Has(itm.delum_unlock)
+can_get_kc_gb = Has(itm.dada_lesson_e_item)
+can_get_kc_rb = HasAll(itm.dada_lesson_e_item, itm.diffindo_unlock)
+can_get_hogstat_rb = can_use_dm_in_hub
+can_get_hogstat_sip = HasAll(itm.herm_bag_unlock, itm.reducto_unlock, itm.y6_story_complete_e_item)
+can_get_hogspath_gb = char_is_strong_hub
+can_get_hogspath_rb = Has(itm.delum_unlock)
+can_get_hogspath_sip = Has(itm.reducto_unlock)
+can_get_hogs_gb = can_use_key_in_hub
+can_get_hogs_sip = Has(itm.delum_unlock)
+can_get_hogwpath_gb = HasAll(itm.reducto_unlock, itm.dada_lesson_e_item)
+can_get_hogwpath_rb = Has(itm.herm_bag_unlock)
+can_get_hogwpath_sip = Has(itm.dada_lesson_e_item)
 
 # Shop Logic
 has_high_multi = (Has(itm.score_x6_unlock) | Has(itm.score_x8_unlock) | Has(itm.score_x10_unlock) |
@@ -366,6 +394,8 @@ def set_rules(world: "LHP2World"):
     set_fiend_logic(world)
     set_st_logic(world)
     set_tfitp_logic(world)
+    # Hub Logic
+    set_hub_collect_logic(world)
     # Shop Logic
     set_char_purch_logic(world)
     set_joke_purch_logic(world)
@@ -420,6 +450,7 @@ def set_entrance_rules(world):
     # Hub Entrance Rules
     world.set_rule(world.get_entrance(regn.diag + " -> " + regn.knock), can_access_knockturn)
     world.set_rule(world.get_entrance(regn.lond + " -> " + regn.tent), can_access_tent)
+    world.set_rule(world.get_entrance(regn.lond + " -> " + regn.cafe), can_access_cafe)
     world.set_rule(world.get_entrance(regn.court + " -> " + regn.tg), can_access_train_grounds)
     world.set_rule(world.get_entrance(regn.foyer + " -> " + regn.lib), can_access_library)
     world.set_rule(world.get_entrance(regn.ground + " -> " + regn.lake), can_access_lake)
@@ -732,6 +763,26 @@ def set_tfitp_logic(world):
     world.set_rule(world.get_location(locn.tfitp_sc), can_get_tfitp_sc)
     world.set_rule(world.get_location(locn.tfitp_rc), can_get_tfitp_rc)
     world.set_rule(world.get_location(locn.tfitp_sip), can_get_tfitp_sip)
+
+
+def set_hub_collect_logic(world):
+    world.set_rule(world.get_location(locn.knock_sip), can_get_knock_sip)
+    world.set_rule(world.get_location(locn.www_gb), can_get_www_gb)
+    world.set_rule(world.get_location(locn.cafe_gb), can_get_cafe_gb)
+    world.set_rule(world.get_location(locn.tent_gb), can_get_tent_gb)
+    world.set_rule(world.get_location(locn.tent_sip), can_get_tent_sip)
+    world.set_rule(world.get_location(locn.kcs_gb), can_get_kc_gb)
+    world.set_rule(world.get_location(locn.kcs_rb), can_get_kc_rb)
+    world.set_rule(world.get_location(locn.hogstat_rb), can_get_hogstat_rb)
+    world.set_rule(world.get_location(locn.hogstat_sip), can_get_hogstat_sip)
+    world.set_rule(world.get_location(locn.hogspath_gb), can_get_hogspath_gb)
+    world.set_rule(world.get_location(locn.hogspath_rb), can_get_hogspath_rb)
+    world.set_rule(world.get_location(locn.hogspath_sip), can_get_hogspath_sip)
+    world.set_rule(world.get_location(locn.hogs_gb), can_get_hogs_gb)
+    world.set_rule(world.get_location(locn.hogs_sip), can_get_hogs_sip)
+    world.set_rule(world.get_location(locn.hogwpath_gb), can_get_hogwpath_gb)
+    world.set_rule(world.get_location(locn.hogwpath_rb), can_get_hogwpath_rb)
+    world.set_rule(world.get_location(locn.hogwpath_sip), can_get_hogwpath_sip)
 
 
 def set_char_purch_logic(world):
