@@ -19,11 +19,11 @@ regn = RegionName
 
 # Helper Rules
 can_use_dark_mag = (Has(itm.alecto_play) | Has(itm.amycus_play) | Has(itm.dolohov_play) | Has(itm.bellatrix_play) |
-                    Has(itm.bellatrix_azka_play) | Has(itm.death_eater_play) | Has(itm.fenrir_play) |
-                    Has(itm.grindel_old_play) | Has(itm.grindel_young_play) | Has(itm.lord_voldemort_play) |
-                    Has(itm.lucius_play) | Has(itm.lucius_death_eater_play) | Has(itm.black_play) |
-                    Has(itm.pius_play) | Has(itm.scabior_play) | Has(itm.snatcher_play) | Has(itm.rowle_play) |
-                    Has(itm.tom_riddle_play))
+                    Has(itm.bellatrix_azka_play) | Has(itm.death_eater_play) | Has(itm.dolohov_workman_play) |
+                    Has(itm.fenrir_play) | Has(itm.grindel_old_play) | Has(itm.grindel_young_play) |
+                    Has(itm.lord_voldemort_play) | Has(itm.lucius_play) | Has(itm.lucius_death_eater_play) |
+                    Has(itm.black_play) | Has(itm.pius_play) | Has(itm.scabior_play) | Has(itm.snatcher_play) |
+                    Has(itm.rowle_play) | Has(itm.tom_riddle_play) | Has(itm.wormtail_play) | Has(itm.yaxley_play))
 
 can_use_spanner = (Has(itm.arthur_play) | Has(itm.arthur_suit_play) | Has(itm.arthur_cardigan_play) |
                    Has(itm.arthur_torn_suit_play))
@@ -31,8 +31,9 @@ can_use_spanner = (Has(itm.arthur_play) | Has(itm.arthur_suit_play) | Has(itm.ar
 can_use_key = Has(itm.bogrod_play) | Has(itm.cole_play) | Has(itm.griphook_play)
 
 char_is_strong = (Has(itm.dudley_play) | Has(itm.dudley_grey_play) | Has(itm.dudley_shirt_play) | Has(itm.fenrir_play) |
-                  Has(itm.fang_play) | Has(itm.hagrid_play) | Has(itm.hagrid_wed_play) | Has(itm.remus_lupin_play) |
-                  Has(itm.sirius_black_play) | Has(itm.sirius_azkaban_play) | Has(itm.super_strength_unlock))
+                  Has(itm.fang_play) | Has(itm.hagrid_play) | Has(itm.hagrid_wed_play) | Has(itm.muggle_orphan_play) |
+                  Has(itm.remus_lupin_play) | Has(itm.sirius_black_play) | Has(itm.sirius_azkaban_play) |
+                  Has(itm.vernon_play) | Has(itm.super_strength_unlock))
 
 # Dark Times Logic
 can_get_dt_gc = Has(itm.expecto_unlock)
