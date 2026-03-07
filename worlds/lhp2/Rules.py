@@ -279,6 +279,7 @@ can_access_knockturn = HasAll(itm.diffindo_unlock, itm.dada_lesson_e_item)
 can_access_tent = HasAll(itm.herm_bag_unlock, itm.apparition_unlock, itm.cafe_lesson_e_item)
 can_access_train_grounds = HasAll(itm.agua_unlock, itm.dada_lesson_e_item)
 can_access_library = HasAll(itm.agua_unlock, itm.y6_hogwarts_e_item)
+can_access_hog_grounds = Has(itm.dada_lesson_e_item)
 can_access_lake = HasAll(itm.herm_bag_unlock, itm.cafe_lesson_e_item)
 can_access_quid = HasAll(itm.delum_unlock, itm.cafe_lesson_e_item)
 can_access_potions = Has(itm.y6_hogwarts_e_item)
@@ -313,6 +314,14 @@ can_get_hogs_sip = Has(itm.delum_unlock)
 can_get_hogwpath_gb = HasAll(itm.reducto_unlock, itm.dada_lesson_e_item)
 can_get_hogwpath_rb = Has(itm.herm_bag_unlock)
 can_get_hogwpath_sip = Has(itm.dada_lesson_e_item)
+can_get_court_gb = HasAll(itm.www_box_unlock, itm.dada_lesson_e_item)
+can_get_court_rb = HasAll(itm.diffindo_unlock, itm.dada_lesson_e_item)
+can_get_court_sip = Has(itm.delum_unlock)
+can_get_tg_gb = can_use_dm_in_hub
+can_get_herb_gb = Has(itm.diffindo_unlock)
+can_get_grounds_gb = char_is_strong_hub
+can_get_grounds_rb = Has(itm.specs_unlock)
+
 
 # Shop Logic
 has_high_multi = (Has(itm.score_x6_unlock) | Has(itm.score_x8_unlock) | Has(itm.score_x10_unlock) |
@@ -453,6 +462,7 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(regn.lond + " -> " + regn.cafe), can_access_cafe)
     world.set_rule(world.get_entrance(regn.court + " -> " + regn.tg), can_access_train_grounds)
     world.set_rule(world.get_entrance(regn.foyer + " -> " + regn.lib), can_access_library)
+    world.set_rule(world.get_entrance(regn.foyer + " -> " + regn.ground), can_access_hog_grounds)
     world.set_rule(world.get_entrance(regn.ground + " -> " + regn.lake), can_access_lake)
     world.set_rule(world.get_entrance(regn.ground + " -> " + regn.qp), can_access_quid)
     world.set_rule(world.get_entrance(regn.cl + " -> " + regn.pot), can_access_potions)
@@ -783,6 +793,13 @@ def set_hub_collect_logic(world):
     world.set_rule(world.get_location(locn.hogwpath_gb), can_get_hogwpath_gb)
     world.set_rule(world.get_location(locn.hogwpath_rb), can_get_hogwpath_rb)
     world.set_rule(world.get_location(locn.hogwpath_sip), can_get_hogwpath_sip)
+    world.set_rule(world.get_location(locn.court_gb), can_get_court_gb)
+    world.set_rule(world.get_location(locn.court_rb), can_get_court_rb)
+    world.set_rule(world.get_location(locn.court_sip), can_get_court_sip)
+    world.set_rule(world.get_location(locn.tg_gb), can_get_tg_gb)
+    world.set_rule(world.get_location(locn.herb_gb), can_get_herb_gb)
+    world.set_rule(world.get_location(locn.ground_gb), can_get_grounds_gb)
+    world.set_rule(world.get_location(locn.ground_rb), can_get_grounds_rb)
 
 
 def set_char_purch_logic(world):
