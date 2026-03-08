@@ -321,7 +321,15 @@ can_get_tg_gb = can_use_dm_in_hub
 can_get_herb_gb = Has(itm.diffindo_unlock)
 can_get_grounds_gb = char_is_strong_hub
 can_get_grounds_rb = Has(itm.specs_unlock)
-
+can_get_thest_gb = Has(itm.thestral_lesson_e_item)
+can_get_thest_rb = Has(itm.thestral_lesson_e_item) & can_use_dm_in_hub
+can_get_thest_sip = Has(itm.thestral_lesson_e_item) & can_use_dm_in_hub
+can_get_lake_rb = Has(itm.reducto_unlock)
+can_get_lake_sip = can_use_dm_in_hub
+can_get_foyer_gb = Has(itm.y5_hogwarts_e_item)
+can_get_foyer_sip = Has(itm.y5_hogwarts_e_item)
+can_get_stair_gb = Has(itm.diffindo_unlock)
+can_get_stair_sip = HasAll(itm.diffindo_unlock, itm.dada_lesson_e_item)
 
 # Shop Logic
 has_high_multi = (Has(itm.score_x6_unlock) | Has(itm.score_x8_unlock) | Has(itm.score_x10_unlock) |
@@ -800,6 +808,15 @@ def set_hub_collect_logic(world):
     world.set_rule(world.get_location(locn.herb_gb), can_get_herb_gb)
     world.set_rule(world.get_location(locn.ground_gb), can_get_grounds_gb)
     world.set_rule(world.get_location(locn.ground_rb), can_get_grounds_rb)
+    world.set_rule(world.get_location(locn.thest_gb), can_get_thest_gb)
+    world.set_rule(world.get_location(locn.thest_rb), can_get_thest_rb)
+    world.set_rule(world.get_location(locn.thest_sip), can_get_thest_sip)
+    world.set_rule(world.get_location(locn.lake_rb), can_get_lake_rb)
+    world.set_rule(world.get_location(locn.lake_sip), can_get_lake_sip)
+    world.set_rule(world.get_location(locn.foyer_gb), can_get_foyer_gb)
+    world.set_rule(world.get_location(locn.foyer_sip), can_get_foyer_sip)
+    world.set_rule(world.get_location(locn.stair_gb), can_get_stair_gb)
+    world.set_rule(world.get_location(locn.stair_sip), can_get_stair_sip)
 
 
 def set_char_purch_logic(world):

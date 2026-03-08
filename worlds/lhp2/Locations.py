@@ -312,6 +312,7 @@ character_token_location_table: Dict[str, LocationData] = {
     LocationName.charity_token: LocationData(base_location_id + 287, RegionName.pot),
     LocationName.charlie_token: LocationData(base_location_id + 288, RegionName.wc),
     LocationName.cormac_token: LocationData(base_location_id + 289, RegionName.ror),
+    #  TODO: Update grand staircase regions
     LocationName.dedalus_token: LocationData(base_location_id + 290, RegionName.low_stair),
     LocationName.dirk_token: LocationData(base_location_id + 291, RegionName.ror),
     LocationName.dolohov_token: LocationData(base_location_id + 292, RegionName.ast),
@@ -740,7 +741,7 @@ hub_gb_loc_table: Dict[str, LocationData] = {
     LocationName.dada_gb: LocationData(base_location_id + 745, RegionName.dada),
     LocationName.divc_gb: LocationData(base_location_id + 746, RegionName.divc),
     LocationName.cl_gb: LocationData(base_location_id + 747, RegionName.cl),
-    LocationName.stair_gb: LocationData(base_location_id + 748, RegionName.low_stair),
+    LocationName.stair_gb: LocationData(base_location_id + 748, RegionName.mid_stair),
     LocationName.lib_gb: LocationData(base_location_id + 749, RegionName.lib),
     LocationName.foyer_gb: LocationData(base_location_id + 750, RegionName.foyer),
     LocationName.mm_gb: LocationData(base_location_id + 751, RegionName.mm),
