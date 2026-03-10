@@ -43,6 +43,11 @@ char_is_strong_level = strong_chars | Has(itm.super_strength_unlock)
 
 char_is_strong_hub = (strong_chars & Has(itm.delum_unlock)) | Has(itm.super_strength_unlock)
 
+ravenclaw_chars = (Has(itm.cho_play) | Has(itm.cho_winter_play) | Has(itm.luna_play) | Has(itm.luna_blue_jumper_play) |
+                   Has(itm.luna_overalls_play) | Has(itm.luna_pink_dress_play) | Has(itm.luna_purple_coat_play) |
+                   Has(itm.luna_yellow_dress_play) | Has(itm.belby_play) | Has(itm.padma_patil_play) |
+                   Has(itm.penelope_play))
+
 # Dark Times Logic
 can_get_dt_gc = Has(itm.expecto_unlock)
 can_get_dt_sc = Has(itm.diffindo_unlock)
@@ -286,15 +291,17 @@ can_access_potions = Has(itm.y6_hogwarts_e_item)
 can_access_div_court = HasAll(itm.diffindo_unlock, itm.dada_lesson_e_item)
 can_access_astron = HasAll(itm.herm_bag_unlock, itm.y6_hogwarts_e_item)
 can_access_great_hall = Has(itm.thestral_lesson_e_item)
-can_access_weasley_courtyard = Has(itm.focus_lesson_e_item)
+can_access_weasley_courtyard = HasAll(itm.focus_lesson_e_item, itm.www_box_unlock)
 can_access_mid_grand_stair = HasAll(itm.draught_lesson_e_item, itm.diffindo_unlock)
 can_access_dumb_office = HasAll(itm.draught_lesson_e_item, itm.www_box_unlock)
 can_access_upper_grand_stair = HasAll(itm.draught_lesson_e_item, itm.agua_unlock)
-can_access_slytherin_common = HasAll(itm.delum_unlock, itm.herm_bag_unlock, itm.y5_hogwarts_e_item) & can_use_dark_mag
-can_access_hufflepuff_common = HasAll(itm.delum_unlock, itm.y5_hogwarts_e_item) & can_use_dark_mag
+can_access_slytherin_common = HasAll(itm.delum_unlock, itm.herm_bag_unlock, itm.y5_hogwarts_e_item) & can_use_dm_in_hub
+can_access_hufflepuff_common = HasAll(itm.delum_unlock, itm.y5_hogwarts_e_item) & can_use_dm_in_hub
 can_access_ravenclaw_tower = HasAll(itm.y6_hogwarts_e_item, itm.agua_unlock)
-can_access_hogsmeade = Has(itm.y6_story_complete_e_item)
+can_access_hogsmeade = Has(itm.y6_hogwarts_e_item)
 can_access_cafe = Has(itm.y6_story_complete_e_item)
+can_access_y5c = Has(itm.diffindo_unlock)
+can_access_y6c = Has(itm.agua_unlock)
 
 # Collectibles
 can_get_knock_sip = can_use_dm_in_hub
@@ -330,6 +337,40 @@ can_get_foyer_gb = Has(itm.y5_hogwarts_e_item)
 can_get_foyer_sip = Has(itm.y5_hogwarts_e_item)
 can_get_stair_gb = Has(itm.diffindo_unlock)
 can_get_stair_sip = HasAll(itm.diffindo_unlock, itm.dada_lesson_e_item)
+can_get_dorm_lobby_gb = Has(itm.y5_hogwarts_e_item)
+can_get_dorm_lobby_sip = Has(itm.y5_hogwarts_e_item)
+can_get_gryf_common_gb = HasAll(itm.dada_lesson_e_item, itm.reducto_unlock)
+can_get_gryf_common_sip = HasAll(itm.dada_lesson_e_item, itm.agua_unlock)
+can_get_raven_tower_sip = can_use_dm_in_hub
+can_get_lib_rb = HasAll(itm.delum_unlock, itm.diffindo_unlock) & ravenclaw_chars
+can_get_lib_sip = Has(itm.herm_bag_unlock)
+can_get_ghl_gb = Has(itm.focus_unlock)
+can_get_ghl_rb = can_use_dm_in_hub
+can_get_ghl_sip = Has(itm.delum_unlock)
+can_get_wc_gb = Has(itm.owls_lesson_e_item)
+can_get_wc_rb = can_use_dm_in_hub & Has(itm.owls_lesson_e_item)
+can_get_wc_sip = HasAll(itm.reducto_unlock, itm.owls_lesson_e_item)
+can_get_wcs_sip = can_use_dm_in_hub & Has(itm.owls_lesson_e_item)
+can_get_gh_rb = can_use_dm_in_hub
+can_get_gh_sip = Has(itm.reducto_unlock)
+can_get_ror_gb = can_use_dm_in_hub
+can_get_ror_rb = Has(itm.reducto_unlock)
+can_get_cl_gb = Has(itm.draught_lesson_e_item)
+can_get_cl_sip = HasAll(itm.reducto_unlock, itm.dada_lesson_e_item)
+can_get_y5c_gb = Has(itm.diffindo_lesson_e_item)
+can_get_y5c_sip = Has(itm.diffindo_lesson_e_item)
+can_get_y6c_gb = Has(itm.agua_lesson_e_item)
+can_get_y6c_sip = Has(itm.agua_lesson_e_item)
+can_get_dada_gb = Has(itm.dada_lesson_e_item)
+can_get_dada_rb = Has(itm.dada_lesson_e_item)
+can_get_dada_sip = Has(itm.dada_lesson_e_item) & can_use_dm_in_hub
+can_get_pot_gb = Has(itm.draught_lesson_e_item)
+can_get_pot_sip = Has(itm.draught_lesson_e_item)
+can_get_divc_gb = Has(itm.specs_unlock)
+can_get_divc_rb = Has(itm.agua_unlock)
+can_get_divc_sip = Has(itm.agua_unlock)
+can_get_div_rb = Has(itm.specs_unlock)
+can_get_ast_rb = can_use_dm_in_hub
 
 # Shop Logic
 has_high_multi = (Has(itm.score_x6_unlock) | Has(itm.score_x8_unlock) | Has(itm.score_x10_unlock) |
@@ -486,25 +527,27 @@ def set_entrance_rules(world):
     world.set_rule(world.get_entrance(regn.house + " -> " + regn.huff), can_access_hufflepuff_common)
     world.set_rule(world.get_entrance(regn.house + " -> " + regn.raven), can_access_ravenclaw_tower)
     world.set_rule(world.get_entrance(regn.hogwpath + " -> " + regn.hogspath), can_access_hogsmeade)
+    world.set_rule(world.get_entrance(regn.cl + " -> " + regn.y5c), can_access_y5c)
+    world.set_rule(world.get_entrance(regn.cl + " -> " + regn.y6c), can_access_y6c)
 
 
 def set_lesson_logic(world):
     world.set_rule(world.get_location(locn.dada_lesson), Has(itm.y5_hogwarts_e_item))
     world.set_rule(world.get_location(locn.thestral_lesson), Has(itm.dada_lesson_e_item))
     world.set_rule(world.get_location(locn.dueling_lesson), Has(itm.thestral_lesson_e_item))
-    world.set_rule(world.get_location(locn.diffindo_lesson), HasAll(itm.diffindo_unlock, itm.dueling_lesson_e_item))
+    world.set_rule(world.get_location(locn.diffindo_lesson), Has(itm.dueling_lesson_e_item))
     world.set_rule(world.get_location(locn.patroneous_lesson), HasAll(itm.expecto_unlock, itm.diffindo_lesson_e_item))
     world.set_rule(world.get_location(locn.grawp_lesson), Has(itm.patroneous_lesson_e_item))
     world.set_rule(world.get_location(locn.focus_lesson), Has(itm.grawp_lesson_e_item))
-    world.set_rule(world.get_location(locn.owls_lesson), HasAll(itm.focus_lesson_e_item, itm.www_box_unlock))
+    world.set_rule(world.get_location(locn.owls_lesson), Has(itm.focus_lesson_e_item))
     world.set_rule(world.get_location(locn.y5_story_complete), Has(itm.owls_lesson_e_item))
     world.set_rule(world.get_location(locn.specs_lesson), HasAll(itm.y5_story_complete_e_item, itm.specs_unlock))
     world.set_rule(world.get_location(locn.y6_hogwarts), Has(itm.specs_lesson_e_item))
     world.set_rule(world.get_location(locn.draught_lesson), Has(itm.y6_hogwarts_e_item))
     world.set_rule(world.get_location(locn.vial_lesson), Has(itm.draught_lesson_e_item))
-    world.set_rule(world.get_location(locn.agua_lesson), HasAll(itm.vial_lesson_e_item, itm.agua_unlock))
+    world.set_rule(world.get_location(locn.agua_lesson), HasAll(itm.vial_lesson_e_item))
     world.set_rule(world.get_location(locn.reducto_lesson), HasAll(itm.agua_lesson_e_item, itm.reducto_unlock))
-    world.set_rule(world.get_location(locn.dumble_lesson), HasAll(itm.reducto_lesson_e_item, itm.reducto_unlock))
+    world.set_rule(world.get_location(locn.dumble_lesson), Has(itm.reducto_lesson_e_item))
     world.set_rule(world.get_location(locn.y6_story_complete), Has(itm.dumble_lesson_e_item))
     world.set_rule(world.get_location(locn.cafe_lesson), Has(itm.y6_story_complete_e_item))
 
@@ -817,6 +860,40 @@ def set_hub_collect_logic(world):
     world.set_rule(world.get_location(locn.foyer_sip), can_get_foyer_sip)
     world.set_rule(world.get_location(locn.stair_gb), can_get_stair_gb)
     world.set_rule(world.get_location(locn.stair_sip), can_get_stair_sip)
+    world.set_rule(world.get_location(locn.house_gb), can_get_dorm_lobby_gb)
+    world.set_rule(world.get_location(locn.house_sip), can_get_dorm_lobby_sip)
+    world.set_rule(world.get_location(locn.gryf_gb), can_get_gryf_common_gb)
+    world.set_rule(world.get_location(locn.gryf_sip), can_get_gryf_common_sip)
+    world.set_rule(world.get_location(locn.raven_sip), can_get_raven_tower_sip)
+    world.set_rule(world.get_location(locn.lib_rb), can_get_lib_rb)
+    world.set_rule(world.get_location(locn.lib_sip), can_get_lib_sip)
+    world.set_rule(world.get_location(locn.ghl_gb), can_get_ghl_gb)
+    world.set_rule(world.get_location(locn.ghl_rb), can_get_ghl_rb)
+    world.set_rule(world.get_location(locn.ghl_sip), can_get_ghl_sip)
+    world.set_rule(world.get_location(locn.wc_gb), can_get_wc_gb)
+    world.set_rule(world.get_location(locn.wc_rb), can_get_wc_rb)
+    world.set_rule(world.get_location(locn.wc_sip), can_get_wc_sip)
+    world.set_rule(world.get_location(locn.wcs_sip), can_get_wcs_sip)
+    world.set_rule(world.get_location(locn.gh_rb), can_get_gh_rb)
+    world.set_rule(world.get_location(locn.gh_sip), can_get_gh_sip)
+    world.set_rule(world.get_location(locn.ror_gb), can_get_ror_gb)
+    world.set_rule(world.get_location(locn.ror_rb), can_get_ror_rb)
+    world.set_rule(world.get_location(locn.cl_gb), can_get_cl_gb)
+    world.set_rule(world.get_location(locn.cl_sip), can_get_cl_sip)
+    world.set_rule(world.get_location(locn.y5c_gb), can_get_y5c_gb)
+    world.set_rule(world.get_location(locn.y5c_sip), can_get_y5c_sip)
+    world.set_rule(world.get_location(locn.y6c_gb), can_get_y6c_gb)
+    world.set_rule(world.get_location(locn.y6c_sip), can_get_y6c_sip)
+    world.set_rule(world.get_location(locn.dada_gb), can_get_dada_gb)
+    world.set_rule(world.get_location(locn.dada_rb), can_get_dada_rb)
+    world.set_rule(world.get_location(locn.dada_sip), can_get_dada_sip)
+    world.set_rule(world.get_location(locn.pot_gb), can_get_pot_gb)
+    world.set_rule(world.get_location(locn.pot_sip), can_get_pot_sip)
+    world.set_rule(world.get_location(locn.divc_gb), can_get_divc_gb)
+    world.set_rule(world.get_location(locn.divc_rb), can_get_divc_rb)
+    world.set_rule(world.get_location(locn.divc_sip), can_get_divc_sip)
+    world.set_rule(world.get_location(locn.div_rb), can_get_div_rb)
+    world.set_rule(world.get_location(locn.ast_rb), can_get_ast_rb)
 
 
 def set_char_purch_logic(world):
