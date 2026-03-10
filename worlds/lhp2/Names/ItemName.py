@@ -725,6 +725,7 @@ tfitp_tw = "The Flaw in the Plan: True Wizard"
 
 # Gold Brick Definitions
 gb = "Gold Brick"
+gb5 = "Gold Brick x5"
 
 # Red Brick Definitions
 com_spec_purchasable = "Comedy Specs Purchasable"

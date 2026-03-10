@@ -698,9 +698,14 @@ true_wizard_item_table: Dict[str, LHP2ItemData] = {
     ItemName.tfitp_tw: LHP2ItemData(base_item_id + 698),
 }
 
+purp_stud_item_table: Dict[str, LHP2ItemData] = {
+    ItemName.purp_stud: LHP2ItemData(base_item_id + 699, qty=6),
+}
+
 # Gold Bricks 700 - 899
 gold_brick_item_table: Dict[str, LHP2ItemData] = {
-    ItemName.gb: LHP2ItemData(base_item_id + 700, qty=53),
+    ItemName.gb: LHP2ItemData(base_item_id + 700, qty=52),
+    ItemName.gb5: LHP2ItemData(base_item_id + 701, qty=1),
 }
 
 # Red Brick Purchasable 900 - 935
@@ -801,10 +806,6 @@ ability_item_table: Dict[str, LHP2ItemData] = {
     ItemName.www_box_unlock: LHP2ItemData(base_item_id + 1024, ItemClassification.progression),
     ItemName.specs_unlock: LHP2ItemData(base_item_id + 1025, ItemClassification.progression),
     ItemName.herm_bag_unlock: LHP2ItemData(base_item_id + 1026, ItemClassification.progression),
-}
-
-purp_stud_item_table: Dict[str, LHP2ItemData] = {
-    ItemName.purp_stud: LHP2ItemData(base_item_id + 2000, qty=6),
 }
 
 item_data_table = {
