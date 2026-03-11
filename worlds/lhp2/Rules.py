@@ -415,6 +415,7 @@ can_get_madam_pince = can_use_dm_in_hub
 can_get_mafalda = HasAll(itm.agua_unlock, itm.dada_lesson_e_item)
 can_get_belby = can_use_dm_in_hub
 can_get_mary = HasAll(itm.agua_unlock, itm.dada_lesson_e_item)
+can_get_mcgonagall_black = Has(itm.cafe_lesson_e_item)
 can_get_michael = Has(itm.reducto_unlock)
 can_get_ministry_guard = can_use_key_in_hub
 can_get_myrtle = Has(itm.reducto_unlock)
@@ -1016,6 +1017,7 @@ def set_hub_token_logic(world):
     world.set_rule(world.get_location(locn.mafalda_token), can_get_mafalda)
     world.set_rule(world.get_location(locn.belby_token), can_get_belby)
     world.set_rule(world.get_location(locn.mary_cattermole_token), can_get_mary)
+    world.set_rule(world.get_location(locn.mcgon_black_token), can_get_mcgonagall_black)
     world.set_rule(world.get_location(locn.michael_token), can_get_michael)
     world.set_rule(world.get_location(locn.ministry_guard_token), can_get_ministry_guard)
     world.set_rule(world.get_location(locn.myrtle_token), can_get_myrtle)
