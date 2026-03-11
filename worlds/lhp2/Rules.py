@@ -398,6 +398,55 @@ can_get_george = Has(itm.y5_story_complete_e_item)
 can_get_ginny_pyjamas = Has(itm.y5_hogwarts_e_item)
 can_get_goyle_jumper = HasAll(itm.agua_unlock, itm.dada_lesson_e_item)
 can_get_gregorovitch = Has(itm.dada_lesson_e_item)
+can_get_hannah = Has(itm.specs_unlock)
+can_get_harry_pyjamas = Has(itm.y5_hogwarts_e_item)
+can_get_herm_ball_gown = Has(itm.y5_hogwarts_e_item)
+can_get_herm_cardigan = Has(itm.y5_hogwarts_e_item)
+can_get_james_young = char_is_strong_hub
+can_get_katie_bell = can_use_dm_in_hub & Has(itm.thestral_lesson_e_item)
+can_get_lavender = Has(itm.agua_lesson_e_item)
+can_get_lily_casual = HasAll(itm.reducto_unlock, itm.dada_lesson_e_item)
+can_get_lucius = can_use_dm_in_hub
+can_get_luna_blue = Has(itm.thestral_lesson_e_item)
+can_get_luna_overalls = HasAll(itm.reducto_unlock, itm.dada_lesson_e_item)
+can_get_luna_pink = Has(itm.specs_unlock)
+can_get_luna = Has(itm.dada_lesson_e_item)
+can_get_madam_pince = can_use_dm_in_hub
+can_get_mafalda = HasAll(itm.agua_unlock, itm.dada_lesson_e_item)
+can_get_belby = can_use_dm_in_hub
+can_get_mary = HasAll(itm.agua_unlock, itm.dada_lesson_e_item)
+can_get_michael = Has(itm.reducto_unlock)
+can_get_ministry_guard = can_use_key_in_hub
+can_get_myrtle = Has(itm.reducto_unlock)
+can_get_mrs_black = can_use_dm_in_hub
+can_get_mrs_cole = can_use_dm_in_hub
+can_get_narcissa = Has(itm.agua_unlock)
+can_get_neville_tank = HasAll(itm.reducto_unlock, itm.dada_lesson_e_item)
+can_get_neville_waiter = Has(itm.specs_unlock)
+can_get_padma = Has(itm.thestral_lesson_e_item)
+can_get_petunia_green = Has(itm.cafe_lesson_e_item)
+can_get_petunia = Has(itm.cafe_lesson_e_item)
+can_get_pius = can_use_dm_in_hub
+can_get_prof_binns = can_use_key_in_hub
+can_get_prof_flitwick = HasAll(itm.agua_unlock, itm.diffindo_lesson_e_item)
+can_get_prof_grub = Has(itm.agua_unlock)
+can_get_prof_mcgonagall = can_use_key_in_hub
+can_get_prof_trelawney = Has(itm.agua_unlock)
+can_get_reg_catter = Has(itm.agua_unlock)
+can_get_regulus = Has(itm.agua_unlock)
+can_get_rita = HasAll(itm.agua_unlock, itm.dada_lesson_e_item)
+can_get_ron_blue = Has(itm.y5_hogwarts_e_item)
+can_get_ron_green = HasAll(itm.reducto_unlock, itm.www_box_unlock)
+can_get_rufus = Has(itm.delum_unlock)
+can_get_scabior = can_use_dm_in_hub
+can_get_slug_young = can_use_dm_in_hub
+can_get_snatcher = can_use_dm_in_hub
+can_get_susan_bones = Has(itm.y5_hogwarts_e_item)
+can_get_rowle = can_use_dm_in_hub
+can_get_umbridge_wizen = Has(itm.dada_lesson_e_item) & can_use_dm_in_hub
+can_get_vernon = Has(itm.cafe_lesson_e_item)
+can_get_waitress_luchino = Has(itm.cafe_lesson_e_item)
+can_get_yaxley = can_use_dm_in_hub
 
 # Shop Logic
 has_high_multi = (Has(itm.score_x6_unlock) | Has(itm.score_x8_unlock) | Has(itm.score_x10_unlock) |
@@ -949,6 +998,55 @@ def set_hub_token_logic(world):
     world.set_rule(world.get_location(locn.ginny_pyjamas_token), can_get_ginny_pyjamas)
     world.set_rule(world.get_location(locn.goyle_jumper_token), can_get_goyle_jumper)
     world.set_rule(world.get_location(locn.gregorovitch_token), can_get_gregorovitch)
+    world.set_rule(world.get_location(locn.hannah_token), can_get_hannah)
+    world.set_rule(world.get_location(locn.harry_pyjamas_token), can_get_harry_pyjamas)
+    world.set_rule(world.get_location(locn.herm_ball_token), can_get_herm_ball_gown)
+    world.set_rule(world.get_location(locn.herm_cardigan_token), can_get_herm_cardigan)
+    world.set_rule(world.get_location(locn.james_young_token), can_get_james_young)
+    world.set_rule(world.get_location(locn.katie_token), can_get_katie_bell)
+    world.set_rule(world.get_location(locn.lavender_token), can_get_lavender)
+    world.set_rule(world.get_location(locn.lily_young_casual_token), can_get_lily_casual)
+    world.set_rule(world.get_location(locn.lucius_token), can_get_lucius)
+    world.set_rule(world.get_location(locn.luna_blue_jumper_token), can_get_luna_blue)
+    world.set_rule(world.get_location(locn.luna_overalls_token), can_get_luna_overalls)
+    world.set_rule(world.get_location(locn.luna_pink_dress_token), can_get_luna_pink)
+    world.set_rule(world.get_location(locn.luna_token), can_get_luna)
+    world.set_rule(world.get_location(locn.madam_pince_token), can_get_madam_pince)
+    world.set_rule(world.get_location(locn.mafalda_token), can_get_mafalda)
+    world.set_rule(world.get_location(locn.belby_token), can_get_belby)
+    world.set_rule(world.get_location(locn.mary_cattermole_token), can_get_mary)
+    world.set_rule(world.get_location(locn.michael_token), can_get_michael)
+    world.set_rule(world.get_location(locn.ministry_guard_token), can_get_ministry_guard)
+    world.set_rule(world.get_location(locn.myrtle_token), can_get_myrtle)
+    world.set_rule(world.get_location(locn.black_token), can_get_mrs_black)
+    world.set_rule(world.get_location(locn.cole_token), can_get_mrs_cole)
+    world.set_rule(world.get_location(locn.narcissa_token), can_get_narcissa)
+    world.set_rule(world.get_location(locn.neville_tank_top_token), can_get_neville_tank)
+    world.set_rule(world.get_location(locn.neville_waiter_token), can_get_neville_waiter)
+    world.set_rule(world.get_location(locn.padma_patil_token), can_get_padma)
+    world.set_rule(world.get_location(locn.petunia_green_coat_token), can_get_petunia_green)
+    world.set_rule(world.get_location(locn.petunia_token), can_get_petunia)
+    world.set_rule(world.get_location(locn.pius_token), can_get_pius)
+    world.set_rule(world.get_location(locn.prof_binns_token), can_get_prof_binns)
+    world.set_rule(world.get_location(locn.prof_flit_token), can_get_prof_flitwick)
+    world.set_rule(world.get_location(locn.prof_grubbly_token), can_get_prof_grub)
+    world.set_rule(world.get_location(locn.prof_mcgon_token), can_get_prof_mcgonagall)
+    world.set_rule(world.get_location(locn.prof_trelawney_token), can_get_prof_trelawney)
+    world.set_rule(world.get_location(locn.reg_token), can_get_reg_catter)
+    world.set_rule(world.get_location(locn.regulus_token), can_get_regulus)
+    world.set_rule(world.get_location(locn.rita_skeeter_token), can_get_rita)
+    world.set_rule(world.get_location(locn.ron_blue_pyjamas_token), can_get_ron_blue)
+    world.set_rule(world.get_location(locn.ron_green_shirt_token), can_get_ron_green)
+    world.set_rule(world.get_location(locn.scrimgeour_token), can_get_rufus)
+    world.set_rule(world.get_location(locn.scabior_token), can_get_scabior)
+    world.set_rule(world.get_location(locn.slughorn_young_token), can_get_slug_young)
+    world.set_rule(world.get_location(locn.snatcher_token), can_get_snatcher)
+    world.set_rule(world.get_location(locn.susan_token), can_get_susan_bones)
+    world.set_rule(world.get_location(locn.rowle_token), can_get_rowle)
+    world.set_rule(world.get_location(locn.umbridge_wizengamot_token), can_get_umbridge_wizen)
+    world.set_rule(world.get_location(locn.vernon_token), can_get_vernon)
+    world.set_rule(world.get_location(locn.waitress_luchino_token), can_get_waitress_luchino)
+    world.set_rule(world.get_location(locn.yaxley_token), can_get_yaxley)
 
 
 def set_char_purch_logic(world):
