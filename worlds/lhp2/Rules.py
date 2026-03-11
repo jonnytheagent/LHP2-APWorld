@@ -530,6 +530,7 @@ def set_rules(world: "LHP2World"):
     set_tfitp_logic(world)
     # Hub Logic
     set_hub_collect_logic(world)
+    set_hub_token_logic(world)
     # Shop Logic
     set_char_purch_logic(world)
     set_joke_purch_logic(world)
