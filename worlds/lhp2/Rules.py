@@ -470,6 +470,10 @@ def can_purch_char(location_name: str) -> Rule:
     return And(Has(token), has_needed_multi(location_name))
 
 
+def can_purch_joke(location_name: str) -> Rule:
+    return And(has_needed_multi(location_name), Has(itm.y5_story_complete_e_item))
+
+
 def has_needed_multi(location_name: str) -> Rule:
     return Or(from_option(HardPurchases, 1), HasMultiplier(location_name))
 
@@ -1258,25 +1262,25 @@ def set_char_purch_logic(world):
 
 
 def set_joke_purch_logic(world):
-    world.set_rule(world.get_location(locn.slug_purch), has_needed_multi(locn.slug_purch))
-    world.set_rule(world.get_location(locn.rictu_purch), has_needed_multi(locn.rictu_purch))
-    world.set_rule(world.get_location(locn.entomo_purch), has_needed_multi(locn.entomo_purch))
-    world.set_rule(world.get_location(locn.taranta_purch), has_needed_multi(locn.taranta_purch))
-    world.set_rule(world.get_location(locn.loco_purch), has_needed_multi(locn.loco_purch))
-    world.set_rule(world.get_location(locn.redact_purch), has_needed_multi(locn.redact_purch))
-    world.set_rule(world.get_location(locn.colo_purch), has_needed_multi(locn.colo_purch))
-    world.set_rule(world.get_location(locn.calvo_purch), has_needed_multi(locn.calvo_purch))
-    world.set_rule(world.get_location(locn.anteo_purch), has_needed_multi(locn.anteo_purch))
-    world.set_rule(world.get_location(locn.herbi_purch), has_needed_multi(locn.herbi_purch))
-    world.set_rule(world.get_location(locn.glaci_purch), has_needed_multi(locn.glaci_purch))
-    world.set_rule(world.get_location(locn.incarc_purch), has_needed_multi(locn.incarc_purch))
-    world.set_rule(world.get_location(locn.expel_purch), has_needed_multi(locn.expel_purch))
-    world.set_rule(world.get_location(locn.flip_purch), has_needed_multi(locn.flip_purch))
-    world.set_rule(world.get_location(locn.trip_purch), has_needed_multi(locn.trip_purch))
-    world.set_rule(world.get_location(locn.stup_purch), has_needed_multi(locn.stup_purch))
-    world.set_rule(world.get_location(locn.transfig_purch), has_needed_multi(locn.transfig_purch))
-    world.set_rule(world.get_location(locn.engorg_purch), has_needed_multi(locn.engorg_purch))
-    world.set_rule(world.get_location(locn.immob_purch), has_needed_multi(locn.immob_purch))
+    world.set_rule(world.get_location(locn.slug_purch), can_purch_joke(locn.slug_purch))
+    world.set_rule(world.get_location(locn.rictu_purch), can_purch_joke(locn.rictu_purch))
+    world.set_rule(world.get_location(locn.entomo_purch), can_purch_joke(locn.entomo_purch))
+    world.set_rule(world.get_location(locn.taranta_purch), can_purch_joke(locn.taranta_purch))
+    world.set_rule(world.get_location(locn.loco_purch), can_purch_joke(locn.loco_purch))
+    world.set_rule(world.get_location(locn.redact_purch), can_purch_joke(locn.redact_purch))
+    world.set_rule(world.get_location(locn.colo_purch), can_purch_joke(locn.colo_purch))
+    world.set_rule(world.get_location(locn.calvo_purch), can_purch_joke(locn.calvo_purch))
+    world.set_rule(world.get_location(locn.anteo_purch), can_purch_joke(locn.anteo_purch))
+    world.set_rule(world.get_location(locn.herbi_purch), can_purch_joke(locn.herbi_purch))
+    world.set_rule(world.get_location(locn.glaci_purch), can_purch_joke(locn.glaci_purch))
+    world.set_rule(world.get_location(locn.incarc_purch), can_purch_joke(locn.incarc_purch))
+    world.set_rule(world.get_location(locn.expel_purch), can_purch_joke(locn.expel_purch))
+    world.set_rule(world.get_location(locn.flip_purch), can_purch_joke(locn.flip_purch))
+    world.set_rule(world.get_location(locn.trip_purch), can_purch_joke(locn.trip_purch))
+    world.set_rule(world.get_location(locn.stup_purch), can_purch_joke(locn.stup_purch))
+    world.set_rule(world.get_location(locn.transfig_purch), can_purch_joke(locn.transfig_purch))
+    world.set_rule(world.get_location(locn.engorg_purch), can_purch_joke(locn.engorg_purch))
+    world.set_rule(world.get_location(locn.immob_purch), can_purch_joke(locn.immob_purch))
 
 
 def set_gold_brick_purch_logic(world):
