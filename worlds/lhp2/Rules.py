@@ -471,7 +471,7 @@ def can_purch_char(location_name: str) -> Rule:
 
 
 def can_purch_joke(location_name: str) -> Rule:
-    return And(has_needed_multi(location_name), Has(itm.y5_story_complete_e_item))
+    return And(has_needed_multi(location_name), Has(itm.dada_lesson_e_item))
 
 
 def has_needed_multi(location_name: str) -> Rule:
