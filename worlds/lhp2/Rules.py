@@ -163,6 +163,7 @@ can_get_tr_orphan = can_use_dark_mag
 
 # The Seven Harry's Logic
 can_access_tsh_free = HasAll(itm.reducto_unlock, itm.agua_unlock, itm.herm_bag_unlock, itm.delum_unlock)
+can_get_delum = HasAll(itm.reducto_unlock, itm.agua_unlock, itm.delum_unlock)
 can_get_tsh_gc = Has(itm.reducto_unlock)
 can_get_mad_eye = HasAll(itm.reducto_unlock, itm.agua_unlock) & can_use_dark_mag
 can_get_ron_wed = HasAll(itm.apparition_unlock, itm.specs_unlock)
@@ -791,6 +792,7 @@ def set_thath_logic(world):
 
 
 def set_tsh_logic(world):
+    world.set_rule(world.get_location(locn.delum_lesson), can_get_delum)
     world.set_rule(world.get_location(locn.tsh_gc), can_get_tsh_gc)
     world.set_rule(world.get_location(locn.madeye_token), can_get_mad_eye)
     world.set_rule(world.get_location(locn.ron_wedding_token), can_get_ron_wed)

@@ -876,7 +876,7 @@ hub_progress_loc_table: Dict[str, LocationData] = {
     LocationName.reducto_lesson: LocationData(base_location_id + 1021, RegionName.y5c),
     LocationName.dumble_lesson: LocationData(base_location_id + 1022, RegionName.dumble_office),
     LocationName.y6_story_complete: LocationData(base_location_id + 1023, RegionName.dumble_office),
-    LocationName.delum_lesson: LocationData(base_location_id + 1024, RegionName.tshf),
+    LocationName.delum_lesson: LocationData(base_location_id + 1024, RegionName.tsh),
     LocationName.bag_lesson: LocationData(base_location_id + 1025, RegionName.tshf),
     LocationName.apparition_lesson: LocationData(base_location_id + 1026, RegionName.tshf),
     LocationName.cafe_lesson: LocationData(base_location_id + 1027, RegionName.cafe),
