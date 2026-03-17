@@ -850,7 +850,7 @@ spell_loc_table: Dict[str, LocationData] = {
     # LocationName.diffindo_purch: LocationData(base_location_id + 998, RegionName.y5c),
     # # LocationName.lumos_purch: LocationData(base_location_id + 999, RegionName.www),
     # # lumos has 2 bits
-    # LocationName.delum_purch: LocationData(base_location_id + 1001, RegionName.www),
+    LocationName.delum_lesson: LocationData(base_location_id + 1001, RegionName.www),
     # LocationName.agua_purch: LocationData(base_location_id + 1002, RegionName.y6c),
     # LocationName.focus_purch: LocationData(base_location_id + 1003, RegionName.cl),
     # LocationName.expecto_purch: LocationData(base_location_id + 1004, RegionName.ror),
@@ -876,7 +876,7 @@ hub_progress_loc_table: Dict[str, LocationData] = {
     LocationName.reducto_lesson: LocationData(base_location_id + 1021, RegionName.y5c),
     LocationName.dumble_lesson: LocationData(base_location_id + 1022, RegionName.dumble_office),
     LocationName.y6_story_complete: LocationData(base_location_id + 1023, RegionName.dumble_office),
-    LocationName.delum_lesson: LocationData(base_location_id + 1024, RegionName.tsh),
+    # LocationName.delum_lesson: LocationData(base_location_id + 1024, RegionName.tsh),
     LocationName.bag_lesson: LocationData(base_location_id + 1025, RegionName.tshf),
     LocationName.apparition_lesson: LocationData(base_location_id + 1026, RegionName.tshf),
     LocationName.cafe_lesson: LocationData(base_location_id + 1027, RegionName.cafe),
