@@ -47,7 +47,7 @@ hub_regions = [
     RegionName.hogspath,
     RegionName.hogs,
     RegionName.hogwpath,
-    RegionName.court,
+    RegionName.quad,
     RegionName.tg,
     RegionName.herb,
     RegionName.ground,
@@ -59,7 +59,7 @@ hub_regions = [
     RegionName.mid_stair,
     RegionName.dumble_office,
     RegionName.upper_stair,
-    RegionName.house,
+    RegionName.dormlob,
     RegionName.slyth,
     RegionName.huff,
     RegionName.gryf,
@@ -148,16 +148,16 @@ def create_regions(world: MultiWorld, player: int, seed_locs):
     connect_regions(world, player, RegionName.ghl, RegionName.ror)
     connect_regions(world, player, RegionName.ror, RegionName.upper_stair)
     connect_regions(world, player, RegionName.foyer, RegionName.low_stair)
-    connect_regions(world, player, RegionName.low_stair, RegionName.house)
+    connect_regions(world, player, RegionName.low_stair, RegionName.dormlob)
     connect_regions(world, player, RegionName.low_stair, RegionName.mid_stair)
     connect_regions(world, player, RegionName.mid_stair, RegionName.dumble_office)
     connect_regions(world, player, RegionName.dumble_office, RegionName.upper_stair)
     connect_regions(world, player, RegionName.upper_stair, RegionName.dumble_office)
     connect_regions(world, player, RegionName.upper_stair, RegionName.ror)
-    connect_regions(world, player, RegionName.house, RegionName.slyth)
-    connect_regions(world, player, RegionName.house, RegionName.huff)
-    connect_regions(world, player, RegionName.house, RegionName.gryf)
-    connect_regions(world, player, RegionName.house, RegionName.raven)
+    connect_regions(world, player, RegionName.dormlob, RegionName.slyth)
+    connect_regions(world, player, RegionName.dormlob, RegionName.huff)
+    connect_regions(world, player, RegionName.dormlob, RegionName.gryf)
+    connect_regions(world, player, RegionName.dormlob, RegionName.raven)
     connect_regions(world, player, RegionName.foyer, RegionName.cl)
     connect_regions(world, player, RegionName.cl, RegionName.dada)
     connect_regions(world, player, RegionName.cl, RegionName.y5c)

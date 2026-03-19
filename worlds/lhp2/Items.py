@@ -533,7 +533,7 @@ hub_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.hogwpath_sip: LHP2ItemData(base_item_id + 507),
     ItemName.herb_sip: LHP2ItemData(base_item_id + 508),
     ItemName.tg_sip: LHP2ItemData(base_item_id + 509),
-    ItemName.court_sip: LHP2ItemData(base_item_id + 510),
+    ItemName.quad_sip: LHP2ItemData(base_item_id + 510),
     ItemName.ror_sip: LHP2ItemData(base_item_id + 511),
     ItemName.wcs_sip: LHP2ItemData(base_item_id + 512),
     ItemName.wc_sip: LHP2ItemData(base_item_id + 513),
@@ -545,7 +545,7 @@ hub_sip_item_table: Dict[str, LHP2ItemData] = {
     ItemName.ground_sip: LHP2ItemData(base_item_id + 519),
     ItemName.raven_sip: LHP2ItemData(base_item_id + 520),
     ItemName.gryf_sip: LHP2ItemData(base_item_id + 521),
-    ItemName.house_sip: LHP2ItemData(base_item_id + 522),
+    ItemName.dormlob_sip: LHP2ItemData(base_item_id + 522),
     ItemName.ast_sip: LHP2ItemData(base_item_id + 523),
     ItemName.y6c_sip: LHP2ItemData(base_item_id + 524),
     ItemName.y5c_sip: LHP2ItemData(base_item_id + 525),
@@ -709,7 +709,7 @@ gold_brick_item_table: Dict[str, LHP2ItemData] = {
     ItemName.gb5: LHP2ItemData(base_item_id + 701, qty=1),
 }
 
-# Red Brick Purchasable 900 - 935
+# Red Brick Purchasable 900 - 933
 red_brick_purchasable_table: Dict[str, LHP2ItemData] = {
     ItemName.christmas_purchasable: LHP2ItemData(base_item_id + 901, ItemClassification.progression),
     ItemName.gb_detect_purchasable: LHP2ItemData(base_item_id + 903, ItemClassification.progression),
