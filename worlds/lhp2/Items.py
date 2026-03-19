@@ -564,7 +564,7 @@ hub_sip_item_table: Dict[str, LHP2ItemData] = {
     # ItemName.diag_sip: LHP2ItemData(base_item_id + 538),
 }
 
-# 550 - 525
+# 550 - 575
 house_crest_item_table: Dict[str, LHP2ItemData] = {
     # Gryff Crests
     ItemName.dt_gc: LHP2ItemData(base_item_id + 550),
