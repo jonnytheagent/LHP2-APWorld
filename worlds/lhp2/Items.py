@@ -700,7 +700,7 @@ true_wizard_item_table: Dict[str, LHP2ItemData] = {
 }
 
 purp_stud_item_table: Dict[str, LHP2ItemData] = {
-    ItemName.purp_stud: LHP2ItemData(base_item_id + 699, qty=6),
+    ItemName.purp_stud: LHP2ItemData(base_item_id + 699, qty=5),
 }
 
 # Gold Bricks 700 - 899
