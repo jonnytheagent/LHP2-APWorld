@@ -453,7 +453,7 @@ character_token_item_table: Dict[str, LHP2ItemData] = {
 }
 
 
-# 440 - 445
+# 440 - 446
 horcrux_item_table: Dict[str, LHP2ItemData] = {
     ItemName.tr_diary: LHP2ItemData(base_item_id + 440, ItemClassification.progression),
     ItemName.gaunt_ring: LHP2ItemData(base_item_id + 441, ItemClassification.progression),
@@ -461,6 +461,7 @@ horcrux_item_table: Dict[str, LHP2ItemData] = {
     ItemName.cup: LHP2ItemData(base_item_id + 443, ItemClassification.progression),
     ItemName.diadem: LHP2ItemData(base_item_id + 444, ItemClassification.progression),
     ItemName.nagini: LHP2ItemData(base_item_id + 445, ItemClassification.progression),
+    ItemName.horharry: LHP2ItemData(base_item_id + 446, ItemClassification.progression),
 }
 
 # 450 - 473

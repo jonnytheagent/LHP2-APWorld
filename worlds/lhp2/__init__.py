@@ -8,7 +8,7 @@ from .Names import ItemName, RegionName
 from .Options import LHP2Options
 from .Regions import create_regions, connect_regions
 from .Rules import set_rules
-from ..AutoWorld import World, WebWorld, CollectionState
+from ..AutoWorld import World, WebWorld
 
 
 class LHP2Web(WebWorld):
@@ -80,6 +80,7 @@ class LHP2World(World):
     def fill_slot_data(self):
         return {
             "EndGoal": self.options.EndGoal.value,
-            "CollectiblesRequired": self.options.CollectibleQuantity.value,
+            # "CollectiblesRequired": self.options.CollectibleQuantity.value,
             # "FlawInThePlanCondition": self.options.FlawInThePlanCondition.value,
+            "NumHorcruxRequired": self.options.NumHorcruxRequired.value,
         }
