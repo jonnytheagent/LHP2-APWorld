@@ -13,7 +13,7 @@
 - Install Reloaded II Mod Loader
 - Add Lego Harry Potter 5-7 to Reloaded II either through setup or by clicking the + on the left.
   - Must use the exe found in the Steam or GOG Lego Harry Potter folder
-- Due to Steam DRM, we will need to use the ASI loader
+- If you are using the Steam version, we will need to use the ASI loader (optional for GOG version) 
   - Under Lego Harry Potter 5-7, click Edit Application
   - Under "Advanced Tools & Options", make sure that "Don't Inject Loader" is enabled
     - Indicated by the red +
@@ -26,7 +26,8 @@
 - Fill out the Host IP, Port Number, Slot Name, and Password as applicable
 - Ensure that the Archipelago Mod is enabled
   - Indicated by the red +
-- Start the game either in Reloaded II, DXWnd, Steam, or GOG
+- Launch the game either in Reloaded II
+  - If you are using ASI Loader, launching in DXWnd, Steam, or GOG will also work
 - The game will attempt to connect to the server once the menu is loaded
 - IT IS IMPORTANT THAT YOU WAIT ON THE MENU UNTIL IT IS CONNECTED
 - Start a new game and enjoy
