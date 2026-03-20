@@ -49,13 +49,11 @@ ravenclaw_chars = (Has(itm.cho_play) | Has(itm.cho_winter_play) | Has(itm.luna_p
                    Has(itm.penelope_play))
 
 # Dark Times Logic
-can_get_dt_gc = Has(itm.expecto_unlock)
 can_get_dt_sc = Has(itm.diffindo_unlock)
-can_get_dt_rc = Has(itm.expecto_unlock)
 can_get_dt_hc = Has(itm.www_box_unlock)
 can_get_dt_sip = can_use_dark_mag
-can_get_arthur_suit = HasAll(itm.reducto_unlock, itm.expecto_unlock) & can_use_dark_mag
-can_get_elphias = HasAll(itm.agua_unlock, itm.expecto_unlock)
+can_get_arthur_suit = Has(itm.reducto_unlock) & can_use_dark_mag
+can_get_elphias = Has(itm.agua_unlock)
 
 # Dumbledore's Army Logic
 can_beat_da = Has(itm.expecto_unlock)
@@ -667,9 +665,7 @@ def set_win_con(world):
 
 
 def set_dt_logic(world):
-    world.set_rule(world.get_location(locn.dt_gc), can_get_dt_gc)
     world.set_rule(world.get_location(locn.dt_sc), can_get_dt_sc)
-    world.set_rule(world.get_location(locn.dt_rc), can_get_dt_rc)
     world.set_rule(world.get_location(locn.dt_hc), can_get_dt_hc)
     world.set_rule(world.get_location(locn.dt_sip), can_get_dt_sip)
     world.set_rule(world.get_location(locn.arthur_suit_token), can_get_arthur_suit)

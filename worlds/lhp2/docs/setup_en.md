@@ -59,7 +59,7 @@
     - Walk through the loading zone behind the gold brick to get there
   - In this room, pause the game, and open up the Extras Menu
   - In the Extras Menu, open up the "Enter Code" Menu
-  - Type in YEAR5, YEAR6, YEAR7, OR YEAR8 and hit A (or whatever your select button is)
+  - Type in YEAR05, YEAR06, YEAR07, OR YEAR08 and hit A (or whatever your select button is)
   - Now, while still in the Character Customization Room, save the game
     - To do so, go into options and change any of the options (like volume)
   - Then quit to menu and reload your save file

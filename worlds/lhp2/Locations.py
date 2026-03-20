@@ -850,7 +850,7 @@ spell_loc_table: Dict[str, LocationData] = {
     # LocationName.diffindo_purch: LocationData(base_location_id + 998, RegionName.y5c),
     # # LocationName.lumos_purch: LocationData(base_location_id + 999, RegionName.www),
     # # lumos has 2 bits
-    LocationName.delum_lesson: LocationData(base_location_id + 1001, RegionName.www),
+    LocationName.delum_lesson: LocationData(base_location_id + 1001, RegionName.tsh),
     # LocationName.agua_purch: LocationData(base_location_id + 1002, RegionName.y6c),
     # LocationName.focus_purch: LocationData(base_location_id + 1003, RegionName.cl),
     # LocationName.expecto_purch: LocationData(base_location_id + 1004, RegionName.ror),
