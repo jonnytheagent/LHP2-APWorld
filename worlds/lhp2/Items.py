@@ -825,3 +825,5 @@ item_data_table = {
     **purp_stud_item_table,
     **horcrux_item_table,
 }
+
+horcrux_names_set = set(horcrux_item_table.keys())

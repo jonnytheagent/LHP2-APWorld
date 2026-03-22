@@ -2,13 +2,13 @@ from typing import Dict
 
 from BaseClasses import Item, Tutorial
 from Options import OptionError
-from .Items import LHP2Item, item_data_table
+from .Items import LHP2Item, item_data_table, horcrux_names_set
 from .Locations import all_location_table, LocationData, setup_locations
 from .Names import ItemName, RegionName
 from .Options import LHP2Options
 from .Regions import create_regions, connect_regions
 from .Rules import set_rules
-from ..AutoWorld import World, WebWorld
+from ..AutoWorld import World, WebWorld, CollectionState
 
 
 class LHP2Web(WebWorld):
@@ -76,6 +76,26 @@ class LHP2World(World):
             starting_level = starting_level + ": Level Unlocked"
             self.multiworld.push_precollected(self.create_item(starting_level))
             levels_pushed += 1
+
+    def collect(self, state: CollectionState, item: Item) -> bool:
+        changed = super().collect(state, item)
+        if changed:
+            name = item.name
+            if name in horcrux_names_set and state.count(name, self.player) == 1:
+                # Count was 0 before super().collect().
+                # Increase unique horcrux count.
+                state.prog_items[self.player]["UNIQUE_HORCRUX"] += 1
+        return changed
+
+    def remove(self, state: CollectionState, item: Item) -> bool:
+        changed = super().remove(state, item)
+        if changed:
+            name = item.name
+            if name in horcrux_names_set and state.count(name, self.player) == 0:
+                # Count was 1 before super().remove().
+                # Decrease unique horcrux count.
+                state.prog_items[self.player]["UNIQUE_HORCRUX"] -= 1
+        return changed
 
     def fill_slot_data(self):
         return {

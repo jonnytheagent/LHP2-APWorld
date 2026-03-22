@@ -4,13 +4,13 @@ import dataclasses
 
 from Options import Option
 from rule_builder.options import OptionFilter, Operator
-from rule_builder.rules import Rule, Has, HasAll, True_, And, Or, CanReachLocation
+from rule_builder.rules import Rule, Has, HasAll, True_, And, Or, CanReachLocation, HasAnyCount
 
 if TYPE_CHECKING:
     from . import LHP2World
 
 from .Names import LocationName, ItemName, RegionName
-from .Options import LHP2Options, EndGoal, HardPurchases
+from .Options import LHP2Options, EndGoal, HardPurchases, NumHorcruxesRequired
 from .Locations import all_location_table
 
 itm = ItemName
@@ -274,7 +274,6 @@ can_beat_tfitp = Has(itm.expecto_unlock)
 can_get_tfitp_sc = can_use_dark_mag
 can_get_tfitp_rc = Has(itm.specs_unlock) & char_is_strong_level
 can_get_tfitp_sip = can_use_key
-has_all_horcruxes = HasAll(itm.tr_diary, itm.gaunt_ring, itm.locket, itm.cup, itm.diadem, itm.nagini)
 defeat_voldemort = Has("Voldemort Defeated")
 
 # Hub Logic
@@ -655,7 +654,8 @@ def set_event_logic(world):
     world.set_rule(world.get_location(locn.dumble_lesson_event), CanReachLocation(locn.dumble_lesson))
     world.set_rule(world.get_location(locn.y6_story_complete_event), CanReachLocation(locn.y6_story_complete))
     world.set_rule(world.get_location(locn.cafe_lesson_event), CanReachLocation(locn.cafe_lesson))
-    world.set_rule(world.get_location("Defeat Voldemort"), has_all_horcruxes & can_beat_tfitp)
+    world.set_rule(world.get_location("Defeat Voldemort"), Has("UNIQUE_HORCRUX", world.options.NumHorcruxRequired.value)
+                   & can_beat_tfitp)
 
 
 def set_win_con(world):
