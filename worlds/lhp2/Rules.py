@@ -244,7 +244,7 @@ can_get_neville_cardigan = HasAll(itm.diffindo_unlock, itm.herm_bag_unlock) & ca
 can_get_seamus = HasAll(itm.delum_unlock, itm.www_box_unlock)
 
 # Fiendfyre Frenzy Logic
-can_access_fiend = HasAll(itm.www_box_unlock, itm.reducto_unlock, itm.herm_bag_unlock, itm.ff_unlock)
+can_access_fiend = HasAll(itm.www_box_unlock, itm.reducto_unlock, itm.herm_bag_unlock, itm.fiend_unlock)
 can_access_fiend_free = HasAll(itm.specs_unlock, itm.delum_unlock)
 can_beat_fiend = HasAll(itm.agua_unlock, itm.diffindo_unlock)
 can_get_fiend_gc = char_is_strong_level
