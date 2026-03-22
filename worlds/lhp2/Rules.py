@@ -734,7 +734,7 @@ def set_oor_logic(world):
     world.set_rule(world.get_location(locn.oor_sip), can_get_oor_sip)
     world.set_rule(world.get_location(locn.dumble_cursed_token), can_get_dumble_cursed)
     world.set_rule(world.get_location(locn.milk_man_token), can_get_milk_man)
-    world.set_rule(world.get_location(locn.slughorn_pajamas_token), can_get_slug_pajamas)
+    world.set_rule(world.get_location(locn.slughorn_pyjamas_token), can_get_slug_pajamas)
 
 
 def set_jd_logic(world):
@@ -1181,7 +1181,7 @@ def set_char_purch_logic(world):
     world.set_rule(world.get_location(locn.marietta_purch), can_purch_char(locn.marietta_purch))
     world.set_rule(world.get_location(locn.dumble_young_purch), can_purch_char(locn.dumble_young_purch))
     world.set_rule(world.get_location(locn.slughorn_young_purch), can_purch_char(locn.slughorn_young_purch))
-    world.set_rule(world.get_location(locn.slughorn_pajamas_purch), can_purch_char(locn.slughorn_pajamas_purch))
+    world.set_rule(world.get_location(locn.slughorn_pyjamas_purch), can_purch_char(locn.slughorn_pyjamas_purch))
     world.set_rule(world.get_location(locn.lily_young_casual_purch), can_purch_char(locn.lily_young_casual_purch))
     world.set_rule(world.get_location(locn.ginny_dress_purch), can_purch_char(locn.ginny_dress_purch))
     world.set_rule(world.get_location(locn.ginny_pyjamas_purch), can_purch_char(locn.ginny_pyjamas_purch))
@@ -1246,7 +1246,7 @@ def set_char_purch_logic(world):
     world.set_rule(world.get_location(locn.neville_winter_purch), can_purch_char(locn.neville_winter_purch))
     world.set_rule(world.get_location(locn.parvati_purch), can_purch_char(locn.parvati_purch))
     world.set_rule(world.get_location(locn.ron_red_sweater_purch), can_purch_char(locn.ron_red_sweater_purch))
-    world.set_rule(world.get_location(locn.olivander_purch), can_purch_char(locn.olivander_purch))
+    world.set_rule(world.get_location(locn.ollivander_purch), can_purch_char(locn.ollivander_purch))
     world.set_rule(world.get_location(locn.seamus_winter_purch), can_purch_char(locn.seamus_winter_purch))
     world.set_rule(world.get_location(locn.ron_underwear_purch), can_purch_char(locn.ron_underwear_purch))
     world.set_rule(world.get_location(locn.ron_wedding_purch), can_purch_char(locn.ron_wedding_purch))
